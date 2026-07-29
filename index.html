@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="htmlRoot">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نادي الإتفاق الرباطي | Itifaqe de Rabat</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { 
+            background: linear-gradient(rgba(13, 19, 14, 0.88), rgba(13, 19, 14, 0.95)), 
+                        url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1600') center/cover fixed; 
+            color: #ffffff; line-height: 1.6; min-height: 100vh; 
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(20, 28, 22, 0.95); padding: 12px 3%; display: flex;
+            justify-content: space-between; align-items: center;
+            border-bottom: 3px solid #16a34a; position: sticky; top: 0; z-index: 1000;
+        }
+        .header-right { display: flex; align-items: center; gap: 15px; }
+        .logo-img { height: 45px; width: auto; object-fit: contain; }
+        .club-title { font-size: 18px; font-weight: bold; color: #fff; }
+        .club-title span { color: #16a34a; }
+
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .lang-switch { display: flex; gap: 5px; background: #0d130e; padding: 3px; border-radius: 5px; border: 1px solid #2e3d34; }
+        .lang-btn { background: none; border: none; color: #9ca3af; padding: 3px 8px; cursor: pointer; font-size: 11px; font-weight: bold; border-radius: 3px; }
+        .lang-btn.active { background: #16a34a; color: white; }
+
+        .menu-trigger { font-size: 22px; color: #16a34a; cursor: pointer; padding: 4px 8px; border-radius: 5px; background: #1a261c; }
+
+        /* Drawer */
+        .drawer {
+            position: fixed; top: 0; right: -320px; width: 300px; height: 100%;
+            background-color: #111813; border-left: 2px solid #16a34a; z-index: 2000;
+            transition: 0.4s ease; padding: 20px; overflow-y: auto; box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+        }
+        [dir="ltr"] .drawer { right: auto; left: -320px; border-left: none; border-right: 2px solid #16a34a; }
+        .drawer.active { right: 0; }
+        [dir="ltr"] .drawer.active { left: 0; }
+        
+        .drawer-close { font-size: 18px; color: #ef4444; cursor: pointer; margin-bottom: 20px; }
+        .drawer-nav a { display: block; padding: 12px; color: #d1d5db; text-decoration: none; border-bottom: 1px solid #1f2923; font-weight: bold; font-size: 13px; }
+        .drawer-nav a:hover { color: #16a34a; background: #18221a; }
+
+        .hero { text-align: center; padding: 40px 20px; }
+        .hero h1 { font-size: 30px; color: #fff; margin-bottom: 10px; }
+        .hero p { color: #9ca3af; font-size: 14px; max-width: 650px; margin: 0 auto; }
+
+        /* Login */
+        .login-card {
+            background-color: #141c16; border: 2px solid #16a34a; border-radius: 12px;
+            max-width: 450px; margin: 15px auto; padding: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+        }
+        .login-card h3 { text-align: center; color: #16a34a; margin-bottom: 15px; }
+        .role-selector { display: flex; gap: 5px; margin-bottom: 15px; background: #0d130e; padding: 5px; border-radius: 8px; }
+        .role-btn { flex: 1; padding: 8px 4px; font-size: 11px; font-weight: bold; border: none; background: transparent; color: #9ca3af; cursor: pointer; border-radius: 5px; }
+        .role-btn.active { background: #16a34a; color: white; }
+
+        .form-group { margin-bottom: 12px; text-align: start; }
+        .form-group label { display: block; margin-bottom: 4px; color: #d1d5db; font-size: 12px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #2e3d34; background-color: #0d130e; color: #ffffff; font-size: 13px; outline: none;
+        }
+        .btn-submit { width: 100%; padding: 10px; background-color: #16a34a; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px; }
+
+        /* Dashboard */
+        .dashboard { display: none; background: #141c16; border: 1px solid #2e3d34; border-radius: 12px; padding: 20px; margin: 20px 3%; }
+        .dashboard.active { display: block; }
+        .dash-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2e3d34; padding-bottom: 12px; margin-bottom: 15px; }
+        .badge { background: #16a34a; color: white; padding: 2px 8px; border-radius: 10px; font-size: 11px; }
+
+        /* 🤖 AI Chatbot Widget Styles */
+        .ai-fab {
+            position: fixed; bottom: 20px; left: 20px; background: #16a34a; color: white; width: 55px; height: 55px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;
+            cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 3000; border: 2px solid #fff;
+        }
+        [dir="ltr"] .ai-fab { left: auto; right: 20px; }
+        
+        .ai-chat-box {
+            position: fixed; bottom: 85px; left: 20px; width: 330px; height: 430px; background: #111813;
+            border: 2px solid #16a34a; border-radius: 12px; display: none; flex-direction: column;
+            z-index: 3000; box-shadow: 0 10px 25px rgba(0,0,0,0.7); overflow: hidden;
+        }
+        [dir="ltr"] .ai-chat-box { left: auto; right: 20px; }
+        .ai-chat-box.active { display: flex; }
+
+        .ai-chat-header { background: #16a34a; color: white; padding: 12px; font-weight: bold; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+        .ai-chat-body { flex: 1; padding: 12px; overflow-y: auto; font-size: 12px; display: flex; flex-direction: column; gap: 8px; }
+        .chat-msg { padding: 8px 12px; border-radius: 8px; max-width: 85%; }
+        .chat-msg.bot { background: #1a261c; border: 1px solid #2e3d34; color: #d1d5db; align-self: flex-start; }
+        .chat-msg.user { background: #16a34a; color: white; align-self: flex-end; }
+        
+        .ai-chat-input { display: flex; border-top: 1px solid #2e3d34; padding: 8px; background: #0d130e; }
+        .ai-chat-input input { flex: 1; background: transparent; border: none; color: white; padding: 5px; font-size: 12px; outline: none; }
+        .ai-chat-input button { background: #16a34a; color: white; border: none; padding: 5px 12px; border-radius: 4px; cursor: pointer; }
+
+        section { padding: 30px 4%; }
+        .section-title { text-align: center; font-size: 22px; margin-bottom: 20px; color: #16a34a; }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+        .card { background-color: #141c16; border: 1px solid #2e3d34; border-radius: 8px; padding: 15px; text-align: center; }
+        footer { background: #070a08; padding: 20px 4%; border-top: 1px solid #1f2923; margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-right">
+            <img src="logo.png" alt="Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/45/16a34a/ffffff?text=IR'">
+            <div class="club-title">Itifaqe <span>de Rabat</span></div>
+        </div>
+
+        <div class="header-left">
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="changeLang('ar')">العربية</button>
+                <button class="lang-btn" onclick="changeLang('fr')">FR</button>
+                <button class="lang-btn" onclick="changeLang('en')">EN</button>
+            </div>
+            <div class="menu-trigger" onclick="toggleDrawer()"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+
+    <!-- Side Menu Drawer -->
+    <div id="drawer" class="drawer">
+        <div class="drawer-close" onclick="toggleDrawer()"><i class="fas fa-times"></i> <span data-key="close">إغلاق</span></div>
+        <nav class="drawer-nav">
+            <a href="#about" onclick="toggleDrawer()" data-key="m_about">🏠 الرئيسية والتعريف بالنادي</a>
+            <a href="#register" onclick="toggleDrawer()" data-key="m_reg">📝 التسجيل في النادي</a>
+            <a href="#sponsorship" onclick="toggleDrawer()" data-key="m_sponsor">🤝 طلب شراكة ورعاية</a>
+            <a href="#contact" onclick="toggleDrawer()" data-key="m_contact">📞 تواصل معنا</a>
+        </nav>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1 data-key="hero_title">نادي الإتفاق الرباطي</h1>
+        <p data-key="hero_sub">المنصة الرياضية الإدارية والتقنية الشاملة لإدارة الفئات والتقييمات الميدانية</p>
+    </div>
+
+    <!-- Login Card -->
+    <div class="login-card" id="loginCard">
+        <h3 data-key="login_head">تسجيل الدخول للنظام</h3>
+        <div class="role-selector">
+            <button class="role-btn active" onclick="setRole('admin', this)" data-key="r_admin">أعضاء المكتب</button>
+            <button class="role-btn" onclick="setRole('coach', this)" data-key="r_coach">الطاقم التقني</button>
+            <button class="role-btn" onclick="setRole('player', this)" data-key="r_player">اللاعبون</button>
+        </div>
+
+        <div class="form-group">
+            <label id="codeLabel" data-key="code_lbl">رمز التوثيق الخاص بعضو المكتب:</label>
+            <input type="password" id="authCode" placeholder="...">
+        </div>
+        <button class="btn-submit" onclick="login()" data-key="btn_login">تسجيل الدخول</button>
+        <p id="loginError" style="color:#ef4444; font-size:12px; margin-top:8px; display:none; text-align:center;">الرمز غير صحيح!</p>
+    </div>
+
+    <!-- Dashboards -->
+    <div id="adminDash" class="dashboard"><div class="dash-header"><h2 id="adminName"></h2><button onclick="logout()">خروج</button></div></div>
+    <div id="coachDash" class="dashboard"><div class="dash-header"><h2 id="coachName"></h2><button onclick="logout()">خروج</button></div></div>
+    <div id="playerDash" class="dashboard">
+        <div class="dash-header"><h2>محمد الرباطي</h2><button onclick="logout()">خروج</button></div>
+        <div style="max-width:320px; margin:0 auto;"><canvas id="playerRadar"></canvas></div>
+    </div>
+
+    <!-- Section: About -->
+    <section id="about">
+        <h2 class="section-title">الطاقم التقني والإداري</h2>
+        <div class="cards-grid">
+            <div class="card"><h4>آدم القدوري</h4><p style="font-size:12px; color:#16a34a;">المدير التقني والرئيس</p></div>
+            <div class="card"><h4>عصام الكبوس</h4><p style="font-size:12px; color:#16a34a;">مسؤول البرمجة والتطوير</p></div>
+            <div class="card"><h4>سليمان بنغزال</h4><p style="font-size:12px; color:#16a34a;">مدرب اللياقة البدنية والنمو</p></div>
+            <div class="card"><h4>زكرياء حداوي</h4><p style="font-size:12px; color:#16a34a;">مسؤول اللوجستيك والتنظيم</p></div>
+            <div class="card"><h4>أمين بنجابر</h4><p style="font-size:12px; color:#16a34a;">مدرب الحراس الاحترافي</p></div>
+            <div class="card"><h4>هدى بوكدال</h4><p style="font-size:12px; color:#16a34a;">الكاتبة العامة والمحتوى</p></div>
+            <div class="card"><h4>ملاك قدوري</h4><p style="font-size:12px; color:#16a34a;">أمينة المال والمالية</p></div>
+        </div>
+    </section>
+
+    <!-- 🤖 AI Assistant Floating Widget -->
+    <div class="ai-fab" onclick="toggleAIChat()" title="مساعد الذكاء الاصطناعي"><i class="fas fa-robot"></i></div>
+    
+    <div class="ai-chat-box" id="aiChatBox">
+        <div class="ai-chat-header">
+            <span>🤖 المساعد الذكي - الإتفاق الرباطي</span>
+            <i class="fas fa-times" style="cursor:pointer;" onclick="toggleAIChat()"></i>
+        </div>
+        <div class="ai-chat-body" id="aiChatBody">
+            <div class="chat-msg bot">مرحباً بك! أنا مساعد نادي الإتفاق الرباطي الذكي ⚽. كيف يمكنني مساعدتك اليوم؟ يمكنك سؤالي عن التدريبات، اللياقة، الاشتراكات، أو توجيهك للمدرب/العضو المسؤول.</div>
+        </div>
+        <div class="ai-chat-input">
+            <input type="text" id="aiInput" placeholder="اكتب سؤالك هنا..." onkeypress="if(event.key==='Enter') askAI()">
+            <button onclick="askAI()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <section id="contact">
+        <h2 class="section-title">تواصل معنا</h2>
+        <div style="text-align:center; font-size:13px; color:#d1d5db;">
+            <p>📞 +212 7-02-49-77-48</p>
+            <p>✉️ itifaqe.de.rabat.contact@gmail.com</p>
+        </div>
+    </section>
+
+    <footer>
+        <div style="text-align:center; font-size:12px; color:#9ca3af;">نادي الإتفاق الرباطي © جميع الحقوق محفوظة</div>
+    </footer>
+
+    <!-- Logic Engine -->
+    <script>
+        function toggleDrawer() { document.getElementById('drawer').classList.toggle('active'); }
+        function toggleAIChat() { document.getElementById('aiChatBox').classList.toggle('active'); }
+
+        // 🧠 محرك إجابات المساعد الذكي وتوجيه التخصصات وحظر الأسئلة الخارجية
+        function askAI() {
+            const input = document.getElementById('aiInput');
+            const q = input.value.trim().toLowerCase();
+            if(!q) return;
+
+            const chatBody = document.getElementById('aiChatBody');
+            chatBody.innerHTML += `<div class="chat-msg user">${input.value}</div>`;
+            input.value = "";
+
+            let reply = "";
+
+            // 1. فحص الكلمات المحظورة (خارج نطاق النادي والرياضة)
+            const offTopicKeywords = ['طبخ', 'وصفة', 'سياسة', 'برمجة بلغة', 'فيلم', 'مسلسل', 'أغنية', 'طرق النجاح في الرياضيات', 'عاصمة', 'سيارة', 'شراء'];
+            const isOffTopic = offTopicKeywords.some(word => q.includes(word));
+
+            if(isOffTopic) {
+                reply = "⚠️ عذراً، أنا مساعد خاص بنادي الإتفاق الرباطي وشؤون كرة القدم والتدريب فقط. لا يمكنني الإجابة على الأسئلة الخارجية خارج هذا النطاق.";
+            } 
+            // 2. توجيه وتجاوب حسب التخصصات والمسؤولين
+            else if(q.includes('حارس') || q.includes('حراس') || q.includes('مرمى')) {
+                reply = "🧤 **تخصص مدرب الحراس (أمين بنجابر):**\nيقوم الكابتن أمين بتدريب الأساسيات (المسكة الصحيحة، التمركز، والسقوط الآمن). يمكنك مراجعته في بداية الحصة التدريبية.";
+            } 
+            else if(q.includes('لياقة') || q.includes('سرعة') || q.includes('عضلات') || q.includes('بدن')) {
+                reply = "🏃 **تخصص مدرب اللياقة (سليمان بنغزال):**\nالكابتن سليمان مسؤول عن محطات الرشاقة والتوافق الحركي والوقاية من الإصابات. تقييمك البدني يصدر منه شهرياً.";
+            } 
+            else if(q.includes('برمجة') || q.includes('مباراة') || q.includes('ودية') || q.includes('توقيت') || q.includes('جدول')) {
+                reply = "📅 **تخصص مسؤول البرمجة (عصام الكبوس):**\nيتكفل الكابتن عصام بتنظيم زمن الحصص التدريبية، التناوب على الملاعب، وبرمجة المباريات الودية والبطولة.";
+            } 
+            else if(q.includes('معدات') || q.includes('كرة') || q.includes('قميص') || q.includes('ملعب') || q.includes('حضور')) {
+                reply = "📦 **تخصص مسؤول اللوجستيك (زكرياء حداوي):**\nيتولى الكابتن زكرياء ضبط الأجهزة، تجهيز الملعب، ومتابعة سجل حضور وغياب اللاعبين.";
+            } 
+            else if(q.includes('مال') || q.includes('اشتراك') || q.includes('دفع') || q.includes('واجب') || q.includes('فاتورة')) {
+                reply = "💳 **تخصص أمينة المال (ملاك قدوري):**\nتختص الأستاذة ملاك بإدارة الاشتراكات الشهرية، الواجب السنوي، واستخراج الفواتير والتقارير المالية.";
+            } 
+            else if(q.includes('خبر') || q.includes('صور') || q.includes('وثيقة') || q.includes('مقال') || q.includes('تواصل')) {
+                reply = "📝 **تخصص الكاتبة العامة (هدى بوكدال):**\nتتولى الأستاذة هدى نشر الأخبار، رفع صور المباريات والدوريات، واستقبال المراسلات العامة.";
+            } 
+            else if(q.includes('رئيس') || q.includes('قبول') || q.includes('تسجيل جديد') || q.includes('ادارة')) {
+                reply = "👑 **المدير التقني ورئيس النادي (آدم القدوري):**\nله الوصول الكامل لإدارة حسابات الأعضاء، قبول اللاعبين الجدد، واعتماد التقارير الحساسة.";
+            } 
+            else if(q.includes('تقييم') || q.includes('نقاط') || q.includes('رادار')) {
+                reply = "📊 يمكنك مشاهدة تقييمك الدوري (من 1 إلى 10) من خلال تسجيل الدخول برمزك التسلسلي الخص بك في لوحة تحكم اللاعبين.";
+            } 
+            else {
+                reply = "⚽ أنا في خدمتك! يمكنك الاستفسار عن: (التدريبات، التقييمات، الاشتراكات المالية، أو أدوار الطاقم التقني والإداري).";
+            }
+
+            setTimeout(() => {
+                chatBody.innerHTML += `<div class="chat-msg bot">${reply.replace(/\n/g, '<br>')}</div>`;
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 400);
+        }
+
+        function changeLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            const root = document.getElementById('htmlRoot');
+            if(lang === 'ar') root.setAttribute('dir', 'rtl');
+            else root.setAttribute('dir', 'ltr');
+        }
+
+        function setRole(role, btn) {
+            document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function login() { alert("يرجى إدخال الرمز الصحيح للدخول"); }
+        function logout() { location.reload(); }
+    </script>
+</body>
+</html>
