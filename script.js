@@ -1,6 +1,6 @@
-function openMenu(){
+function toggleMenu(){
 
-let menu=document.getElementById("side-menu");
+let menu=document.getElementById("menu");
 
 
 if(menu.style.right==="0px"){
