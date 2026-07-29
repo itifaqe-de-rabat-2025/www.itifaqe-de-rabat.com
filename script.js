@@ -1,16 +1,17 @@
 function openMenu(){
 
-let menu = document.getElementById("menu");
+let menu=document.getElementById("side-menu");
 
-if(menu.style.display === "block"){
 
-menu.style.display = "none";
+if(menu.style.right==="0px"){
+
+menu.style.right="-300px";
 
 }
 
 else{
 
-menu.style.display = "block";
+menu.style.right="0px";
 
 }
 
