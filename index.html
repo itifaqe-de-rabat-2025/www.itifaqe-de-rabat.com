@@ -1,300 +1,234 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" id="htmlRoot">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نادي الإتفاق الرباطي | Itifaqe de Rabat</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نادي الإتفاق الرباطي | Itifaqe de Rabat</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: linear-gradient(rgba(13, 19, 14, 0.88), rgba(13, 19, 14, 0.95)), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1600') center/cover fixed; color: #ffffff; line-height: 1.6; min-height: 100vh; }
     
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { 
-            background: linear-gradient(rgba(13, 19, 14, 0.88), rgba(13, 19, 14, 0.95)), 
-                        url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1600') center/cover fixed; 
-            color: #ffffff; line-height: 1.6; min-height: 100vh; 
-        }
+    /* Header */
+    header { background-color: rgba(20, 28, 22, 0.95); padding: 12px 3%; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #16a34a; position: sticky; top: 0; z-index: 1000; }
+    .header-right { display: flex; align-items: center; gap: 15px; }
+    .logo-img { height: 45px; width: auto; object-fit: contain; }
+    .club-title { font-size: 18px; font-weight: bold; color: #fff; }
+    .club-title span { color: #16a34a; }
+    
+    .header-left { display: flex; align-items: center; gap: 15px; }
+    .social-btn { color: #e1306c; font-size: 20px; transition: transform 0.2s; }
+    .social-btn:hover { transform: scale(1.2); }
+    
+    /* Login Card */
+    .login-card { background-color: #141c16; border: 2px solid #16a34a; border-radius: 12px; max-width: 450px; margin: 30px auto; padding: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.6); }
+    .role-selector { display: flex; gap: 5px; margin-bottom: 15px; background: #0d130e; padding: 5px; border-radius: 8px; }
+    .role-btn { flex: 1; padding: 8px 4px; font-size: 12px; font-weight: bold; border: none; background: transparent; color: #9ca3af; cursor: pointer; border-radius: 5px; }
+    .role-btn.active { background: #16a34a; color: white; }
+    
+    .form-group { margin-bottom: 12px; text-align: right; }
+    .form-group label { display: block; margin-bottom: 4px; color: #d1d5db; font-size: 12px; }
+    .form-group input { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #2e3d34; background-color: #0d130e; color: #fff; font-size: 13px; }
+    .btn-submit { width: 100%; padding: 10px; background: #16a34a; border: none; color: white; font-weight: bold; border-radius: 6px; cursor: pointer; }
 
-        /* Header */
-        header {
-            background-color: rgba(20, 28, 22, 0.95); padding: 12px 3%; display: flex;
-            justify-content: space-between; align-items: center;
-            border-bottom: 3px solid #16a34a; position: sticky; top: 0; z-index: 1000;
-        }
-        .header-right { display: flex; align-items: center; gap: 15px; }
-        .logo-img { height: 45px; width: auto; object-fit: contain; }
-        .club-title { font-size: 18px; font-weight: bold; color: #fff; }
-        .club-title span { color: #16a34a; }
+    /* Dashboard & Players List */
+    .dashboard { display: none; padding: 20px; background: rgba(20, 28, 22, 0.9); margin: 20px auto; max-width: 800px; border-radius: 10px; border: 1px solid #16a34a; }
+    .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #2e3d34; padding-bottom: 10px; }
+    
+    .add-player-box { background: #0d130e; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px dashed #16a34a; }
+    .btn-add { background: #16a34a; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
 
-        .header-left { display: flex; align-items: center; gap: 15px; }
-        .lang-switch { display: flex; gap: 5px; background: #0d130e; padding: 3px; border-radius: 5px; border: 1px solid #2e3d34; }
-        .lang-btn { background: none; border: none; color: #9ca3af; padding: 3px 8px; cursor: pointer; font-size: 11px; font-weight: bold; border-radius: 3px; }
-        .lang-btn.active { background: #16a34a; color: white; }
+    /* Cards Grid */
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 15px; }
+    .card { background-color: #141c16; border: 1px solid #2e3d34; border-radius: 8px; padding: 15px; text-align: center; }
 
-        .menu-trigger { font-size: 22px; color: #16a34a; cursor: pointer; padding: 4px 8px; border-radius: 5px; background: #1a261c; }
+    /* Sponsors Section (2 Sponsors Only) */
+    .sponsors-container { display: flex; justify-content: center; align-items: center; gap: 40px; margin-top: 15px; flex-wrap: wrap; }
+    .sponsor-card { background: rgba(255,255,255,0.05); padding: 10px 20px; border-radius: 8px; border: 1px solid #2e3d34; }
+    .sponsor-card img { max-height: 50px; width: auto; object-fit: contain; }
 
-        /* Drawer */
-        .drawer {
-            position: fixed; top: 0; right: -320px; width: 300px; height: 100%;
-            background-color: #111813; border-left: 2px solid #16a34a; z-index: 2000;
-            transition: 0.4s ease; padding: 20px; overflow-y: auto; box-shadow: -5px 0 15px rgba(0,0,0,0.5);
-        }
-        [dir="ltr"] .drawer { right: auto; left: -320px; border-left: none; border-right: 2px solid #16a34a; }
-        .drawer.active { right: 0; }
-        [dir="ltr"] .drawer.active { left: 0; }
-        
-        .drawer-close { font-size: 18px; color: #ef4444; cursor: pointer; margin-bottom: 20px; }
-        .drawer-nav a { display: block; padding: 12px; color: #d1d5db; text-decoration: none; border-bottom: 1px solid #1f2923; font-weight: bold; font-size: 13px; }
-        .drawer-nav a:hover { color: #16a34a; background: #18221a; }
-
-        .hero { text-align: center; padding: 40px 20px; }
-        .hero h1 { font-size: 30px; color: #fff; margin-bottom: 10px; }
-        .hero p { color: #9ca3af; font-size: 14px; max-width: 650px; margin: 0 auto; }
-
-        /* Login */
-        .login-card {
-            background-color: #141c16; border: 2px solid #16a34a; border-radius: 12px;
-            max-width: 450px; margin: 15px auto; padding: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-        }
-        .login-card h3 { text-align: center; color: #16a34a; margin-bottom: 15px; }
-        .role-selector { display: flex; gap: 5px; margin-bottom: 15px; background: #0d130e; padding: 5px; border-radius: 8px; }
-        .role-btn { flex: 1; padding: 8px 4px; font-size: 11px; font-weight: bold; border: none; background: transparent; color: #9ca3af; cursor: pointer; border-radius: 5px; }
-        .role-btn.active { background: #16a34a; color: white; }
-
-        .form-group { margin-bottom: 12px; text-align: start; }
-        .form-group label { display: block; margin-bottom: 4px; color: #d1d5db; font-size: 12px; }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #2e3d34; background-color: #0d130e; color: #ffffff; font-size: 13px; outline: none;
-        }
-        .btn-submit { width: 100%; padding: 10px; background-color: #16a34a; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px; }
-
-        /* Dashboard */
-        .dashboard { display: none; background: #141c16; border: 1px solid #2e3d34; border-radius: 12px; padding: 20px; margin: 20px 3%; }
-        .dashboard.active { display: block; }
-        .dash-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2e3d34; padding-bottom: 12px; margin-bottom: 15px; }
-        .badge { background: #16a34a; color: white; padding: 2px 8px; border-radius: 10px; font-size: 11px; }
-
-        /* 🤖 AI Chatbot Widget Styles */
-        .ai-fab {
-            position: fixed; bottom: 20px; left: 20px; background: #16a34a; color: white; width: 55px; height: 55px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;
-            cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 3000; border: 2px solid #fff;
-        }
-        [dir="ltr"] .ai-fab { left: auto; right: 20px; }
-        
-        .ai-chat-box {
-            position: fixed; bottom: 85px; left: 20px; width: 330px; height: 430px; background: #111813;
-            border: 2px solid #16a34a; border-radius: 12px; display: none; flex-direction: column;
-            z-index: 3000; box-shadow: 0 10px 25px rgba(0,0,0,0.7); overflow: hidden;
-        }
-        [dir="ltr"] .ai-chat-box { left: auto; right: 20px; }
-        .ai-chat-box.active { display: flex; }
-
-        .ai-chat-header { background: #16a34a; color: white; padding: 12px; font-weight: bold; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
-        .ai-chat-body { flex: 1; padding: 12px; overflow-y: auto; font-size: 12px; display: flex; flex-direction: column; gap: 8px; }
-        .chat-msg { padding: 8px 12px; border-radius: 8px; max-width: 85%; }
-        .chat-msg.bot { background: #1a261c; border: 1px solid #2e3d34; color: #d1d5db; align-self: flex-start; }
-        .chat-msg.user { background: #16a34a; color: white; align-self: flex-end; }
-        
-        .ai-chat-input { display: flex; border-top: 1px solid #2e3d34; padding: 8px; background: #0d130e; }
-        .ai-chat-input input { flex: 1; background: transparent; border: none; color: white; padding: 5px; font-size: 12px; outline: none; }
-        .ai-chat-input button { background: #16a34a; color: white; border: none; padding: 5px 12px; border-radius: 4px; cursor: pointer; }
-
-        section { padding: 30px 4%; }
-        .section-title { text-align: center; font-size: 22px; margin-bottom: 20px; color: #16a34a; }
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
-        .card { background-color: #141c16; border: 1px solid #2e3d34; border-radius: 8px; padding: 15px; text-align: center; }
-        footer { background: #070a08; padding: 20px 4%; border-top: 1px solid #1f2923; margin-top: 30px; }
-    </style>
+    footer { background: #070a08; padding: 20px 4%; text-align: center; border-top: 1px solid #1f2923; margin-top: 30px; font-size: 13px; color: #9ca3af; }
+  </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="header-right">
-            <img src="logo.jpeg" alt="Logo" class="logo-img" onerror="this.style.display='none'">
-            <div class="club-title">Itifaqe <span>de Rabat</span></div>
-        </div>
-
-        <div class="header-left">
-            <div class="lang-switch">
-                <button class="lang-btn active" onclick="changeLang('ar')">العربية</button>
-                <button class="lang-btn" onclick="changeLang('fr')">FR</button>
-                <button class="lang-btn" onclick="changeLang('en')">EN</button>
-            </div>
-            <div class="menu-trigger" onclick="toggleDrawer()"><i class="fas fa-bars"></i></div>
-        </div>
-    </header>
-
-    <!-- Side Menu Drawer -->
-    <div id="drawer" class="drawer">
-        <div class="drawer-close" onclick="toggleDrawer()"><i class="fas fa-times"></i> <span data-key="close">إغلاق</span></div>
-        <nav class="drawer-nav">
-            <a href="#about" onclick="toggleDrawer()" data-key="m_about">🏠 الرئيسية والتعريف بالنادي</a>
-            <a href="#register" onclick="toggleDrawer()" data-key="m_reg">📝 التسجيل في النادي</a>
-            <a href="#sponsorship" onclick="toggleDrawer()" data-key="m_sponsor">🤝 طلب شراكة ورعاية</a>
-            <a href="#contact" onclick="toggleDrawer()" data-key="m_contact">📞 تواصل معنا</a>
-        </nav>
+  <!-- Header -->
+  <header>
+    <div class="header-right">
+      <img src="logo.jpeg" alt="Logo" class="logo-img" onerror="this.style.display='none'">
+      <div class="club-title">Itifaqe <span>de Rabat</span></div>
     </div>
-
-    <!-- Hero -->
-    <div class="hero">
-        <h1 data-key="hero_title">نادي الإتفاق الرباطي</h1>
-        <p data-key="hero_sub">المنصة الرياضية الإدارية والتقنية الشاملة لإدارة الفئات والتقييمات الميدانية</p>
+    <div class="header-left">
+      <!-- Instagram Link -->
+      <a href="https://www.instagram.com/itifaqe_de_rabat/" target="_blank" class="social-btn" title="إنستغرام النادي">
+        <i class="fab fa-instagram"></i>
+      </a>
     </div>
+  </header>
 
-    <!-- Login Card -->
-    <div class="login-card" id="loginCard">
-        <h3 data-key="login_head">تسجيل الدخول للنظام</h3>
-        <div class="role-selector">
-            <button class="role-btn active" onclick="setRole('admin', this)" data-key="r_admin">أعضاء المكتب</button>
-            <button class="role-btn" onclick="setRole('coach', this)" data-key="r_coach">الطاقم التقني</button>
-            <button class="role-btn" onclick="setRole('player', this)" data-key="r_player">اللاعبون</button>
-        </div>
-
-        <div class="form-group">
-            <label id="codeLabel" data-key="code_lbl">رمز التوثيق الخاص بعضو المكتب:</label>
-            <input type="password" id="authCode" placeholder="...">
-        </div>
-        <button class="btn-submit" onclick="login()" data-key="btn_login">تسجيل الدخول</button>
-        <p id="loginError" style="color:#ef4444; font-size:12px; margin-top:8px; display:none; text-align:center;">الرمز غير صحيح!</p>
+  <!-- Login Section -->
+  <div class="login-card" id="loginBox">
+    <h3 style="text-align: center; color: #16a34a; margin-bottom: 15px;">تسجيل الدخول للنادي</h3>
+    <div class="role-selector">
+      <button class="role-btn active" onclick="setRole('admin')">الرئيس / الإدارة</button>
+      <button class="role-btn" onclick="setRole('player')">لاعب</button>
     </div>
-
-    <!-- Dashboards -->
-    <div id="adminDash" class="dashboard"><div class="dash-header"><h2 id="adminName"></h2><button onclick="logout()">خروج</button></div></div>
-    <div id="coachDash" class="dashboard"><div class="dash-header"><h2 id="coachName"></h2><button onclick="logout()">خروج</button></div></div>
-    <div id="playerDash" class="dashboard">
-        <div class="dash-header"><h2>محمد الرباطي</h2><button onclick="logout()">خروج</button></div>
-        <div style="max-width:320px; margin:0 auto;"><canvas id="playerRadar"></canvas></div>
+    <div class="form-group">
+      <label id="userLabel">اسم المستخدم / الاسم:</label>
+      <input type="text" id="username" placeholder="أدخل الاسم...">
     </div>
-
-    <!-- Section: About -->
-    <section id="about">
-        <h2 class="section-title">الطاقم التقني والإداري</h2>
-        <div class="cards-grid">
-            <div class="card"><h4>آدم القدوري</h4><p style="font-size:12px; color:#16a34a;">المدير التقني والرئيس</p></div>
-            <div class="card"><h4>عصام الكبوس</h4><p style="font-size:12px; color:#16a34a;">مسؤول البرمجة والتطوير</p></div>
-            <div class="card"><h4>سليمان بنغزال</h4><p style="font-size:12px; color:#16a34a;">مدرب اللياقة البدنية والنمو</p></div>
-            <div class="card"><h4>زكرياء حداوي</h4><p style="font-size:12px; color:#16a34a;">مسؤول اللوجستيك والتنظيم</p></div>
-            <div class="card"><h4>أمين بنجابر</h4><p style="font-size:12px; color:#16a34a;">مدرب الحراس الاحترافي</p></div>
-            <div class="card"><h4>هدى بوكدال</h4><p style="font-size:12px; color:#16a34a;">الكاتبة العامة والمحتوى</p></div>
-            <div class="card"><h4>ملاك قدوري</h4><p style="font-size:12px; color:#16a34a;">أمينة المال والمالية</p></div>
-        </div>
-    </section>
-
-    <!-- 🤖 AI Assistant Floating Widget -->
-    <div class="ai-fab" onclick="toggleAIChat()" title="مساعد الذكاء الاصطناعي"><i class="fas fa-robot"></i></div>
-    
-    <div class="ai-chat-box" id="aiChatBox">
-        <div class="ai-chat-header">
-            <span>🤖 المساعد الذكي - الإتفاق الرباطي</span>
-            <i class="fas fa-times" style="cursor:pointer;" onclick="toggleAIChat()"></i>
-        </div>
-        <div class="ai-chat-body" id="aiChatBody">
-            <div class="chat-msg bot">مرحباً بك! أنا مساعد نادي الإتفاق الرباطي الذكي ⚽. كيف يمكنني مساعدتك اليوم؟ يمكنك سؤالي عن التدريبات، اللياقة، الاشتراكات، أو توجيهك للمدرب/العضو المسؤول.</div>
-        </div>
-        <div class="ai-chat-input">
-            <input type="text" id="aiInput" placeholder="اكتب سؤالك هنا..." onkeypress="if(event.key==='Enter') askAI()">
-            <button onclick="askAI()"><i class="fas fa-paper-plane"></i></button>
-        </div>
+    <div class="form-group">
+      <label id="codeLabel">كود التوثيق الخاص:</label>
+      <input type="password" id="authCode" placeholder="أدخل الكود...">
     </div>
-    <!-- Section: Sponsors -->
-<section id="sponsors" style="padding: 20px 4%; text-align: center;">
-  <h2 class="section-title">شركاؤنا والمستشهرون</h2>
-  <div style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 15px;">
-    <img src="sponsor1.jpeg" alt="Sponsor 1" style="max-height: 60px; object-fit: contain;">
-    <img src="sponsor2.jpeg" alt="Sponsor 2" style="max-height: 60px; object-fit: contain;">
-    <img src="sponsor3.jpeg" alt="Sponsor 3" style="max-height: 60px; object-fit: contain;">
+    <button class="btn-submit" onclick="login()">دخول</button>
+    <p id="loginError" style="color:#ef4444; font-size:12px; margin-top:8px; display:none; text-align:center;"></p>
   </div>
-</section>
 
-    <!-- Contact -->
-    <section id="contact">
-        <h2 class="section-title">تواصل معنا</h2>
-        <div style="text-align:center; font-size:13px; color:#d1d5db;">
-            <p>📞 +212 7-02-49-77-48</p>
-            <p>✉️ itifaqe.de.rabat.contact@gmail.com</p>
-        </div>
-    </section>
+  <!-- Admin Dashboard -->
+  <div id="adminDash" class="dashboard">
+    <div class="dash-header">
+      <h2>لوحة تحكم الرئيس / الإدارة</h2>
+      <button onclick="logout()" style="background:#ef4444; color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer;">خروج</button>
+    </div>
 
-    <footer>
-        <div style="text-align:center; font-size:12px; color:#9ca3af;">نادي الإتفاق الرباطي © جميع الحقوق محفوظة</div>
-    </footer>
+    <!-- إضافة لاعب جديد -->
+    <div class="add-player-box">
+      <h4 style="color:#16a34a; margin-bottom:10px;"><i class="fas fa-user-plus"></i> إضافة لاعب جديد للنادي</h4>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <input type="text" id="newPlayerName" placeholder="اسم اللاعب الكامل" style="flex:1; padding:8px; border-radius:4px; border:1px solid #333; background:#000; color:#fff;">
+        <input type="text" id="newPlayerCode" placeholder="كود دخول اللاعب" style="flex:1; padding:8px; border-radius:4px; border:1px solid #333; background:#000; color:#fff;">
+        <button class="btn-add" onclick="addPlayerByAdmin()">+ إضافة اللاعب</button>
+      </div>
+    </div>
 
-    <!-- Logic Engine -->
-    <script>
-        function toggleDrawer() { document.getElementById('drawer').classList.toggle('active'); }
-        function toggleAIChat() { document.getElementById('aiChatBox').classList.toggle('active'); }
+    <h4>قائمة اللاعبين المعتمدين بالنادي:</h4>
+    <div id="playersList" class="cards-grid"></div>
+  </div>
 
-        // 🧠 محرك إجابات المساعد الذكي وتوجيه التخصصات وحظر الأسئلة الخارجية
-        function askAI() {
-            const input = document.getElementById('aiInput');
-            const q = input.value.trim().toLowerCase();
-            if(!q) return;
+  <!-- Player Dashboard -->
+  <div id="playerDash" class="dashboard">
+    <div class="dash-header">
+      <h2 id="playerNameTitle">مرحباً بك يا لاعب</h2>
+      <button onclick="logout()" style="background:#ef4444; color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer;">خروج</button>
+    </div>
+    <p>أهلاً بك في حسابك الرسمي بنادي الإتفاق الرباطي. يمكنك الاطلاع على إحصائياتك وتحديثات التدريب هنا.</p>
+  </div>
 
-            const chatBody = document.getElementById('aiChatBody');
-            chatBody.innerHTML += `<div class="chat-msg user">${input.value}</div>`;
-            input.value = "";
+  <!-- Section: Staff -->
+  <section id="about" style="padding: 20px 4%;">
+    <h2 style="text-align:center; color:#16a34a; margin-bottom:15px;">الطاقم التقني والإداري</h2>
+    <div class="cards-grid">
+      <div class="card"><h4>أدم القدوري</h4><p style="font-size:12px; color:#16a34a;">المدير التقني والرئيس</p></div>
+      <div class="card"><h4>عصام الكبوس</h4><p style="font-size:12px; color:#16a34a;">نائب البرمجة والتطوير</p></div>
+      <div class="card"><h4>سليمان بنغرال</h4><p style="font-size:12px; color:#16a34a;">اللياقة البدنية والنمو</p></div>
+      <div class="card"><h4>زكرياء حداوي</h4><p style="font-size:12px; color:#16a34a;">اللوجستيك والتنظيم</p></div>
+    </div>
+  </section>
 
-            let reply = "";
+  <!-- Section: Sponsors (2 Sponsors Only) -->
+  <section id="sponsors" style="padding: 25px 4%; text-align: center; background: rgba(0,0,0,0.2);">
+    <h3 style="color:#16a34a; margin-bottom:15px;">الشركاء والمستشهرون الرسميون</h3>
+    <div class="sponsors-container">
+      <div class="sponsor-card">
+        <img src="sponsor1.jpeg" alt="المستشهر 1" onerror="this.src='https://via.placeholder.com/120x50/16a34a/ffffff?text=Sponsor+1'">
+      </div>
+      <div class="sponsor-card">
+        <img src="sponsor2.jpeg" alt="المستشهر 2" onerror="this.src='https://via.placeholder.com/120x50/16a34a/ffffff?text=Sponsor+2'">
+      </div>
+    </div>
+  </section>
 
-            // 1. فحص الكلمات المحظورة (خارج نطاق النادي والرياضة)
-            const offTopicKeywords = ['طبخ', 'وصفة', 'سياسة', 'برمجة بلغة', 'فيلم', 'مسلسل', 'أغنية', 'طرق النجاح في الرياضيات', 'عاصمة', 'سيارة', 'شراء'];
-            const isOffTopic = offTopicKeywords.some(word => q.includes(word));
+  <!-- Footer -->
+  <footer>
+    <p>نادي الإتفاق الرباطي © جميع الحقوق محفوظة</p>
+    <p style="margin-top: 8px;">
+      <a href="https://www.instagram.com/itifaqe_de_rabat/" target="_blank" style="color: #e1306c; text-decoration: none; font-weight: bold;">
+        <i class="fab fa-instagram"></i> تابعنا على إنستغرام
+      </a>
+    </p>
+  </footer>
 
-            if(isOffTopic) {
-                reply = "⚠️ عذراً، أنا مساعد خاص بنادي الإتفاق الرباطي وشؤون كرة القدم والتدريب فقط. لا يمكنني الإجابة على الأسئلة الخارجية خارج هذا النطاق.";
-            } 
-            // 2. توجيه وتجاوب حسب التخصصات والمسؤولين
-            else if(q.includes('حارس') || q.includes('حراس') || q.includes('مرمى')) {
-                reply = "🧤 **تخصص مدرب الحراس (أمين بنجابر):**\nيقوم الكابتن أمين بتدريب الأساسيات (المسكة الصحيحة، التمركز، والسقوط الآمن). يمكنك مراجعته في بداية الحصة التدريبية.";
-            } 
-            else if(q.includes('لياقة') || q.includes('سرعة') || q.includes('عضلات') || q.includes('بدن')) {
-                reply = "🏃 **تخصص مدرب اللياقة (سليمان بنغزال):**\nالكابتن سليمان مسؤول عن محطات الرشاقة والتوافق الحركي والوقاية من الإصابات. تقييمك البدني يصدر منه شهرياً.";
-            } 
-            else if(q.includes('برمجة') || q.includes('مباراة') || q.includes('ودية') || q.includes('توقيت') || q.includes('جدول')) {
-                reply = "📅 **تخصص مسؤول البرمجة (عصام الكبوس):**\nيتكفل الكابتن عصام بتنظيم زمن الحصص التدريبية، التناوب على الملاعب، وبرمجة المباريات الودية والبطولة.";
-            } 
-            else if(q.includes('معدات') || q.includes('كرة') || q.includes('قميص') || q.includes('ملعب') || q.includes('حضور')) {
-                reply = "📦 **تخصص مسؤول اللوجستيك (زكرياء حداوي):**\nيتولى الكابتن زكرياء ضبط الأجهزة، تجهيز الملعب، ومتابعة سجل حضور وغياب اللاعبين.";
-            } 
-            else if(q.includes('مال') || q.includes('اشتراك') || q.includes('دفع') || q.includes('واجب') || q.includes('فاتورة')) {
-                reply = "💳 **تخصص أمينة المال (ملاك قدوري):**\nتختص الأستاذة ملاك بإدارة الاشتراكات الشهرية، الواجب السنوي، واستخراج الفواتير والتقارير المالية.";
-            } 
-            else if(q.includes('خبر') || q.includes('صور') || q.includes('وثيقة') || q.includes('مقال') || q.includes('تواصل')) {
-                reply = "📝 **تخصص الكاتبة العامة (هدى بوكدال):**\nتتولى الأستاذة هدى نشر الأخبار، رفع صور المباريات والدوريات، واستقبال المراسلات العامة.";
-            } 
-            else if(q.includes('رئيس') || q.includes('قبول') || q.includes('تسجيل جديد') || q.includes('ادارة')) {
-                reply = "👑 **المدير التقني ورئيس النادي (آدم القدوري):**\nله الوصول الكامل لإدارة حسابات الأعضاء، قبول اللاعبين الجدد، واعتماد التقارير الحساسة.";
-            } 
-            else if(q.includes('تقييم') || q.includes('نقاط') || q.includes('رادار')) {
-                reply = "📊 يمكنك مشاهدة تقييمك الدوري (من 1 إلى 10) من خلال تسجيل الدخول برمزك التسلسلي الخص بك في لوحة تحكم اللاعبين.";
-            } 
-            else {
-                reply = "⚽ أنا في خدمتك! يمكنك الاستفسار عن: (التدريبات، التقييمات، الاشتراكات المالية، أو أدوار الطاقم التقني والإداري).";
-            }
+  <!-- JavaScript Code Engine -->
+  <script>
+    let currentRole = 'admin';
+    
+    // قائمة اللاعبين المبدئية المسجلة من قِبل الرئيس
+    let clubPlayers = JSON.parse(localStorage.getItem('clubPlayers')) || [
+      { name: "محمد الرباطي", code: "1010" }
+    ];
 
-            setTimeout(() => {
-                chatBody.innerHTML += `<div class="chat-msg bot">${reply.replace(/\n/g, '<br>')}</div>`;
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }, 400);
+    function setRole(role) {
+      currentRole = role;
+      document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    function login() {
+      const user = document.getElementById('username').value.trim();
+      const code = document.getElementById('authCode').value.trim();
+      const err = document.getElementById('loginError');
+
+      if (!user || !code) {
+        err.innerText = "الرجاء كتابة الاسم والكود الخاص!";
+        err.style.display = "block";
+        return;
+      }
+
+      if (currentRole === 'admin') {
+        if (code === "admin123") { // كود دخول الرئيس
+          document.getElementById('loginBox').style.display = 'none';
+          document.getElementById('adminDash').style.display = 'block';
+          renderPlayers();
+        } else {
+          err.innerText = "كود دخول الرئيس غير صحيح!";
+          err.style.display = "block";
         }
-
-        function changeLang(lang) {
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
-            const root = document.getElementById('htmlRoot');
-            if(lang === 'ar') root.setAttribute('dir', 'rtl');
-            else root.setAttribute('dir', 'ltr');
+      } else {
+        // التحقق من أن اللاعب مضاف مسبقاً بواسطة الرئيس
+        const foundPlayer = clubPlayers.find(p => p.name.toLowerCase() === user.toLowerCase() && p.code === code);
+        if (foundPlayer) {
+          document.getElementById('loginBox').style.display = 'none';
+          document.getElementById('playerDash').style.display = 'block';
+          document.getElementById('playerNameTitle').innerText = "مرحباً بك يا " + foundPlayer.name;
+        } else {
+          err.innerText = "عذراً، هذا الحساب غير موجود! يجب أن يقوم الرئيس بإضافتك أولاً.";
+          err.style.display = "block";
         }
+      }
+    }
 
-        function setRole(role, btn) {
-            document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        }
+    function addPlayerByAdmin() {
+      const pName = document.getElementById('newPlayerName').value.trim();
+      const pCode = document.getElementById('newPlayerCode').value.trim();
 
-        function login() { alert("يرجى إدخال الرمز الصحيح للدخول"); }
-        function logout() { location.reload(); }
-    </script>
+      if (!pName || !pCode) {
+        alert("الرجاء كتابة اسم اللاعب والكود المخصص له!");
+        return;
+      }
+
+      clubPlayers.push({ name: pName, code: pCode });
+      localStorage.setItem('clubPlayers', JSON.stringify(clubPlayers));
+      renderPlayers();
+
+      document.getElementById('newPlayerName').value = '';
+      document.getElementById('newPlayerCode').value = '';
+      alert("تمت إضافة اللاعب " + pName + " بنجاح! يمكنه الآن تسجيل الدخول.");
+    }
+
+    function renderPlayers() {
+      const list = document.getElementById('playersList');
+      list.innerHTML = '';
+      clubPlayers.forEach(p => {
+        list.innerHTML += `<div class="card"><h4>${p.name}</h4><p style="font-size:11px; color:#9ca3af;">الكود: ${p.code}</p></div>`;
+      });
+    }
+
+    function logout() {
+      location.reload();
+    }
+  </script>
 </body>
 </html>
