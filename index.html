@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نادي الإتفاق الرباطي - النظام الذكي</title>
+    <title>نادي الإتفاق الرباطي - المنصة الشاملة الذكية</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -27,13 +27,13 @@
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200">
 
-    <!-- 1. الهيدر والترويسة -->
+    <!-- 1. الهيدر والترويسة الرئيسية -->
     <nav class="sticky top-0 z-50 bg-white dark:bg-gray-800 border-b-2 border-emerald-600 shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
+                <!-- الشعار والاسم -->
                 <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="showView('public')">
                     <div class="w-12 h-12 bg-emerald-700 rounded-full flex items-center justify-center text-white font-bold text-xl border-2 border-yellow-400 shadow overflow-hidden">
-                        <!-- صورة الشعار: مزودة بالتصحيح التلقائي -->
                         <img id="display-logo-img" src="logo.jpeg" alt="نادي الإتفاق الرباطي" class="w-full h-full object-cover auto-fix-img">
                     </div>
                     <div>
@@ -42,15 +42,18 @@
                     </div>
                 </div>
 
+                <!-- القائمة الرئيسية -->
                 <div class="hidden lg:flex items-center space-x-6 space-x-reverse font-bold text-sm">
                     <a href="#hero" onclick="showView('public')" class="hover:text-emerald-600">الرئيسية</a>
                     <a href="#about" onclick="showView('public')" class="hover:text-emerald-600">عن النادي</a>
                     <a href="#gallery" onclick="showView('public')" class="hover:text-emerald-600">المعرض والفيديوهات</a>
                     <a href="#sponsors" onclick="showView('public')" class="hover:text-emerald-600">الرعاة</a>
+                    <a href="#contact" onclick="showView('public')" class="hover:text-emerald-600">تواصل معنا</a>
                 </div>
 
+                <!-- الأزرار -->
                 <div class="flex items-center space-x-3 space-x-reverse">
-                    <button onclick="openModal('reg-modal')" class="bg-yellow-400 hover:bg-yellow-300 text-emerald-950 px-4 py-2 rounded-xl text-xs font-black shadow-md">
+                    <button onclick="openModal('reg-modal')" class="bg-yellow-400 hover:bg-yellow-300 text-emerald-950 px-4 py-2 rounded-xl text-xs sm:text-sm font-black shadow-md transition">
                         سجّل طفلك الآن
                     </button>
                     <button onclick="showView('login')" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1 shadow">
@@ -61,9 +64,9 @@
         </div>
     </nav>
 
-    <!-- 2. الواجهة العامة -->
+    <!-- 2. الواجهة العامة للموقع -->
     <div id="public-view">
-        <!-- خلفية البانر: مزودة بالتصحيح التلقائي للصيغة -->
+        <!-- البانر الرئيسي مع الخلفية ذات التصحيح التلقائي -->
         <section id="hero" class="relative bg-emerald-900 text-white py-24 px-4 text-center overflow-hidden">
             <div id="hero-bg-div" class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('stadium.jpg');"></div>
             <div class="max-w-5xl mx-auto relative z-10">
@@ -71,8 +74,11 @@
                     نادي الإتفاق الرباطي
                 </span>
                 <h2 class="text-3xl sm:text-6xl font-extrabold mb-6 leading-tight">
-                    مصنع أبطال الغد.. هنا تُصنع الأساطير
+                    مصنع أبطال الغد.. هنا تُصنع الأساطير وتبدأ رحلة النجاح
                 </h2>
+                <p class="text-base sm:text-xl text-emerald-100 max-w-3xl mx-auto mb-8 leading-relaxed">
+                    المنصة الرسمية الشاملة لنادي الاتفاق الرباطي لتطوير المواهب الكروية الشابة وفق أحدث المعايير.
+                </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
                     <button onclick="openModal('reg-modal')" class="bg-yellow-400 hover:bg-yellow-300 text-emerald-950 px-8 py-4 rounded-xl font-bold text-lg shadow-lg">
                         استمارة الانضمام للنادي
@@ -84,7 +90,7 @@
             </div>
         </section>
 
-        <!-- الهيكل الإداري والتقني -->
+        <!-- الهيكل الإداري والتقني للنادي -->
         <section id="about" class="py-16 max-w-7xl mx-auto px-4">
             <h3 class="text-3xl font-bold text-center text-emerald-800 dark:text-emerald-400 mb-10">الهيكل الإداري والتقني للنادي</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
@@ -111,31 +117,86 @@
             </div>
         </section>
 
-        <!-- المعرض والرعاة مع الصور الذكية -->
+        <!-- معرض الفيديوهات والصور -->
         <section id="gallery" class="bg-gray-100 dark:bg-gray-800 py-16">
             <div class="max-w-7xl mx-auto px-4">
-                <h3 class="text-3xl font-bold text-center text-emerald-800 dark:text-emerald-400 mb-8">معرض الصور الذكي</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <!-- أي صورة هنا تصحح صيغتها تلقائياً لو أخطأت في الامتداد -->
-                    <img src="stadium.jpg" class="w-full h-40 object-cover rounded-xl shadow auto-fix-img">
-                    <img src="logo.jpeg" class="w-full h-40 object-cover rounded-xl shadow auto-fix-img">
-                    <img src="galaxy.jpeg" class="w-full h-40 object-cover rounded-xl shadow auto-fix-img">
-                    <img src="youssoufia.jpeg" class="w-full h-40 object-cover rounded-xl shadow auto-fix-img">
+                <h3 class="text-3xl font-bold text-center text-emerald-800 dark:text-emerald-400 mb-8">معرض الصور والفيديوهات</h3>
+                
+                <!-- عرض الفيديوهات المضافة -->
+                <div class="mb-10">
+                    <h4 class="font-bold text-lg mb-4 text-emerald-700"><i class="fa-solid fa-video"></i> مقاطع الفيديو والأنشطة</h4>
+                    <div id="public-videos-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <p class="text-xs text-gray-500">لا توجد فيديوهات مضافة حالياً. يمكنك إضافتها من لوحة الرئيس.</p>
+                    </div>
                 </div>
+
+                <!-- معرض الصور المحسن بالتصحيح الذكي -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4 text-emerald-700"><i class="fa-solid fa-images"></i> ألبوم الصور</h4>
+                    <div id="public-images-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <img src="stadium.jpg" class="w-full h-40 object-cover rounded-xl shadow auto-fix-img">
+                        <img src="logo.jpeg" class="w-full h-40 object-cover rounded-xl shadow auto-fix-img">
+                        <img src="galaxy.jpeg" class="w-full h-40 object-cover rounded-xl shadow auto-fix-img">
+                        <img src="youssoufia.jpeg" class="w-full h-40 object-cover rounded-xl shadow auto-fix-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- الرعاة -->
+        <section id="sponsors" class="max-w-7xl mx-auto px-4 py-16 text-center">
+            <h3 class="text-2xl font-bold text-emerald-800 dark:text-emerald-400 mb-8">الرعاة والشركاء الرسميون</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-6 border rounded-2xl bg-white dark:bg-gray-800 shadow-sm flex flex-col items-center">
+                    <img src="galaxy.jpeg" alt="GALAXY" class="w-24 h-24 mb-4 rounded-xl object-cover border border-emerald-500 auto-fix-img">
+                    <h4 class="font-bold text-lg">GALAXY Tiles & Ceramic</h4>
+                    <p class="text-xs text-gray-500 mb-3">الرائد في عالم السيراميك والحلول المعمارية العصرية.</p>
+                    <a href="https://www.instagram.com/galaxy_tiles_ceramic" target="_blank" class="text-xs font-bold text-pink-600"><i class="fa-brands fa-instagram"></i> انستغرام GALAXY</a>
+                </div>
+                <div class="p-6 border rounded-2xl bg-white dark:bg-gray-800 shadow-sm flex flex-col items-center">
+                    <img src="youssoufia.jpeg" alt="المقاطعة" class="w-24 h-24 mb-4 rounded-xl object-cover border border-emerald-500 auto-fix-img">
+                    <h4 class="font-bold text-lg">مجلس مقاطعة اليوسفية - الرباط</h4>
+                    <p class="text-xs text-gray-500 mb-3">الشريك المؤسساتي الداعم للرياضة المحلية والمبادرات الشبابية.</p>
+                    <a href="https://www.facebook.com/share/19EWZHEpjj/" target="_blank" class="text-xs font-bold text-blue-600"><i class="fa-brands fa-facebook"></i> فيسبوك المقاطعة</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- اتصل بنا -->
+        <section id="contact" class="bg-gray-100 dark:bg-gray-800 py-16">
+            <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div>
+                    <h3 class="text-2xl font-bold text-emerald-800 dark:text-emerald-400 mb-6">تواصل معنا</h3>
+                    <p class="text-sm mb-2"><i class="fa-solid fa-phone text-emerald-600"></i> الهاتف: +212 702497748</p>
+                    <p class="text-sm mb-6"><i class="fa-solid fa-envelope text-emerald-600"></i> البريد: itifaqe.de.rabat.contact@gmail.com</p>
+                </div>
+                <form onsubmit="handleContactSubmit(event)" class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow space-y-4">
+                    <h4 class="font-bold text-sm text-emerald-800">مراسلة إدارة النادي برئاسة ادم القدوري</h4>
+                    <input type="text" placeholder="الاسم الكامل" required class="w-full p-2.5 text-xs border rounded-lg dark:bg-gray-800">
+                    <input type="text" placeholder="البريد الإلكتروني / رقم الهاتف" required class="w-full p-2.5 text-xs border rounded-lg dark:bg-gray-800">
+                    <textarea placeholder="نص الرسالة..." rows="4" required class="w-full p-2.5 text-xs border rounded-lg dark:bg-gray-800"></textarea>
+                    <button type="submit" class="w-full bg-emerald-700 text-white font-bold py-2.5 text-xs rounded-lg hover:bg-emerald-800">إرسال الرسالة</button>
+                </form>
             </div>
         </section>
     </div>
 
-    <!-- 3. بوابة الدخول -->
+    <!-- 3. بوابة الدخول المحمية -->
     <div id="login-view" class="hidden max-w-md mx-auto my-20 p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-emerald-500">
         <h3 class="text-2xl font-bold text-center text-emerald-800 dark:text-emerald-400 mb-2">تسجيل الدخول للنظام</h3>
+        <p class="text-xs text-center text-gray-500 mb-6">أدخل القن السري المخصص لك للولوج</p>
+
         <form onsubmit="handleAuthLogin(event)" class="space-y-4">
-            <input type="password" id="access-code-input" placeholder="أدخل القن السري هنا" required class="w-full p-3 border rounded-xl text-center text-sm font-mono dark:bg-gray-900 border-emerald-600">
+            <div>
+                <label class="block text-xs font-bold mb-1">الرمز السري:</label>
+                <input type="password" id="access-code-input" placeholder="أدخل القن السري هنا" required class="w-full p-3 border rounded-xl text-center text-sm font-mono dark:bg-gray-900 border-emerald-600">
+            </div>
             <button type="submit" class="w-full bg-emerald-700 text-white font-bold py-3 rounded-xl hover:bg-emerald-800 text-sm">دخول للنظام</button>
         </form>
+        <button onclick="showView('public')" class="w-full mt-4 text-xs text-gray-500 hover:underline text-center block">العودة للموقع العام</button>
     </div>
 
-    <!-- 4. لوحات التحكم -->
+    <!-- 4. لوحات التحكم (Dashboards) -->
     <div id="dashboard-view" class="hidden max-w-7xl mx-auto px-4 py-10">
         <div class="flex justify-between items-center bg-white dark:bg-gray-800 p-6 rounded-2xl shadow mb-8 border-r-4 border-emerald-600">
             <div>
@@ -145,27 +206,38 @@
             <button onclick="logout()" class="bg-red-600 text-white text-xs px-4 py-2 rounded-lg font-bold">تسجيل الخروج</button>
         </div>
 
-        <!-- لوحة تحكم الرئيس (ادم القدوري) -->
+        <!-- أ. لوحة تحكم الرئيس (ادم القدوري) -->
         <div id="panel-super-admin" class="hidden space-y-8">
             <div class="bg-emerald-900 text-white p-6 rounded-2xl shadow">
-                <h4 class="font-bold text-lg mb-2"><i class="fa-solid fa-crown text-yellow-400"></i> لوحة الرئيس - ادم القدوري</h4>
-                <div class="flex gap-4">
+                <h4 class="font-bold text-lg mb-2"><i class="fa-solid fa-crown text-yellow-400"></i> لوحة تحكم الرئيس - ادم القدوري</h4>
+                <p class="text-xs opacity-80 mb-6">إدارة الاعضاء، الصلاحيات، التعديل والحذف، والأكواد التلقائية والمعرض.</p>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
                     <button onclick="openModal('add-member-modal')" class="bg-emerald-700 hover:bg-emerald-600 p-4 rounded-xl font-bold text-xs border border-emerald-500">
-                        <i class="fa-solid fa-user-plus text-xl block mb-1 text-yellow-300"></i> إضافة عضو كود تلقائي
+                        <i class="fa-solid fa-user-plus text-xl block mb-1 text-yellow-300"></i> إضافة عضو/لاعب/مدرب
+                    </button>
+                    <button onclick="switchAdminTab('users-list')" class="bg-emerald-700 hover:bg-emerald-600 p-4 rounded-xl font-bold text-xs border border-emerald-500">
+                        <i class="fa-solid fa-users-gear text-xl block mb-1 text-yellow-300"></i> إدارة وتعديل الأعضاء
+                    </button>
+                    <button onclick="switchAdminTab('media-mgr')" class="bg-emerald-700 hover:bg-emerald-600 p-4 rounded-xl font-bold text-xs border border-emerald-500">
+                        <i class="fa-solid fa-photo-film text-xl block mb-1 text-yellow-300"></i> إدارة المعرض والفيديوهات
+                    </button>
+                    <button onclick="switchAdminTab('sponsors-req')" class="bg-yellow-500 text-emerald-950 p-4 rounded-xl font-bold text-xs">
+                        <i class="fa-solid fa-handshake text-xl block mb-1"></i> طلبات الاستشهار
                     </button>
                 </div>
             </div>
 
-            <!-- جدول التحكم الشامل (تعديل + حذف) -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow">
-                <h4 class="font-bold text-emerald-800 dark:text-emerald-400 mb-4 text-sm">إدارة الحسابات</h4>
+            <!-- قسم إدارة الأعضاء والحسابات (تعديل + حذف) -->
+            <div id="admin-sec-users-list" class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow">
+                <h4 class="font-bold text-emerald-800 dark:text-emerald-400 mb-4 text-sm">قائمة الأعضاء والأكواد المسجلة (حذف وتعديل)</h4>
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs text-right border-collapse">
                         <thead>
                             <tr class="bg-emerald-100 dark:bg-gray-700 text-emerald-900 dark:text-gray-200">
-                                <th class="p-3 border">الاسم</th>
-                                <th class="p-3 border">الدور</th>
-                                <th class="p-3 border">القن السري</th>
+                                <th class="p-3 border">الاسم / الصفة</th>
+                                <th class="p-3 border">النوع / الدور</th>
+                                <th class="p-3 border">القن السري (الكود)</th>
                                 <th class="p-3 border text-center">إجراءات</th>
                             </tr>
                         </thead>
@@ -173,49 +245,139 @@
                     </table>
                 </div>
             </div>
+
+            <!-- قسم إدارة المعرض بالفيديوهات -->
+            <div id="admin-sec-media-mgr" class="hidden bg-white dark:bg-gray-800 p-6 rounded-2xl shadow space-y-4">
+                <h4 class="font-bold text-emerald-800 dark:text-emerald-400 text-sm">إضافة فيديو جديد للمعرض</h4>
+                <form onsubmit="addNewVideo(event)" class="space-y-3 text-xs">
+                    <input type="text" id="video-title" placeholder="عنوان الفيديو" required class="w-full p-2.5 border rounded dark:bg-gray-900">
+                    <input type="url" id="video-url" placeholder="رابط فيديو YouTube (إمبد أو مباشر)" required class="w-full p-2.5 border rounded dark:bg-gray-900">
+                    <button type="submit" class="bg-emerald-700 text-white px-4 py-2 rounded font-bold">إضافة الفيديو للمعرض</button>
+                </form>
+            </div>
+
+            <!-- قسم طلبات الاستشهار -->
+            <div id="admin-sec-sponsors-req" class="hidden bg-white dark:bg-gray-800 p-6 rounded-2xl shadow">
+                <h4 class="font-bold text-emerald-800 mb-4 text-sm">طلبات الاستشهار الواردة</h4>
+                <div id="sponsors-req-container" class="space-y-3 text-xs">
+                    <p class="text-gray-500">لا توجد طلبات معلقة حالياً.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ب. لوحة تحكم أمينة المال (ملاك قدوري) -->
+        <div id="panel-finance" class="hidden space-y-6">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow border-t-4 border-emerald-600">
+                <h4 class="font-bold text-lg text-emerald-800 mb-4"><i class="fa-solid fa-wallet"></i> اللوحة المالية - ملاك قدوري (أمينة المال)</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                    <div class="p-4 bg-emerald-50 dark:bg-gray-900 rounded-xl">
+                        <span class="text-xs text-gray-500 block">إجمالي الاشتراكات</span>
+                        <span class="font-extrabold text-xl text-emerald-700">12,500 درهم</span>
+                    </div>
+                    <div class="p-4 bg-red-50 dark:bg-gray-900 rounded-xl">
+                        <span class="text-xs text-gray-500 block">المصروفات والمعدات</span>
+                        <span class="font-extrabold text-xl text-red-600">3,200 درهم</span>
+                    </div>
+                    <div class="p-4 bg-yellow-50 dark:bg-gray-900 rounded-xl">
+                        <span class="text-xs text-gray-500 block">الرصيد الصافي</span>
+                        <span class="font-extrabold text-xl text-yellow-600">9,300 درهم</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ج. لوحة المدربين (ادم القدوري & عصام الكبوس) -->
+        <div id="panel-coach" class="hidden space-y-6">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow border-t-4 border-yellow-400">
+                <h4 class="font-bold text-lg text-emerald-800 mb-4"><i class="fa-solid fa-clipboard-user"></i> لوحة المدربين والبرمجة</h4>
+                <p class="text-xs text-gray-500 mb-4">مسؤول البرمجة والتدريب: <strong>عصام الكبوس</strong> | المدير التقني: <strong>ادم القدوري</strong></p>
+                <div class="bg-emerald-50 dark:bg-gray-900 p-4 rounded-xl">
+                    <h5 class="font-bold text-xs text-emerald-800 mb-2">إضافة تقييم للاعب:</h5>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <input type="text" placeholder="اسم اللاعب" class="p-2 border rounded text-xs dark:bg-gray-800">
+                        <input type="number" placeholder="التقييم من 100" class="p-2 border rounded text-xs dark:bg-gray-800">
+                        <button class="bg-emerald-700 text-white font-bold p-2 rounded text-xs">حفظ التقييم</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- د. لوحة حساب اللاعب -->
+        <div id="panel-player" class="hidden bg-white dark:bg-gray-800 p-6 rounded-2xl shadow text-center">
+            <h4 class="font-bold text-lg text-emerald-800 mb-2">البطاقة الرقمية للاعب</h4>
+            <div class="inline-block p-6 border-2 border-yellow-400 rounded-2xl bg-emerald-50 dark:bg-gray-900">
+                <i class="fa-solid fa-id-card text-5xl text-emerald-700 mb-2 block"></i>
+                <h5 class="font-bold text-base" id="player-card-name">اسم اللاعب</h5>
+                <span class="text-xs text-gray-500 block mb-2" id="player-card-role">لاعب مسجل</span>
+                <span class="font-mono text-xs font-bold text-emerald-900 dark:text-emerald-300 bg-yellow-300 px-3 py-1 rounded-full" id="player-card-code">CODE</span>
+            </div>
         </div>
     </div>
 
+    <!-- 5. النوافذ المنبثقة (Modals) -->
     <!-- نافذة إضافة وتعديل عضو -->
     <div id="add-member-modal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
         <div class="bg-white dark:bg-gray-800 max-w-lg w-full rounded-2xl p-6 relative">
-            <button onclick="closeModal('add-member-modal')" class="absolute left-4 top-4 text-gray-500 font-bold">✕</button>
-            <h3 class="text-xl font-bold text-emerald-800 mb-4" id="modal-member-title">إضافة عضو جديد</h3>
+            <button onclick="closeModal('add-member-modal')" class="absolute left-4 top-4 text-gray-500 text-lg font-bold">✕</button>
+            <h3 class="text-xl font-bold text-emerald-800 dark:text-emerald-400 mb-2" id="modal-member-title">إضافة عضو جديد</h3>
+
             <form onsubmit="saveMemberForm(event)" class="space-y-3 text-xs">
                 <input type="hidden" id="edit-original-code" value="">
-                <input type="text" id="mem-name" placeholder="الاسم الكامل" required class="w-full p-2.5 border rounded dark:bg-gray-900">
-                <select id="mem-role" class="w-full p-2.5 border rounded dark:bg-gray-900 font-bold" onchange="autoGenerateCode()">
-                    <option value="player">لاعب</option>
-                    <option value="coach">مدرب</option>
-                    <option value="finance">إدارة مالية</option>
-                    <option value="admin">إدارة / مستشار</option>
-                </select>
-                <div class="flex gap-2">
-                    <input type="text" id="mem-code" required class="w-full p-2.5 bg-gray-50 border font-mono font-bold text-center">
-                    <button type="button" onclick="autoGenerateCode()" class="bg-yellow-400 font-bold px-3 py-1 rounded text-xs">توليد</button>
+                <div>
+                    <label class="font-bold block mb-1">الاسم الكامل / الصفة:</label>
+                    <input type="text" id="mem-name" required class="w-full p-2.5 border rounded dark:bg-gray-900">
                 </div>
-                <button type="submit" class="w-full bg-emerald-700 text-white font-bold p-3 rounded-xl text-sm mt-4">حفظ</button>
+                <div>
+                    <label class="font-bold block mb-1">نوع الدور والصلاحية:</label>
+                    <select id="mem-role" class="w-full p-2.5 border rounded dark:bg-gray-900 font-bold" onchange="autoGenerateCode()">
+                        <option value="player">لاعب</option>
+                        <option value="coach">مدرب</option>
+                        <option value="finance">أمين المال / إدارة مالية</option>
+                        <option value="admin">مستشار / إدارة</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="font-bold text-emerald-700">القن السري (الكود):</label>
+                        <button type="button" onclick="autoGenerateCode()" class="text-[10px] bg-yellow-400 text-emerald-950 font-bold px-2 py-0.5 rounded">
+                            <i class="fa-solid fa-arrows-rotate"></i> توليد كود تلقائي
+                        </button>
+                    </div>
+                    <input type="text" id="mem-code" required class="w-full p-2.5 bg-gray-50 dark:bg-gray-700 border font-mono font-bold text-center">
+                </div>
+                <button type="submit" class="w-full bg-emerald-700 text-white font-bold p-3 rounded-xl hover:bg-emerald-800 text-sm mt-4">حفظ البيانات</button>
             </form>
         </div>
     </div>
 
-    <!-- 5. المحرك الذكي لتصحيح التغييرات تلقائياً (SELF-HEALING MOTOR) -->
+    <!-- نافذة طلب الاستشهار -->
+    <div id="sponsor-modal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 max-w-lg w-full rounded-2xl p-6 relative">
+            <button onclick="closeModal('sponsor-modal')" class="absolute left-4 top-4 text-gray-500 text-lg font-bold">✕</button>
+            <h3 class="text-xl font-bold text-emerald-800 mb-2">طلب استشهار وشراكة</h3>
+            <form onsubmit="submitSponsorRequest(event)" class="space-y-3 text-xs">
+                <input type="text" id="sp-company" placeholder="اسم الشركة" required class="w-full p-2.5 border rounded dark:bg-gray-900">
+                <input type="text" id="sp-name" placeholder="اسم الممثل الكامل" required class="w-full p-2.5 border rounded dark:bg-gray-900">
+                <input type="tel" id="sp-phone" placeholder="رقم الهاتف" required class="w-full p-2.5 border rounded dark:bg-gray-900">
+                <button type="submit" class="w-full bg-yellow-400 text-emerald-950 font-black p-3 rounded-xl text-sm">إرسال الطلب لرئيس النادي</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 6. المحرك البرمجي الذكي الكامل + محرك التصحيح التلقائي -->
     <script>
         // -------------------------------------------------------------------
-        // أ. محرك تصحيح صيغ الصور تلقائياً (Auto-Fix Image Extensions)
+        // أ. محرك تصحيح صيغ الصور تلقائياً (Self-Healing Image Motor)
         // -------------------------------------------------------------------
         const EXTENSIONS_TO_TRY = ['.jpg', '.jpeg', '.png', '.webp', '.JPG', '.JPEG'];
 
         document.addEventListener('DOMContentLoaded', () => {
-            // فحص كل الصور في الصفحة
             const images = document.querySelectorAll('img.auto-fix-img, img');
             images.forEach(img => {
                 img.addEventListener('error', function() {
                     autoCorrectImageSrc(this);
                 });
             });
-
-            // فحص الصور المضافة كخلفية (مثل صورة الملعب في البانر)
             fixHeroBgDiv();
         });
 
@@ -224,30 +386,23 @@
             let currentAttempt = parseInt(imgElement.getAttribute('data-attempt') || '0');
 
             if (currentAttempt < EXTENSIONS_TO_TRY.length) {
-                // استخراج الاسم وتجربة الامتداد التالي تلقائياً
                 let basePath = currentSrc.substring(0, currentSrc.lastIndexOf('.'));
                 let nextExt = EXTENSIONS_TO_TRY[currentAttempt];
-                
                 imgElement.setAttribute('data-attempt', currentAttempt + 1);
                 imgElement.src = basePath + nextExt;
-                console.log(`[تصحيح تلقائي] تجربة الامتداد: ${basePath + nextExt}`);
             }
         }
 
         function fixHeroBgDiv() {
             const heroBg = document.getElementById('hero-bg-div');
             if(!heroBg) return;
-            
-            // اختيار ذكي للتأكد من التحميل
             let imgTester = new Image();
             imgTester.src = 'stadium.jpg';
-            imgTester.onerror = function() {
-                heroBg.style.backgroundImage = "url('stadium.jpeg')";
-            };
+            imgTester.onerror = function() { heroBg.style.backgroundImage = "url('stadium.jpeg')"; };
         }
 
         // -------------------------------------------------------------------
-        // ب. إدارة الحسابات والأكواد الذكية
+        // ب. قواعد البيانات وإدارة الحسابات الشاملة
         // -------------------------------------------------------------------
         const DEFAULT_USERS = {
             "X-2006-QDR": { role: "super_admin", title: "ادم القدوري", type: "رئيس النادي والمدير التقني" },
@@ -255,6 +410,8 @@
             "X-2003-QDR": { role: "finance", title: "ملاك قدوري", type: "أمينة المال والمسؤولة المالية" },
             "COACH-ISSAM-ALAKBOUS-@33": { role: "coach", title: "عصام الكبوس", type: "مسؤول البرمجة والتدريب" }
         };
+
+        let videosDB = [];
 
         function getUsersDB() {
             const saved = localStorage.getItem('IR_USERS_DB');
@@ -270,18 +427,31 @@
             document.getElementById('public-view').classList.add('hidden');
             document.getElementById('login-view').classList.add('hidden');
             document.getElementById('dashboard-view').classList.add('hidden');
-            if(document.getElementById(view + '-view')) {
-                document.getElementById(view + '-view').classList.remove('hidden');
-            }
+
+            if(view === 'public') document.getElementById('public-view').classList.remove('hidden');
+            if(view === 'login') document.getElementById('login-view').classList.remove('hidden');
+            if(view === 'dashboard') document.getElementById('dashboard-view').classList.remove('hidden');
         }
 
-        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function openModal(id) {
+            if(id === 'add-member-modal') {
+                document.getElementById('edit-original-code').value = "";
+                document.getElementById('modal-member-title').innerText = "إضافة عضو جديد";
+                document.getElementById('mem-name').value = "";
+                autoGenerateCode();
+            }
+            document.getElementById(id).classList.remove('hidden');
+        }
+
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
         function autoGenerateCode() {
             const role = document.getElementById('mem-role').value;
             const rand = Math.floor(1000 + Math.random() * 9000);
-            let prefix = role === 'coach' ? 'IR-COACH-' : role === 'finance' ? 'IR-FIN-' : 'IR-PL-';
+            let prefix = "IR-PL-";
+            if(role === 'coach') prefix = "IR-COACH-";
+            if(role === 'finance') prefix = "IR-FIN-";
+            if(role === 'admin') prefix = "IR-ADM-";
             document.getElementById('mem-code').value = prefix + rand;
         }
 
@@ -291,10 +461,30 @@
             const db = getUsersDB();
 
             if(db[code]) {
+                const user = db[code];
                 showView('dashboard');
-                document.getElementById('dash-user-title').innerText = "مرحباً بك: " + db[code].title;
-                document.getElementById('panel-super-admin').classList.remove('hidden');
-                renderUsersTable();
+                document.getElementById('dash-user-title').innerText = "مرحباً بك: " + user.title;
+                document.getElementById('dash-user-role').innerText = "الصلاحيات: " + user.type;
+                
+                document.getElementById('panel-super-admin').classList.add('hidden');
+                document.getElementById('panel-finance').classList.add('hidden');
+                document.getElementById('panel-coach').classList.add('hidden');
+                document.getElementById('panel-player').classList.add('hidden');
+
+                if(user.role === 'super_admin') {
+                    document.getElementById('panel-super-admin').classList.remove('hidden');
+                    renderUsersTable();
+                } else if(user.role === 'finance') {
+                    document.getElementById('panel-finance').classList.remove('hidden');
+                } else if(user.role === 'coach') {
+                    document.getElementById('panel-coach').classList.remove('hidden');
+                } else {
+                    document.getElementById('panel-player').classList.remove('hidden');
+                    document.getElementById('player-card-name').innerText = user.title;
+                    document.getElementById('player-card-role').innerText = user.type;
+                    document.getElementById('player-card-code').innerText = code;
+                }
+                document.getElementById('access-code-input').value = "";
             } else {
                 alert("الرمز السري غير صحيح!");
             }
@@ -308,23 +498,32 @@
             const name = document.getElementById('mem-name').value.trim();
             const role = document.getElementById('mem-role').value;
 
-            if(origCode && origCode !== newCode) delete db[origCode];
-            db[newCode] = { role: role, title: name, type: role };
+            let typeLabel = "لاعب";
+            if(role === 'coach') typeLabel = "مدرب";
+            if(role === 'finance') typeLabel = "إدارة مالية";
+            if(role === 'admin') typeLabel = "إدارة / مستشار";
+
+            if(origCode && origCode !== newCode) { delete db[origCode]; }
+            db[newCode] = { role: role, title: name, type: typeLabel };
             saveUsersDB(db);
+            alert("تم حفظ بيانات العضو بنجاح!");
             closeModal('add-member-modal');
         }
 
         function editUserAccount(code) {
             const db = getUsersDB();
+            const user = db[code];
             document.getElementById('edit-original-code').value = code;
-            document.getElementById('mem-name').value = db[code].title;
+            document.getElementById('mem-name').value = user.title;
+            document.getElementById('mem-role').value = user.role;
             document.getElementById('mem-code').value = code;
+            document.getElementById('modal-member-title').innerText = "تعديل حساب العضو";
             openModal('add-member-modal');
         }
 
         function deleteUserAccount(code) {
             if(code === 'X-2006-QDR') return alert("حساب الرئيس غير قابل للحذف!");
-            if(confirm("تأكيد حذف الحساب؟")) {
+            if(confirm("تأكيد حذف الحساب وإلغاء الصلاحية؟")) {
                 const db = getUsersDB();
                 delete db[code];
                 saveUsersDB(db);
@@ -336,20 +535,60 @@
             const tbody = document.getElementById('users-table-body');
             tbody.innerHTML = "";
             for(let code in db) {
+                const u = db[code];
                 tbody.innerHTML += `
                     <tr class="border-b dark:border-gray-700">
-                        <td class="p-3 font-bold">${db[code].title}</td>
-                        <td class="p-3">${db[code].type}</td>
-                        <td class="p-3 font-mono text-yellow-500 font-bold">${code}</td>
-                        <td class="p-3 text-center">
-                            <button onclick="editUserAccount('${code}')" class="bg-blue-600 text-white px-2 py-1 rounded text-xs">تعديل</button>
-                            ${code !== 'X-2006-QDR' ? `<button onclick="deleteUserAccount('${code}')" class="bg-red-600 text-white px-2 py-1 rounded text-xs">حذف</button>` : ''}
+                        <td class="p-3 font-bold">${u.title}</td>
+                        <td class="p-3"><span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-1 rounded-full font-bold">${u.type}</span></td>
+                        <td class="p-3 font-mono text-yellow-600 dark:text-yellow-400 font-bold">${code}</td>
+                        <td class="p-3 text-center space-x-1 space-x-reverse">
+                            <button onclick="editUserAccount('${code}')" class="bg-blue-600 text-white px-2 py-1 rounded text-[10px] font-bold">تعديل</button>
+                            ${code !== 'X-2006-QDR' ? `<button onclick="deleteUserAccount('${code}')" class="bg-red-600 text-white px-2 py-1 rounded text-[10px] font-bold">حذف</button>` : ''}
                         </td>
                     </tr>
                 `;
             }
         }
 
+        function addNewVideo(e) {
+            e.preventDefault();
+            const title = document.getElementById('video-title').value;
+            const url = document.getElementById('video-url').value;
+            videosDB.push({ title, url });
+            renderVideos();
+            alert("تمت إضافة الفيديو للواجهة الرئيسية!");
+            e.target.reset();
+        }
+
+        function renderVideos() {
+            const grid = document.getElementById('public-videos-grid');
+            grid.innerHTML = "";
+            videosDB.forEach(v => {
+                grid.innerHTML += `
+                    <div class="bg-white dark:bg-gray-900 p-3 rounded-xl shadow">
+                        <p class="font-bold text-xs mb-2 text-emerald-800 dark:text-emerald-400">${v.title}</p>
+                        <div class="aspect-video bg-black rounded-lg overflow-hidden flex items-center justify-center text-white text-xs">
+                            <a href="${v.url}" target="_blank" class="text-yellow-400 underline"><i class="fa-solid fa-play"></i> مشاهدة الفيديو</a>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function switchAdminTab(tab) {
+            document.getElementById('admin-sec-users-list').classList.add('hidden');
+            document.getElementById('admin-sec-media-mgr').classList.add('hidden');
+            document.getElementById('admin-sec-sponsors-req').classList.add('hidden');
+            document.getElementById('admin-sec-' + tab).classList.remove('hidden');
+        }
+
+        function submitSponsorRequest(e) {
+            e.preventDefault();
+            alert("تم إرسال الطلب بنجاح لرئيس النادي ادم القدوري.");
+            closeModal('sponsor-modal');
+        }
+
+        function handleContactSubmit(e) { e.preventDefault(); alert("تم إرسال الرسالة بنجاح!"); e.target.reset(); }
         function logout() { showView('public'); }
     </script>
 </body>
