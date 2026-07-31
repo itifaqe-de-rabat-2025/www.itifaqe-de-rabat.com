@@ -195,4 +195,163 @@
         }
     </script>
 </body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المساعد الذكي لنادي الاتفاق - Club Bot</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; background: #f4f4f9; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .chat-widget { width: 380px; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); overflow: hidden; display: flex; flex-direction: column; border: 1px solid #ddd; }
+        .chat-header { background: #004d40; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .chat-body { height: 320px; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #fafafa; }
+        .message { padding: 10px 14px; border-radius: 10px; max-width: 80%; font-size: 14px; line-height: 1.4; }
+        .bot-msg { background: #e0f2f1; color: #004d40; align-self: flex-start; border-bottom-right-radius: 2px; }
+        .user-msg { background: #004d40; color: white; align-self: flex-end; border-bottom-left-radius: 2px; }
+        .token-box { padding: 8px 12px; background: #f1f1f1; border-bottom: 1px solid #e0e0e0; display: flex; gap: 5px; align-items: center; }
+        .token-box input { flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; }
+        .chat-footer { padding: 10px; border-top: 1px solid #ddd; display: flex; flex-direction: column; gap: 8px; background: white; }
+        .input-group { display: flex; gap: 6px; }
+        input[type="text"] { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 6px; outline: none; font-size: 13px; }
+        button.send-btn { background: #004d40; color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        button.send-btn:hover { background: #00332c; }
+        .quick-btns { display: flex; gap: 5px; flex-wrap: wrap; }
+        .quick-btn { background: #eef2f2; border: 1px solid #d0dede; padding: 5px 10px; font-size: 11px; border-radius: 4px; cursor: pointer; color: #004d40; transition: 0.2s; }
+        .quick-btn:hover { background: #004d40; color: white; }
+    </style>
+</head>
+<body>
+
+<div class="chat-widget">
+    <div class="chat-header">
+        <span>مساعد نادي الاتفاق ⚽ (Club Bot)</span>
+    </div>
+    
+    <!-- حقل إدخال القن السري للتحقق -->
+    <div class="token-box">
+        <span style="font-size: 11px; color: #555;">🔐 القن:</span>
+        <input type="password" id="userToken" placeholder="اتركه فارغاً للزوار، أو أدخل قن اللاعب/المدرب">
+    </div>
+
+    <div class="chat-body" id="chatBody">
+        <div class="message bot-msg">أهلاً بك في منصة نادي الاتفاق. كيف يمكنني مساعدتك اليوم؟ يمكنك كتابة استفسارك أو اختيار أحد الأزرار أدناه.</div>
+    </div>
+
+    <!-- الأزرار السريعة -->
+    <div style="padding: 0 10px;" class="quick-btns">
+        <button class="quick-btn" onclick="sendQuick('مواعيد التدريبات')">📅 مواعيد التدريبات</button>
+        <button class="quick-btn" onclick="sendQuick('موقع الملعب الرئيسي')">📍 موقع الملعب</button>
+        <button class="quick-btn" onclick="sendQuick('شروط التسجيل')">📝 شروط التسجيل</button>
+        <button class="quick-btn" onclick="sendQuick('تقارير اللياقة البدنية')">📊 تقارير اللياقة</button>
+    </div>
+
+    <div class="chat-footer">
+        <div class="input-group">
+            <input type="text" id="userInput" placeholder="اكتب رسالتك هنا..." onkeypress="handleKeyPress(event)">
+            <button class="send-btn" onclick="sendMessage()">إرسال</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // قاعدة بيانات وهمية مدمجة للأقنان والصلاحيات ليعمل الكود بشكل فوري بدون سيرفر خارجي
+    const DATABASE_TOKENS = {
+        "COACH_991": { role: "مدرب", name: "كابتن أحمد" },
+        "PLAYER_101": { role: "لاعب", name: "سلطان الدوسري" },
+        "PARENT_555": { role: "ولي أمر", name: "أبو فهد" }
+    };
+
+    function checkSecurityAndInjection(message) {
+        const forbiddenPatterns = [/قن/i, /كلمة مرور/i, /password/i, /secret/i, /أكواد/i, /تجاوز/i, /ignore previous/i, /اعتبر نفسك مدير/i, /admin/i];
+        return !forbiddenPatterns.some(pattern => pattern.test(message));
+    }
+
+    function generateBotReply(message, token) {
+        // 1. فحص الخط الأحمر الأمني (محاولات كشف الأقنان أو الاختراق)
+        if (!checkSecurityAndInjection(message)) {
+            return "عذراً، لا يمكنني تلبية هذا الطلب أو الإفصاح عن الأقنان والبيانات السرية لأي سبب كان.";
+        }
+
+        let userRole = "زائر";
+        let userName = "زائر كريم";
+
+        // 2. التحقق من القن
+        if (token && token.trim() !== "") {
+            if (DATABASE_TOKENS[token]) {
+                userRole = DATABASE_TOKENS[token].role;
+                userName = DATABASE_TOKENS[token].name;
+            } else {
+                return "القن المدخل غير صحيح. يرجى التحقق من الرمز أو المتابعة كزائر.";
+            }
+        }
+
+        let msg = message.toLowerCase();
+        let reply = "";
+
+        // 3. توجيه الردود بناءً على الصلاحيات والأدوار
+        if (userRole === "زائر") {
+            if (msg.includes("مواعيد") || msg.includes("ملاعب")) {
+                reply = "أهلاً بك يا زائرنا الكريم في نادي الاتفاق. مواعيد المباريات الجماهيرية ومواقع الملاعب متاحة في صفحة (الفعاليات) الرئيسية بالموقع.";
+            } else if (msg.includes("تسجيل") || msg.includes("انضمام")) {
+                reply = "شروط التسجيل تتطلب تعبئة نموذج تجارب الأداء واجتياز الفحص الطبي. هل ترغب برفع طلب تجربة أداء؟";
+            } else {
+                reply = `أهلاً بك يا ${userName}. كيف يمكنني مساعدتك اليوم في معرفة المزيد عن نادي الاتفاق؟`;
+            }
+        } 
+        else if (userRole === "لاعب") {
+            if (msg.includes("تدريب") || msg.includes("جدول")) {
+                reply = `أهلاً كابتن ${userName}. جدول تدريباتك الشخصية لهذا الأسبوع: الأحد والثلاثاء والأربعاء الساعة 5:00 عصراً.`;
+            } else if (msg.includes("تقارير") || msg.includes("لياقة")) {
+                reply = `تقرير لياقتك البدنية يا ${userName} ممتاز جداً، نسبة الجري والتحمل ارتفعت بنسبة 5% هذا الأسبوع.`;
+            } else {
+                reply = `مرحباً بك يا لاعبنا النجم ${userName}. يمكنك الاستعلام عن جداولك أو طلب تعديل موعد بإذن.`;
+            }
+        } 
+        else if (userRole === "مدرب") {
+            if (msg.includes("تقرير") || msg.includes("رفع")) {
+                reply = `أهلاً كابتن ${userName}. تم استلام طلبك لفتح نموذج رفع التقارير الدورية للاعبين.`;
+            } else if (msg.includes("تنبيه") || msg.includes("مباريات") || msg.includes("جدولة")) {
+                reply = `تم تفعيل صلاحية إرسال التنبيهات الجماعية وجدولة المباريات الداخلية للفريق يا كابتن.`;
+            } else {
+                reply = `مرحباً بك يا كابتن ${userName}. جاهز لمساعدتك في إدارة الفريق ورفع التقارير.`;
+            }
+        }
+
+        return reply;
+    }
+
+    function sendMessage(textToSend = null) {
+        const inputField = document.getElementById("userInput");
+        const chatBody = document.getElementById("chatBody");
+        const tokenField = document.getElementById("userToken");
+
+        const messageText = textToSend || inputField.value.trim();
+        if (!messageText) return;
+
+        // إضافة رسالة المستخدم إلى نافذة الشات
+        chatBody.innerHTML += `<div class="message user-msg">${messageText}</div>`;
+        if (!textToSend) inputField.value = "";
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        // محاكاة استجابة البوت بذكاء
+        setTimeout(() => {
+            const botReply = generateBotReply(messageText, tokenField.value);
+            chatBody.innerHTML += `<div class="message bot-msg">${botReply}</div>`;
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }, 400);
+    }
+
+    function sendQuick(text) {
+        sendMessage(text);
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    }
+</script>
+
+</body>
 </html>
