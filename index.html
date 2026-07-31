@@ -720,4 +720,219 @@
     </script>
 
 </body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة أمينة المال - Finance Panel</title>
+    <!-- استيراد Tailwind CSS للتصميم السريع والنظيف -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- استيراد خط تجوال العربي -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- الشريط العلوي (Header) -->
+    <header class="bg-indigo-900 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-indigo-700 p-2.5 rounded-xl font-bold text-lg">💰</div>
+                <div>
+                    <h1 class="text-xl font-bold">لوحة أمينة المال</h1>
+                    <p class="text-xs text-indigo-200">المستخدم: ملاك القدوري | الكود: <span class="bg-indigo-800 px-2 py-0.5 rounded text-indigo-100 font-mono">X-2003-QDR</span></p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    النظام متصل
+                </span>
+                <button onclick="alert('تم تسجيل الخروج بنجاح')" class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-3 py-2 rounded-lg transition">تسجيل الخروج</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+
+        <!-- بطاقات المؤشرات المالية السريعة -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-slate-500 font-medium">إجمالي التحصيلات (الشهر)</p>
+                    <h3 class="text-2xl font-bold text-slate-800 mt-1">12,500 <span class="text-sm font-normal text-slate-500">درهم</span></h3>
+                </div>
+                <div class="bg-emerald-50 text-emerald-600 p-3 rounded-xl">📈</div>
+            </div>
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-slate-500 font-medium">الاشتراكات المتأخرة</p>
+                    <h3 class="text-2xl font-bold text-rose-600 mt-1">4 <span class="text-sm font-normal text-slate-500">لاعبين</span></h3>
+                </div>
+                <div class="bg-rose-50 text-rose-600 p-3 rounded-xl">⚠️</div>
+            </div>
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-slate-500 font-medium">الرصيد المتاح بالخزينة</p>
+                    <h3 class="text-2xl font-bold text-indigo-600 mt-1">34,200 <span class="text-sm font-normal text-slate-500">درهم</span></h3>
+                </div>
+                <div class="bg-indigo-50 text-indigo-600 p-3 rounded-xl">💼</div>
+            </div>
+        </section>
+
+        <!-- شبكة النماذج (إصدار الإيصالات + رفع التقارير) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- نموذج إصدار إيصالات الاشتراكات (يأخذ عمودين) -->
+            <section class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+                <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                    <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                        <span>🧾</span> إصدار وصل اشتراك جديد
+                    </h2>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-lg">تلقائي بدون روابط</span>
+                </div>
+
+                <form onsubmit="event.preventDefault(); alert('تم إصدار الحفظ بنجاح!');" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- قائمة اللاعبين التلقائية -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">اختر اللاعب المسجل</label>
+                            <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option value="" disabled selected>-- اختر اللاعب من القائمة --</option>
+                                <option value="1">محمد الإدريسي (🟢 مسدد)</option>
+                                <option value="2">يوسف البقالي (🔴 متأخر)</option>
+                                <option value="3">أمين العمري (🟢 مسدد)</option>
+                                <option value="4">حمزة التازي (🔴 متأخر)</option>
+                            </select>
+                        </div>
+
+                        <!-- تحديد الشهر -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">الشهر المعني</label>
+                            <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option value="current" selected>شهر يوليو (يوليوز) 2026</option>
+                                <option value="jun">شهر يونيو (جون) 2026</option>
+                                <option value="may">شهر مايو (ماي) 2026</option>
+                            </select>
+                        </div>
+
+                        <!-- المبلغ والتاريخ -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">المبلغ (درهم)</label>
+                            <input type="number" value="250" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">تاريخ العملية</label>
+                            <input type="date" value="2026-07-31" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                    </div>
+
+                    <!-- طريقة الدفع -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1.5">طريقة الدفع</label>
+                        <div class="flex gap-4">
+                            <label class="flex items-center gap-2 text-sm cursor-pointer">
+                                <input type="radio" name="payment_method" checked class="text-indigo-600 focus:ring-indigo-500"> نقداً (Cash)
+                            </label>
+                            <label class="flex items-center gap-2 text-sm cursor-pointer">
+                                <input type="radio" name="payment_method" class="text-indigo-600 focus:ring-indigo-500"> تحويل بنكي (Transfer)
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- رفع وصل الدفع -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">رفع صورة وصل الدفع (من المعرض مباشرة)</label>
+                        <input type="file" accept="image/*" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer border border-slate-200 rounded-xl">
+                    </div>
+
+                    <!-- زر الحفظ -->
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-xl transition shadow-sm shadow-indigo-200">
+                        إصدار وحفظ الإيصال
+                    </button>
+                </form>
+            </section>
+
+            <!-- نموذج رفع التقارير المالية لرئيس النادي -->
+            <section class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-800 mb-4 pb-3 border-b border-slate-100 flex items-center gap-2">
+                        <span>📊</span> التقارير المالية
+                    </h2>
+                    
+                    <form onsubmit="event.preventDefault(); alert('تم إرسال التقرير بنجاح إلى رئيس النادي!');" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">نوع التقرير</label>
+                            <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option>تقرير شهري تفصيلي</option>
+                                <option>تقرير أسبوعي مختصر</option>
+                                <option>ميزانية طارئة</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">رفع ملف الميزانية (PDF / صورة)</label>
+                            <input type="file" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 cursor-pointer border border-slate-200 rounded-xl">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">ملاحظات لرئيس النادي</label>
+                            <textarea rows="3" placeholder="اكتب ملاحظة توضيحية هنا..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-medium py-2.5 rounded-xl transition text-sm">
+                            إرسال التقرير إلى الرئيس
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- سجل العمليات الأخيرة -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 overflow-hidden">
+            <h2 class="text-lg font-bold text-slate-800 mb-4">سجل العمليات الأخيرة</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-right text-sm">
+                    <thead class="bg-slate-50 text-slate-500 uppercase text-xs">
+                        <tr>
+                            <th class="p-3 rounded-r-xl">رقم الإيصال</th>
+                            <th class="p-3">اسم اللاعب</th>
+                            <th class="p-3">الشهر</th>
+                            <th class="p-3">المبلغ</th>
+                            <th class="p-3">الحالة</th>
+                            <th class="p-3 rounded-l-xl">التاريخ</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-700">
+                        <tr>
+                            <td class="p-3 font-mono font-medium">#REC-901</td>
+                            <td class="p-3">محمد الإدريسي</td>
+                            <td class="p-3">يوليوز 2026</td>
+                            <td class="p-3">250 د.م</td>
+                            <td class="p-3"><span class="bg-emerald-50 text-emerald-600 px-2.5 py-1 rounded-full text-xs font-medium">مؤكد</span></td>
+                            <td class="p-3 text-slate-500">2026/07/31</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-mono font-medium">#REC-900</td>
+                            <td class="p-3">أمين العمري</td>
+                            <td class="p-3">يوليوز 2026</td>
+                            <td class="p-3">250 د.م</td>
+                            <td class="p-3"><span class="bg-emerald-50 text-emerald-600 px-2.5 py-1 rounded-full text-xs font-medium">مؤكد</span></td>
+                            <td class="p-3 text-slate-500">2026/07/29</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+</body>
 </html>
