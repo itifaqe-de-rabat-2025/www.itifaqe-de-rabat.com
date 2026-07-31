@@ -45,22 +45,24 @@
                 <!-- قائمة التنقل -->
                 <div class="hidden lg:flex items-center space-x-6 space-x-reverse font-bold text-sm">
                     <a href="#hero" onclick="showView('public')" class="hover:text-emerald-600" data-i18n="nav-home">الرئيسية</a>
-                    <a href="#about" onclick="showView('public')" class="hover:text-emerald-600" data-i18n="nav-about">عن النادي</a>
                     <a href="#gallery" onclick="showView('public')" class="hover:text-emerald-600" data-i18n="nav-gallery">المعرض والتدوينات</a>
                     <a href="#sponsors" onclick="showView('public')" class="hover:text-emerald-600" data-i18n="nav-sponsors">الرعاة</a>
                     <a href="#contact" onclick="showView('public')" class="hover:text-emerald-600" data-i18n="nav-contact">اتصل بنا</a>
                 </div>
 
-                <!-- الأزرار واللغة -->
-                <div class="flex items-center space-x-3 space-x-reverse">
-                    <button onclick="toggleLanguage()" class="bg-gray-200 dark:bg-gray-700 px-3 py-1.5 rounded-lg text-xs font-bold text-emerald-800 dark:text-emerald-400 border border-emerald-600">
+                <!-- الأزرار، اللغة، ووضع الليل/النهار -->
+                <div class="flex items-center space-x-2 space-x-reverse">
+                    <button onclick="toggleDarkMode()" class="bg-gray-200 dark:bg-gray-700 w-9 h-9 rounded-xl text-emerald-800 dark:text-yellow-400 flex items-center justify-center shadow" title="تبديل وضع الليل/النهار">
+                        <i id="theme-icon" class="fa-solid fa-moon"></i>
+                    </button>
+                    <button onclick="toggleLanguage()" class="bg-gray-200 dark:bg-gray-700 px-3 py-1.5 rounded-xl text-xs font-bold text-emerald-800 dark:text-emerald-400 border border-emerald-600">
                         <i class="fa-solid fa-globe"></i> <span id="lang-btn-text">English</span>
                     </button>
-                    <button onclick="openModal('child-reg-modal')" class="bg-black hover:bg-gray-900 text-yellow-400 px-4 py-2 rounded-xl text-xs sm:text-sm font-black shadow-md" data-i18n="btn-register-child">
-                        سجّل طفلك الآن
+                    <button onclick="openModal('child-reg-modal')" class="bg-black hover:bg-gray-900 text-yellow-400 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-black shadow-md" data-i18n="btn-register-child">
+                        سجّل طفلك
                     </button>
                     <button onclick="showView('login')" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1 shadow" data-i18n="btn-login">
-                        <i class="fa-solid fa-lock"></i> تسجيل الدخول
+                        <i class="fa-solid fa-lock"></i> دخول
                     </button>
                 </div>
             </div>
@@ -86,38 +88,6 @@
                     <button onclick="openModal('sponsor-modal')" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-2" data-i18n="hero-btn-sponsor">
                         <i class="fa-solid fa-handshake text-yellow-400"></i> كن المستشهر وشريك النادي
                     </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- قسم الهيكل الإداري والتقني -->
-        <section id="about" class="py-16 max-w-7xl mx-auto px-4">
-            <h3 class="text-3xl font-bold text-center text-emerald-800 dark:text-emerald-400 mb-10" data-i18n="about-title">الهيكل الإداري والتقني للنادي</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-center">
-                <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl shadow border-t-4 border-yellow-400">
-                    <i class="fa-solid fa-crown text-2xl text-yellow-500 mb-2 block"></i>
-                    <h4 class="font-bold text-base">ادم القدوري</h4>
-                    <span class="text-[11px] text-emerald-700 dark:text-emerald-400 font-bold block">رئيس النادي & المدير التقني</span>
-                </div>
-                <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl shadow border-t-4 border-emerald-600">
-                    <i class="fa-solid fa-user-tie text-2xl text-emerald-600 mb-2 block"></i>
-                    <h4 class="font-bold text-base">أمين بنجابر</h4>
-                    <span class="text-[11px] text-emerald-700 dark:text-emerald-400 font-bold block">المستشار الأول & مدرب الحراس</span>
-                </div>
-                <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl shadow border-t-4 border-emerald-600">
-                    <i class="fa-solid fa-user-shield text-2xl text-emerald-600 mb-2 block"></i>
-                    <h4 class="font-bold text-base">زكرياء حداوي</h4>
-                    <span class="text-[11px] text-emerald-700 dark:text-emerald-400 font-bold block">المستشار الثاني & مسؤول اللوجيستيك</span>
-                </div>
-                <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl shadow border-t-4 border-emerald-600">
-                    <i class="fa-solid fa-coins text-2xl text-emerald-600 mb-2 block"></i>
-                    <h4 class="font-bold text-base">ملاك القدوري</h4>
-                    <span class="text-[11px] text-emerald-700 dark:text-emerald-400 font-bold block">أمينة المال والمسؤولة المالية</span>
-                </div>
-                <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl shadow border-t-4 border-emerald-600">
-                    <i class="fa-solid fa-feather-pointed text-2xl text-emerald-600 mb-2 block"></i>
-                    <h4 class="font-bold text-base">هدى بوكدال</h4>
-                    <span class="text-[11px] text-emerald-700 dark:text-emerald-400 font-bold block">الكاتبة والمسؤولة عن النشر</span>
                 </div>
             </div>
         </section>
@@ -152,7 +122,7 @@
             </div>
         </section>
 
-        <!-- قسم اتصل بنا والملاعب المعتمدة (مع الروابط الثلاثة) -->
+        <!-- قسم اتصل بنا والملاعب المعتمدة -->
         <section id="contact" class="bg-gray-100 dark:bg-gray-800 py-16">
             <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div>
@@ -175,7 +145,7 @@
                 </div>
 
                 <form onsubmit="handleDirectMsgSubmit(event)" class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow space-y-3 text-xs">
-                    <h4 class="font-bold text-sm text-emerald-800 mb-2">إرسال ملاحظة / رسالة مباشرة لرئيس النادي</h4>
+                    <h4 class="font-bold text-sm text-emerald-800 dark:text-emerald-400 mb-2">إرسال ملاحظة / رسالة مباشرة لرئيس النادي</h4>
                     <input type="text" placeholder="الاسم الكامل" required class="w-full p-2.5 border rounded-lg dark:bg-gray-800">
                     <input type="text" placeholder="البريد الإلكتروني / رقم الهاتف" required class="w-full p-2.5 border rounded-lg dark:bg-gray-800">
                     <textarea placeholder="نص الرسالة أو الملاحظة..." rows="4" required class="w-full p-2.5 border rounded-lg dark:bg-gray-800"></textarea>
@@ -185,18 +155,18 @@
         </section>
     </div>
 
-    <!-- 3. المساعد الذكي (Club Bot) -->
+    <!-- 3. المساعد الذكي المطور (Club Bot) لدعم المدربين والأعضاء والزوار -->
     <div class="fixed bottom-6 left-6 z-50">
         <button onclick="toggleBotChat()" class="bg-emerald-700 hover:bg-emerald-800 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-2xl border-2 border-yellow-400">
             <i class="fa-solid fa-robot"></i>
         </button>
         <div id="bot-chat-window" class="hidden absolute bottom-16 left-0 w-80 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-emerald-600 overflow-hidden flex flex-col h-96">
             <div class="bg-emerald-800 text-white p-3 font-bold text-xs flex justify-between items-center">
-                <span><i class="fa-solid fa-robot text-yellow-400"></i> المساعد الذكي بالنادي</span>
+                <span><i class="fa-solid fa-robot text-yellow-400"></i> المساعد الذكي لنادي الإتفاق</span>
                 <button onclick="toggleBotChat()" class="text-white font-bold">✕</button>
             </div>
             <div id="bot-messages" class="flex-grow p-3 overflow-y-auto space-y-2 text-xs">
-                <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-lg">مرحباً بك! أنا مساعد نادي الإتفاق الرباطي. كيف يمكنني مساعدتك في كل ما يخص كرة القدم والنادي؟</div>
+                <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-lg">مرحباً! أنا مساعدك الذكي في نادي الإتفاق الرباطي. كيف يمكنني مساعدتك في مهامك، إرشادات المنصة، أو مواعيد التدريب؟</div>
             </div>
             <form onsubmit="handleBotQuery(event)" class="p-2 bg-gray-50 dark:bg-gray-900 border-t flex gap-1">
                 <input type="text" id="bot-input" placeholder="اسأل المساعد الذكي..." class="w-full p-2 border rounded-lg text-xs dark:bg-gray-800">
@@ -208,7 +178,7 @@
     <!-- 4. بوابة الدخول (Authentication) -->
     <div id="login-view" class="hidden max-w-md mx-auto my-20 p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-emerald-500">
         <h3 class="text-2xl font-bold text-center text-emerald-800 dark:text-emerald-400 mb-2">تسجيل الدخول للنظام</h3>
-        <p class="text-xs text-center text-gray-500 mb-6">أدخل القن السري المخصص لك للولوج للوحة التحكم</p>
+        <p class="text-xs text-center text-gray-500 mb-6">أدخل القن السري الخاص بك للولوج للوحة التحكم</p>
         <form onsubmit="handleAuthLogin(event)" class="space-y-4">
             <div>
                 <label class="block text-xs font-bold mb-1">الرمز السري (القن):</label>
@@ -235,29 +205,29 @@
                 <h4 class="font-bold text-lg mb-2"><i class="fa-solid fa-crown text-yellow-400"></i> لوحة تحكم الرئيس - ادم القدوري</h4>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
                     <button onclick="openModal('add-member-modal')" class="bg-emerald-700 p-3 rounded-xl font-bold text-xs border border-emerald-500">
-                        <i class="fa-solid fa-user-plus text-lg block mb-1 text-yellow-300"></i> إضافة عضو / كود تلقائي
+                        <i class="fa-solid fa-user-plus text-lg block mb-1 text-yellow-300"></i> إضافة عضو / كود
                     </button>
                     <button onclick="switchAdminSec('users-mgr')" class="bg-emerald-700 p-3 rounded-xl font-bold text-xs border border-emerald-500">
                         <i class="fa-solid fa-users-gear text-lg block mb-1 text-yellow-300"></i> إدارة الحسابات
                     </button>
                     <button onclick="switchAdminSec('finance-reports')" class="bg-emerald-700 p-3 rounded-xl font-bold text-xs border border-emerald-500">
-                        <i class="fa-solid fa-file-invoice-dollar text-lg block mb-1 text-yellow-300"></i> تقارير المالية والنشر
+                        <i class="fa-solid fa-file-invoice-dollar text-lg block mb-1 text-yellow-300"></i> التقارير والمنتدى
                     </button>
                     <button onclick="switchAdminSec('requests')" class="bg-yellow-500 text-emerald-950 p-3 rounded-xl font-bold text-xs">
-                        <i class="fa-solid fa-inbox text-lg block mb-1"></i> البلاغات والاستفسارات الواردة
+                        <i class="fa-solid fa-inbox text-lg block mb-1"></i> البلاغات والاستفسارات
                     </button>
                 </div>
             </div>
 
             <!-- جدول إدارة الحسابات -->
             <div id="admin-sec-users-mgr" class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow">
-                <h4 class="font-bold text-emerald-800 dark:text-emerald-400 mb-4 text-sm">إدارة جميع الحسابات والأكواد المسجلة</h4>
+                <h4 class="font-bold text-emerald-800 dark:text-emerald-400 mb-4 text-sm">إدارة الحسابات والأكواد</h4>
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs text-right border-collapse">
                         <thead>
                             <tr class="bg-emerald-100 dark:bg-gray-700 text-emerald-900 dark:text-gray-200">
                                 <th class="p-3 border">الاسم</th>
-                                <th class="p-3 border">الصفة / الدور</th>
+                                <th class="p-3 border">الصفة</th>
                                 <th class="p-3 border">القن السري (الكود)</th>
                                 <th class="p-3 border text-center">إجراءات</th>
                             </tr>
@@ -267,15 +237,22 @@
                 </div>
             </div>
 
-            <!-- التقارير الواردة للرئيس -->
-            <div id="admin-sec-finance-reports" class="hidden bg-white dark:bg-gray-800 p-6 rounded-2xl shadow space-y-4">
-                <h4 class="font-bold text-emerald-800 mb-2 text-sm">التقارير المرفوعة للرئيس:</h4>
-                <div id="admin-reports-feed" class="space-y-3 text-xs"></div>
+            <!-- التقارير ومنتدى المدربين للرئيس -->
+            <div id="admin-sec-finance-reports" class="hidden bg-white dark:bg-gray-800 p-6 rounded-2xl shadow space-y-6">
+                <div>
+                    <h4 class="font-bold text-emerald-800 dark:text-emerald-400 mb-3 text-sm">التقارير المالية والإعلامية المرفوعة:</h4>
+                    <div id="admin-reports-feed" class="space-y-3 text-xs"></div>
+                </div>
+                <hr class="dark:border-gray-700">
+                <div>
+                    <h4 class="font-bold text-emerald-800 dark:text-emerald-400 mb-3 text-sm">منتدى وملاحظات الطاقم التقني (مرئي للرئيس والمدربين):</h4>
+                    <div id="admin-coach-forum-feed" class="space-y-3 text-xs"></div>
+                </div>
             </div>
 
-            <!-- البلاغات والاستفسارات -->
+            <!-- البلاغات -->
             <div id="admin-sec-requests" class="hidden bg-white dark:bg-gray-800 p-6 rounded-2xl shadow space-y-4">
-                <h4 class="font-bold text-emerald-800 mb-2 text-sm">البلاغات، الاستفسارات وطلبات الشراكة:</h4>
+                <h4 class="font-bold text-emerald-800 dark:text-emerald-400 mb-2 text-sm">البلاغات والاستفسارات الواردة:</h4>
                 <div id="admin-notices-feed" class="space-y-3 text-xs"></div>
             </div>
         </div>
@@ -283,16 +260,21 @@
         <!-- ب. لوحة أمينة المال (ملاك القدوري - Finance Panel) -->
         <div id="panel-finance" class="hidden space-y-6">
             <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow border-t-4 border-emerald-600 space-y-6">
-                <h4 class="font-bold text-lg text-emerald-800"><i class="fa-solid fa-wallet"></i> اللوحة المالية - ملاك القدوري</h4>
+                <h4 class="font-bold text-lg text-emerald-800 dark:text-emerald-400"><i class="fa-solid fa-wallet"></i> اللوحة المالية - ملاك القدوري</h4>
                 
                 <!-- استمارة دفع اشتراك لاعب -->
                 <form onsubmit="submitPlayerReceipt(event)" class="space-y-3 text-xs bg-emerald-50 dark:bg-gray-900 p-4 rounded-xl border border-emerald-500">
-                    <h5 class="font-bold text-emerald-800 dark:text-emerald-400">إضافة وصل إيصال دفع اشتراك للاعب (يرسل لحساب اللاعب):</h5>
-                    <input type="text" id="rcp-player-name" placeholder="اسم اللاعب الكامل" required class="w-full p-2.5 border rounded dark:bg-gray-800">
+                    <h5 class="font-bold text-emerald-800 dark:text-emerald-400">إضافة وصل اشتراك لاعب (اختر من القائمة المنسدلة):</h5>
+                    <select id="rcp-player-select" required class="w-full p-2.5 border rounded dark:bg-gray-800 font-bold">
+                        <option value="">اختر اسم اللاعب المسجل</option>
+                    </select>
                     <input type="text" id="rcp-months" placeholder="الأشهر المدفوعة (مثال: أكتوبر، نوفمبر)" required class="w-full p-2.5 border rounded dark:bg-gray-800">
                     <input type="number" id="rcp-amount" placeholder="المبلغ المدفوع (بالدرهم)" required class="w-full p-2.5 border rounded dark:bg-gray-800">
                     <input type="date" id="rcp-date" required class="w-full p-2.5 border rounded dark:bg-gray-800">
-                    <input type="text" id="rcp-img" placeholder="رابط صورة الوصل (اختياري)" class="w-full p-2.5 border rounded dark:bg-gray-800">
+                    <div>
+                        <label class="block font-bold mb-1 text-gray-600 dark:text-gray-300">اختر صورة وصل الدفع من الجهاز:</label>
+                        <input type="file" id="rcp-img-file" accept="image/*" class="w-full p-2 border rounded dark:bg-gray-800 text-xs">
+                    </div>
                     <button type="submit" class="bg-emerald-700 text-white font-bold px-4 py-2 rounded shadow">إرسال الوصل لحساب اللاعب</button>
                 </form>
 
@@ -300,7 +282,7 @@
                 <form onsubmit="submitFinanceReport(event)" class="space-y-3 text-xs bg-gray-50 dark:bg-gray-900 p-4 rounded-xl">
                     <h5 class="font-bold text-emerald-800 dark:text-emerald-400">رفع تقرير مالي إلى رئيس النادي:</h5>
                     <input type="text" id="fin-title" placeholder="عنوان التقرير المالي" required class="w-full p-2.5 border rounded dark:bg-gray-800">
-                    <textarea id="fin-details" placeholder="تفاصيل الميزانية والمصروفات..." rows="3" required class="w-full p-2.5 border rounded dark:bg-gray-800"></textarea>
+                    <textarea id="fin-details" placeholder="تفاصيل الميزانية..." rows="3" required class="w-full p-2.5 border rounded dark:bg-gray-800"></textarea>
                     <button type="submit" class="bg-emerald-700 text-white font-bold px-4 py-2 rounded">إرسال التقرير للرئيس</button>
                 </form>
             </div>
@@ -309,14 +291,17 @@
         <!-- ج. لوحة الكاتبة والمسؤولة عن النشر (هدى بوكدال) -->
         <div id="panel-media" class="hidden space-y-6">
             <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow border-t-4 border-emerald-600 space-y-6">
-                <h4 class="font-bold text-lg text-emerald-800"><i class="fa-solid fa-newspaper"></i> لوحة النشر والإعلام - هدى بوكدال</h4>
+                <h4 class="font-bold text-lg text-emerald-800 dark:text-emerald-400"><i class="fa-solid fa-newspaper"></i> لوحة النشر والإعلام - هدى بوكدال</h4>
                 
-                <!-- نشر تدوينة -->
+                <!-- نشر تدوينة مع رفع صورة مباشرة من الجهاز -->
                 <form onsubmit="addNewPost(event)" class="space-y-3 text-xs bg-gray-50 dark:bg-gray-900 p-4 rounded-xl">
                     <h5 class="font-bold text-emerald-800 dark:text-emerald-400">نشر تدوينة جديدة بالواجهة الرئيسية:</h5>
                     <input type="text" id="post-title" placeholder="عنوان التدوينة / الخبر" required class="w-full p-2.5 border rounded dark:bg-gray-800">
                     <textarea id="post-content" placeholder="نص التدوينة..." rows="3" required class="w-full p-2.5 border rounded dark:bg-gray-800"></textarea>
-                    <input type="text" id="post-media-url" placeholder="اسم أو رابط الصورة/الفيديو (مثال: image.jpeg)" required class="w-full p-2.5 border rounded dark:bg-gray-800">
+                    <div>
+                        <label class="block font-bold mb-1 text-gray-600 dark:text-gray-300">اختر صورة التدوينة من جهازك (الهاتف أو الحاسوب):</label>
+                        <input type="file" id="post-img-file" accept="image/*" required class="w-full p-2 border rounded dark:bg-gray-800 text-xs">
+                    </div>
                     <button type="submit" class="bg-emerald-700 text-white font-bold px-4 py-2 rounded">نشر التدوينة على الموقع العام</button>
                 </form>
 
@@ -332,10 +317,10 @@
         <!-- د. لوحة المستشارين (أمين بنجابر & زكرياء حداوي) -->
         <div id="panel-advisor" class="hidden space-y-6">
             <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow border-t-4 border-yellow-400 space-y-6">
-                <h4 class="font-bold text-lg text-emerald-800"><i class="fa-solid fa-comment-dots"></i> لوحة المستشارين - الاستشارات والبلاغات</h4>
+                <h4 class="font-bold text-lg text-emerald-800 dark:text-emerald-400"><i class="fa-solid fa-comment-dots"></i> لوحة المستشارين - الاستشارات والبلاغات</h4>
                 
                 <form onsubmit="submitAdvisorNotice(event)" class="space-y-3 text-xs bg-yellow-50 dark:bg-gray-900 p-4 rounded-xl">
-                    <h5 class="font-bold text-emerald-800">رفع بلاغ / استفسار / ملاحظة لرئيس النادي:</h5>
+                    <h5 class="font-bold text-emerald-800 dark:text-emerald-400">رفع بلاغ / استفسار / ملاحظة لرئيس النادي:</h5>
                     <input type="text" id="adv-title" placeholder="عنوان البلاغ أو الاستفسار" required class="w-full p-2.5 border rounded dark:bg-gray-800">
                     <textarea id="adv-text" placeholder="تفاصيل البلاغ أو الاستفسار..." rows="4" required class="w-full p-2.5 border rounded dark:bg-gray-800"></textarea>
                     <button type="submit" class="bg-emerald-700 text-white font-bold px-4 py-2 rounded">إرسال البلاغ لرئيس النادي</button>
@@ -343,13 +328,18 @@
             </div>
         </div>
 
-        <!-- هـ. لوحة الطاقم التقني والمدربين (Coach Panel) -->
-        <div id="panel-coach" class="hidden space-y-6">
+        <!-- هـ. لوحة الطاقم التقني والمدربين (Coach Panel + منتدى المدربين) -->
+        <div id="panel-coach" class="hidden space-y-8">
             <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow border-t-4 border-emerald-600">
-                <h4 class="font-bold text-lg text-emerald-800 mb-4"><i class="fa-solid fa-clipboard-user"></i> لوحة الطاقم التقني وتقييم اللاعبين (EA FC / FIFA Style)</h4>
+                <h4 class="font-bold text-lg text-emerald-800 dark:text-emerald-400 mb-4"><i class="fa-solid fa-clipboard-user"></i> تقييم اللاعبين (EA FC / FIFA Style)</h4>
                 
                 <form onsubmit="submitPlayerRating(event)" class="space-y-4 text-xs bg-emerald-50 dark:bg-gray-900 p-4 rounded-xl border border-emerald-500">
-                    <input type="text" id="rate-player-name" placeholder="اسم اللاعب الكامل" required class="w-full p-2.5 border rounded dark:bg-gray-800 font-bold">
+                    <div>
+                        <label class="block font-bold mb-1">اختر اللاعب من القائمة المسجلة:</label>
+                        <select id="rate-player-select" required class="w-full p-2.5 border rounded dark:bg-gray-800 font-bold">
+                            <option value="">اختر اسم اللاعب</option>
+                        </select>
+                    </div>
                     
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
                         <div><label class="font-bold block mb-1">السرعة (PAC)</label><input type="number" id="rate-pac" min="1" max="10" placeholder="10-1" required class="w-full p-2 border rounded dark:bg-gray-800"></div>
@@ -362,8 +352,25 @@
                     </div>
 
                     <textarea id="rate-coach-note" placeholder="ملاحظة المدرب الشخصية للاعب..." rows="2" class="w-full p-2.5 border rounded dark:bg-gray-800"></textarea>
-                    <button type="submit" class="w-full bg-emerald-700 text-white font-bold p-3 rounded-xl">حفظ وإرسال التقييم لحساب اللاعب</button>
+                    <button type="submit" class="w-full bg-emerald-700 text-white font-bold p-3 rounded-xl">حفظ وإرسال التقييم للاعب</button>
                 </form>
+            </div>
+
+            <!-- منتدى وتنويهات المدربين (مرئي للمدربين والرئيس فقط) -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow border-t-4 border-yellow-400 space-y-6">
+                <h4 class="font-bold text-lg text-emerald-800 dark:text-emerald-400"><i class="fa-solid fa-comments"></i> منتدى وتنويهات الطاقم التقني والمدربين</h4>
+                
+                <form onsubmit="submitCoachForumPost(event)" class="space-y-3 text-xs bg-yellow-50 dark:bg-gray-900 p-4 rounded-xl">
+                    <h5 class="font-bold text-emerald-800 dark:text-emerald-400">إضافة تنويه، استفسار أو ملاحظة للمدربين الآخرين:</h5>
+                    <input type="text" id="forum-title" placeholder="عنوان التنويه / الاستفسار" required class="w-full p-2.5 border rounded dark:bg-gray-800">
+                    <textarea id="forum-text" placeholder="اكتب ملاحظتك أو استفسارك هنا ليراها باقي المدربين والرئيس..." rows="3" required class="w-full p-2.5 border rounded dark:bg-gray-800"></textarea>
+                    <button type="submit" class="bg-emerald-700 text-white font-bold px-4 py-2 rounded">نشر في منتدى المدربين</button>
+                </form>
+
+                <div>
+                    <h5 class="font-bold text-sm text-emerald-800 dark:text-emerald-400 mb-3">سجل ملاحظات واستفسارات المنتدى:</h5>
+                    <div id="coach-forum-feed" class="space-y-3 text-xs"></div>
+                </div>
             </div>
         </div>
 
@@ -371,7 +378,7 @@
         <div id="panel-player" class="hidden space-y-8">
             <!-- البطاقة الرقمية -->
             <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow text-center border-t-4 border-yellow-400">
-                <h4 class="font-bold text-lg text-emerald-800 mb-2">البطاقة الرقمية الرسمية للاعب</h4>
+                <h4 class="font-bold text-lg text-emerald-800 dark:text-emerald-400 mb-2">البطاقة الرقمية الرسمية للاعب</h4>
                 <div class="inline-block p-6 border-2 border-yellow-400 rounded-2xl bg-emerald-900 text-white shadow-xl">
                     <i class="fa-solid fa-id-card text-5xl text-yellow-400 mb-2 block"></i>
                     <h5 class="font-bold text-lg" id="player-card-name">اسم اللاعب</h5>
@@ -398,7 +405,7 @@
     <div id="child-reg-modal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
         <div class="bg-white dark:bg-gray-800 max-w-lg w-full rounded-2xl p-6 relative">
             <button onclick="closeModal('child-reg-modal')" class="absolute left-4 top-4 text-gray-500 font-bold">✕</button>
-            <h3 class="text-lg font-bold text-emerald-800 mb-4">استمارة تسجيل الأطفال (الانضمام للنادي)</h3>
+            <h3 class="text-lg font-bold text-emerald-800 dark:text-emerald-400 mb-4">استمارة تسجيل الأطفال (الانضمام للنادي)</h3>
             <form onsubmit="submitChildRegistration(event)" class="space-y-3 text-xs">
                 <input type="text" placeholder="الاسم والنسب" required class="w-full p-2.5 border rounded dark:bg-gray-900">
                 <input type="date" placeholder="تاريخ الازدياد" required class="w-full p-2.5 border rounded dark:bg-gray-900">
@@ -416,7 +423,7 @@
     <div id="sponsor-modal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
         <div class="bg-white dark:bg-gray-800 max-w-lg w-full rounded-2xl p-6 relative">
             <button onclick="closeModal('sponsor-modal')" class="absolute left-4 top-4 text-gray-500 font-bold">✕</button>
-            <h3 class="text-lg font-bold text-emerald-800 mb-4">استمارة تسجيل المستشهرين والشركاء</h3>
+            <h3 class="text-lg font-bold text-emerald-800 dark:text-emerald-400 mb-4">استمارة تسجيل المستشهرين والشركاء</h3>
             <form onsubmit="submitSponsorRequest(event)" class="space-y-3 text-xs">
                 <input type="text" placeholder="اسم الشركة أو المؤسسة" required class="w-full p-2.5 border rounded dark:bg-gray-900">
                 <input type="text" placeholder="اسم وصفت المسؤول" required class="w-full p-2.5 border rounded dark:bg-gray-900">
@@ -431,7 +438,7 @@
     <div id="add-member-modal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
         <div class="bg-white dark:bg-gray-800 max-w-lg w-full rounded-2xl p-6 relative">
             <button onclick="closeModal('add-member-modal')" class="absolute left-4 top-4 text-gray-500 font-bold">✕</button>
-            <h3 class="text-xl font-bold text-emerald-800 mb-4">إضافة / تعديل عضو</h3>
+            <h3 class="text-xl font-bold text-emerald-800 dark:text-emerald-400 mb-4">إضافة / تعديل عضو</h3>
             <form onsubmit="saveMemberForm(event)" class="space-y-3 text-xs">
                 <input type="hidden" id="edit-original-code" value="">
                 <input type="text" id="mem-name" placeholder="الاسم الكامل" required class="w-full p-2.5 border rounded dark:bg-gray-900">
@@ -443,8 +450,8 @@
                     <option value="media">مسؤولة النشر والكاتبة</option>
                 </select>
                 <div class="flex gap-2">
-                    <input type="text" id="mem-code" required class="w-full p-2.5 bg-gray-50 border font-mono font-bold text-center">
-                    <button type="button" onclick="autoGenerateCode()" class="bg-yellow-400 font-bold px-3 py-1 rounded text-xs">توليد</button>
+                    <input type="text" id="mem-code" required class="w-full p-2.5 bg-gray-50 border font-mono font-bold text-center dark:bg-gray-900">
+                    <button type="button" onclick="autoGenerateCode()" class="bg-yellow-400 font-bold px-3 py-1 rounded text-xs text-emerald-950">توليد</button>
                 </div>
                 <button type="submit" class="w-full bg-emerald-700 text-white font-bold p-3 rounded-xl text-sm">حفظ البيانات</button>
             </form>
@@ -453,16 +460,16 @@
 
     <!-- 7. المحرك البرمجي والمساعد الذكي -->
     <script>
-        // قواعد البيانات والأكواد الرسمية
+        // قواعد البيانات والأكواد الرسمية مع الفصل التام بين حساب الرئيس وحساب المدرب (آدم القدوري)
         const DEFAULT_USERS = {
             "X-2006-QDR": { role: "super_admin", title: "ادم القدوري", type: "رئيس النادي & المدير التقني" },
-            "COACH-ADAM-QADDOURI-@14": { role: "super_admin", title: "ادم القدوري", type: "المدير التقني والرئيس" },
+            "COACH-ADAM-QADDOURI-@14": { role: "coach", title: "ادم القدوري (مدرب)", type: "مدرب الفئات التقنية" },
             "X-2007-BENJABER": { role: "advisor", title: "أمين بنجابر", type: "المستشار الأول" },
             "COACH-AMIN-BENJABRE-@22": { role: "coach", title: "أمين بنجابر", type: "مدرب الحراس والفئات الصغرى" },
             "X-1997-HADAOUI": { role: "advisor", title: "زكرياء حداوي", type: "المستشار الثاني" },
             "COACH-ZAKARIA-HADAOUI-@44": { role: "coach", title: "زكرياء حداوي", type: "مسؤول اللوجيستيك والتدريب" },
             "X-2003-QDR": { role: "finance", title: "ملاك القدوري", type: "أمينة المال" },
-            "X-1992-BOUKDAL": { role: "media", title: "هدى بوكدال", type: "الكاتبة والمسؤولة عن النشر" },
+            "X-1992-BOUKDAL": { role: "هدى بوكدال", title: "هدى بوكدال", type: "الكاتبة والمسؤولة عن النشر" },
             "COACH-ISSAM-ALAKBOUS-@33": { role: "coach", title: "عصام الكبوس", type: "مسؤول البرمجة والتدريب" },
             "COACH-SOULAYMEN-BENGHEZALE@55": { role: "coach", title: "سليمان بنغزال", type: "مسؤول الإعداد البدني" }
         };
@@ -481,38 +488,57 @@
                 });
             });
             renderPosts();
+            updatePlayerSelects();
+            renderCoachForum();
+            
+            // استرجاع وضع الليل/النهار المحفوظ
+            if(localStorage.getItem('IR_DARK_MODE') === 'true') {
+                document.documentElement.classList.add('dark');
+                document.getElementById('theme-icon').className = "fa-solid fa-sun";
+            }
         });
 
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            let isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('IR_DARK_MODE', isDark);
+            document.getElementById('theme-icon').className = isDark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+        }
+
         function getUsersDB() { return JSON.parse(localStorage.getItem('IR_USERS_DB')) || DEFAULT_USERS; }
-        function saveUsersDB(db) { localStorage.setItem('IR_USERS_DB', JSON.stringify(db)); renderUsersTable(); }
+        function saveUsersDB(db) { 
+            localStorage.setItem('IR_USERS_DB', JSON.stringify(db)); 
+            renderUsersTable(); 
+            updatePlayerSelects();
+        }
 
         function showView(v) {
             ['public-view', 'login-view', 'dashboard-view'].forEach(id => document.getElementById(id).classList.add('hidden'));
             document.getElementById(v + '-view').classList.remove('hidden');
         }
 
-        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function openModal(id) { document.getElementById(id).classList.add('hidden'); document.getElementById(id).classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
         let currentLang = 'ar';
         const i18n = {
             en: {
-                "nav-home": "Home", "nav-about": "About Club", "nav-gallery": "Gallery", "nav-sponsors": "Sponsors", "nav-contact": "Contact",
+                "nav-home": "Home", "nav-gallery": "Gallery", "nav-sponsors": "Sponsors", "nav-contact": "Contact",
                 "btn-register-child": "Register Child", "btn-login": "Login",
                 "hero-title": "Itifaqe De Rabat Club.. Solid Foundation, Academic Formation, and National Sports Leadership.",
                 "hero-btn-reg": "Child Registration Form", "hero-btn-sponsor": "Become a Sponsor",
-                "about-title": "Administrative & Technical Board", "gallery-title": "News & Posts Gallery",
-                "sponsors-title": "Official Sponsors & Partners", "contact-title": "Contact Us & Approved Stadiums",
-                "stadiums-title": "Approved Stadiums (Google Maps):", "empty-posts": "No posts currently in the gallery."
+                "gallery-title": "News & Posts Gallery", "sponsors-title": "Official Sponsors & Partners", 
+                "contact-title": "Contact Us & Approved Stadiums", "stadiums-title": "Approved Stadiums (Google Maps):", 
+                "empty-posts": "No posts currently in the gallery."
             },
             ar: {
-                "nav-home": "الرئيسية", "nav-about": "عن النادي", "nav-gallery": "المعرض والتدوينات", "nav-sponsors": "الرعاة", "nav-contact": "اتصل بنا",
-                "btn-register-child": "سجّل طفلك الآن", "btn-login": "تسجيل الدخول",
+                "nav-home": "الرئيسية", "nav-gallery": "المعرض والتدوينات", "nav-sponsors": "الرعاة", "nav-contact": "اتصل بنا",
+                "btn-register-child": "سجّل طفلك", "btn-login": "دخول",
                 "hero-title": "نادي الإتفاق الرباطي.. التأسيس المتين، التكوين الأكاديمي، وصناعة ريادة الرياضة الوطنية.",
                 "hero-btn-reg": "استمارة تسجيل الأطفال", "hero-btn-sponsor": "كن المستشهر وشريك النادي",
-                "about-title": "الهيكل الإداري والتقني للنادي", "gallery-title": "معرض الأخبار والمنشورات",
-                "sponsors-title": "الرعاة والشركاء الرسميون", "contact-title": "اتصل بنا & الملاعب المعتمدة",
-                "stadiums-title": "الملاعب المعتمدة للنادي (Google Maps):", "empty-posts": "لا توجد منشورات حالياً في المعرض."
+                "gallery-title": "معرض الأخبار والمنشورات", "sponsors-title": "الرعاة والشركاء الرسميون", 
+                "contact-title": "اتصل بنا & الملاعب المعتمدة", "stadiums-title": "الملاعب المعتمدة للنادي (Google Maps):", 
+                "empty-posts": "لا توجد منشورات حالياً في المعرض."
             }
         };
 
@@ -544,12 +570,15 @@
                     renderUsersTable(); renderAdminFeeds();
                 } else if(currentUser.role === 'finance') {
                     document.getElementById('panel-finance').classList.remove('hidden');
+                    updatePlayerSelects();
                 } else if(currentUser.role === 'media') {
                     document.getElementById('panel-media').classList.remove('hidden');
                 } else if(currentUser.role === 'advisor') {
                     document.getElementById('panel-advisor').classList.remove('hidden');
                 } else if(currentUser.role === 'coach') {
                     document.getElementById('panel-coach').classList.remove('hidden');
+                    updatePlayerSelects();
+                    renderCoachForum();
                 } else {
                     document.getElementById('panel-player').classList.remove('hidden');
                     document.getElementById('player-card-name').innerText = currentUser.title;
@@ -561,7 +590,7 @@
 
         function autoGenerateCode() {
             const r = document.getElementById('mem-role').value;
-            document.getElementById('mem-code').value = (r === 'coach' ? 'IR-COACH-' : 'IR-PL-') + Math.floor(1000 + Math.random()*9000);
+            document.getElementById('mem-code').value = (r === 'coach' ? 'IR-COACH-' : r === 'player' ? 'IR-PL-' : 'IR-M-') + Math.floor(1000 + Math.random()*9000);
         }
 
         function saveMemberForm(e) {
@@ -572,7 +601,7 @@
             const name = document.getElementById('mem-name').value.trim();
             const role = document.getElementById('mem-role').value;
             if(orig && orig !== code) delete db[orig];
-            db[code] = { role, title: name, type: role };
+            db[code] = { role, title: name, type: role === 'player' ? 'لاعب' : role === 'coach' ? 'مدرب' : 'عضو إداري' };
             saveUsersDB(db);
             closeModal('add-member-modal');
         }
@@ -599,19 +628,60 @@
             if(confirm("تأكيد حذف الحساب؟")) { const db = getUsersDB(); delete db[c]; saveUsersDB(db); }
         }
 
-        // إيصالات ودفع الاشتراكات للاعبين
+        // تحديث قوائم اللاعبين المنسدلة أوتوماتيكياً
+        function updatePlayerSelects() {
+            const db = getUsersDB();
+            let players = [];
+            for(let c in db) {
+                if(db[c].role === 'player' || db[c].type === 'لاعب' || db[c].role === 'super_admin' === false && c.startsWith('IR-PL')) {
+                    players.push(db[c].title);
+                }
+            }
+            // إضافة اللاعبين الافتراضيين إذا وجدوا
+            let pSelects = [document.getElementById('rcp-player-select'), document.getElementById('rate-player-select')];
+            pSelects.forEach(sel => {
+                if(!sel) return;
+                let currentVal = sel.value;
+                sel.innerHTML = '<option value="">اختر اسم اللاعب</option>';
+                // استخراج جميع اللاعبين من النظام
+                for(let c in db) {
+                    if(db[c].role === 'player' || db[c].type.includes('لاعب')) {
+                        sel.innerHTML += `<option value="${db[c].title}">${db[c].title}</option>`;
+                    }
+                }
+                sel.value = currentVal;
+            });
+        }
+
+        // إيصالات الدفع ورفع الصور من الجهاز
         let receiptsDB = JSON.parse(localStorage.getItem('IR_RECEIPTS')) || [];
         function submitPlayerReceipt(e) {
             e.preventDefault();
+            const fileInput = document.getElementById('rcp-img-file');
+            let imgUrl = "";
+            if(fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imgUrl = e.target.result;
+                    saveReceiptData(imgUrl);
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                saveReceiptData("");
+            }
+        }
+
+        function saveReceiptData(imgUrl) {
             receiptsDB.push({
-                name: document.getElementById('rcp-player-name').value,
+                name: document.getElementById('rcp-player-select').value,
                 months: document.getElementById('rcp-months').value,
                 amount: document.getElementById('rcp-amount').value,
                 date: document.getElementById('rcp-date').value,
-                img: document.getElementById('rcp-img').value
+                img: imgUrl
             });
             localStorage.setItem('IR_RECEIPTS', JSON.stringify(receiptsDB));
-            alert("تم إرسال وصل الاشتراك بنجاح!"); e.target.reset();
+            alert("تم إرسال وصل الاشتراك بنجاح لحساب اللاعب!"); 
+            document.querySelector('#panel-finance form').reset();
         }
 
         // تقييمات المدربين (FIFA Style)
@@ -619,7 +689,7 @@
         function submitPlayerRating(e) {
             e.preventDefault();
             ratingsDB.push({
-                name: document.getElementById('rate-player-name').value,
+                name: document.getElementById('rate-player-select').value,
                 coach: currentUser ? currentUser.title : "المدرب",
                 pac: document.getElementById('rate-pac').value,
                 sho: document.getElementById('rate-sho').value,
@@ -631,7 +701,16 @@
                 note: document.getElementById('rate-coach-note').value
             });
             localStorage.setItem('IR_RATINGS', JSON.stringify(ratingsDB));
-            alert("تم حفظ وإرسال التقييم للاعب!"); e.target.reset();
+            alert("تم حفظ وإرسال التقييم للاعب بنجاح!"); 
+            // تفريغ الحقول باستثناء القائمة
+            document.getElementById('rate-pac').value = "";
+            document.getElementById('rate-sho').value = "";
+            document.getElementById('rate-pas').value = "";
+            document.getElementById('rate-dri').value = "";
+            document.getElementById('rate-def').value = "";
+            document.getElementById('rate-phy').value = "";
+            document.getElementById('rate-pos').value = "";
+            document.getElementById('rate-coach-note').value = "";
         }
 
         function renderPlayerDashboard() {
@@ -647,7 +726,7 @@
             const ratList = document.getElementById('player-ratings-list');
             ratList.innerHTML = "";
             let myRat = ratingsDB.filter(r => r.name.toLowerCase() === currentUser.title.toLowerCase());
-            if(myRat.length === 0) ratList.innerHTML = "<p class='text-gray-500 col-span-2'>لا توجد تقييمات مرفوعة لك بعد.</p>";
+            if(myRat.length === 0) ratList.innerHTML = "<p class='text-gray-500 col-span-2'>لا توجد تقييمات مرفوعة لك من المدربين بعد.</p>";
             else myRat.forEach(r => {
                 let avg = Math.round((parseInt(r.pac)+parseInt(r.sho)+parseInt(r.pas)+parseInt(r.dri)+parseInt(r.def)+parseInt(r.phy)+parseInt(r.pos))/7 * 10);
                 ratList.innerHTML += `
@@ -666,13 +745,26 @@
             });
         }
 
-        // التدوينات والتقارير
+        // تدوينات المعرض مع رفع الصور من الجهاز
         let postsDB = JSON.parse(localStorage.getItem('IR_POSTS')) || [];
         function addNewPost(e) {
             e.preventDefault();
-            postsDB.push({ title: document.getElementById('post-title').value, content: document.getElementById('post-content').value, media: document.getElementById('post-media-url').value });
-            localStorage.setItem('IR_POSTS', JSON.stringify(postsDB));
-            renderPosts(); alert("تم نشر التدوينة!"); e.target.reset();
+            const fileInput = document.getElementById('post-img-file');
+            if(fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    postsDB.push({ 
+                        title: document.getElementById('post-title').value, 
+                        content: document.getElementById('post-content').value, 
+                        media: e.target.result 
+                    });
+                    localStorage.setItem('IR_POSTS', JSON.stringify(postsDB));
+                    renderPosts(); 
+                    alert("تم نشر التدوينة بنجاح في المعرض!"); 
+                    document.querySelector('#panel-media form').reset();
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            }
         }
 
         function renderPosts() {
@@ -686,6 +778,34 @@
                     feed.innerHTML += `<div class="bg-white dark:bg-gray-900 rounded-2xl shadow overflow-hidden border border-emerald-500"><img src="${p.media}" class="w-full h-48 object-cover"><div class="p-4"><h4 class="font-bold text-base text-emerald-800 dark:text-emerald-400 mb-2">${p.title}</h4><p class="text-xs text-gray-600 dark:text-gray-300">${p.content}</p></div></div>`;
                 });
             }
+        }
+
+        // منتدى المدربين الداخلي (مرئي للمدربين والرئيس فقط)
+        let coachForumDB = JSON.parse(localStorage.getItem('IR_COACH_FORUM')) || [];
+        function submitCoachForumPost(e) {
+            e.preventDefault();
+            coachForumDB.push({
+                author: currentUser ? currentUser.title : "مدرب",
+                title: document.getElementById('forum-title').value,
+                text: document.getElementById('forum-text').value,
+                date: new Date().toLocaleDateString('ar-MA')
+            });
+            localStorage.setItem('IR_COACH_FORUM', JSON.stringify(coachForumDB));
+            renderCoachForum();
+            alert("تم نشر ملاحظتك في منتدى المدربين بنجاح!");
+            document.getElementById('forum-title').value = "";
+            document.getElementById('forum-text').value = "";
+        }
+
+        function renderCoachForum() {
+            let feeds = [document.getElementById('coach-forum-feed'), document.getElementById('admin-coach-forum-feed')];
+            feeds.forEach(feed => {
+                if(!feed) return;
+                feed.innerHTML = coachForumDB.length === 0 ? "<p class='text-gray-500'>لا توجد ملاحظات أو تنويهات في المنتدى بعد.</p>" : "";
+                coachForumDB.forEach(f => {
+                    feed.innerHTML += `<div class="p-3 bg-yellow-50 dark:bg-gray-900 rounded-xl border border-yellow-500"><div class="flex justify-between items-center mb-1"><span class="font-bold text-emerald-800 dark:text-emerald-400">${f.title}</span><span class="text-[10px] text-gray-500">${f.author} | ${f.date}</span></div><p class="text-gray-600 dark:text-gray-300">${f.text}</p></div>`;
+                });
+            });
         }
 
         let reportsDB = JSON.parse(localStorage.getItem('IR_REPORTS')) || [];
@@ -703,6 +823,8 @@
             const notFeed = document.getElementById('admin-notices-feed');
             notFeed.innerHTML = noticesDB.length === 0 ? "<p class='text-gray-500'>لا توجد بلاغات أو استفسارات واردة.</p>" : "";
             noticesDB.forEach(n => { notFeed.innerHTML += `<div class="p-3 bg-yellow-50 dark:bg-gray-900 rounded-xl border border-yellow-500"><span class="font-bold text-yellow-800 block">${n.title} (${n.sender})</span><p class="text-gray-600 dark:text-gray-300 mt-1">${n.text}</p></div>`; });
+            
+            renderCoachForum();
         }
 
         function switchAdminSec(sec) {
@@ -710,7 +832,7 @@
             document.getElementById('admin-sec-' + sec).classList.remove('hidden');
         }
 
-        // المساعد الذكي (الروبوت)
+        // المساعد الذكي المطور (مساعدة المدربين والأعضاء والزوار بذكاء)
         function toggleBotChat() { document.getElementById('bot-chat-window').classList.toggle('hidden'); }
         function handleBotQuery(e) {
             e.preventDefault();
@@ -722,18 +844,20 @@
             msgs.innerHTML += `<div class="bg-emerald-700 text-white p-2 rounded-lg text-left">${input.value}</div>`;
             input.value = "";
 
-            let reply = "أنا مساعد نادي الإتفاق الرباطي المخصص للإجابة عن أسئلة كرة القدم والنادي ومواعيد التداريب فقط. كيف يمكنني مساعدتك؟";
+            let reply = "أنا مساعد نادي الإتفاق الرباطي. يمكنني إرشادك في كيفية استخدام المنصة، مواعيد التداريب، مهام المدربين، أو قوانين كرة القدم. كيف يمكنني خدمتك؟";
             
             if(q.includes('كود') || q.includes('قن') || q.includes('رمز') || q.includes('password') || q.includes('code')) {
-                reply = "⚠️ اعتذار صارم: لا يمكنني إفشاء أو تقديم الأقنان السرية أو الأكواد تحت أي ظرف لأسباب أمنية.";
-            } else if(q.includes('ملعب') || q.includes('stadium') || q.includes('اين')) {
-                reply = "يتوفر نادي الإتفاق الرباطي على 3 ملاعب معتمدة بالرباط، ويمكنك الاطلاع على موقع كل ملعب على خريطة Google Maps في قسم 'اتصل بنا' بالأسفل.";
-            } else if(q.includes('رئيس') || q.includes('مدير')) {
-                reply = "رئيس نادي الإتفاق الرباطي والمدير التقني هو السيد ادم القدوري.";
+                reply = "⚠️ اعتذار صارم: لا أستطيع إفشاء الأقنان السرية أو الأكواد لأي كان حفاظاً على أمان المنصة.";
+            } else if(q.includes('ملعب') || q.includes('stadium') || q.includes('الملاعب')) {
+                reply = "النادي يتوفر على 3 ملاعب معتمدة بالرباط، وتوجد روابط خرائط Google Maps الخاصة بها في قسم 'اتصل بنا' بالصفحة الرئيسية.";
+            } else if(q.includes('رئيس') || q.includes('إدارة')) {
+                reply = "رئيس النادي والمدير التقني هو السيد ادم القدوري.";
+            } else if(q.includes('مدرب') || q.includes('تدريب')) {
+                reply = "بالنسبة للمدربين، يمكنكم تسجيل الدخول بأكوادكم الخاصة لتقييم اللاعبين عبر بطاقات FIFA وإضافة الملاحظات في 'منتدى المدربين'.";
+            } else if(q.includes('اشتراك') || q.includes('لاعب') || q.includes('دفع')) {
+                reply = "يمكن للاعبين الدخول بأكوادهم الشخصية للاطلاع على إيصالات الاشتراكات الشهرية وبطاقات التقييم الخاصة بهم.";
             } else if(q.includes('تسجيل') || q.includes('انضمام')) {
-                reply = "يمكنك تسجيل طفلك بالنادي من خلال الضغط على زر 'سجّل طفلك الآن' بقهوة الشريط العلوي وتعبئة الاستمارة.";
-            } else if(q.includes('كرة') || q.includes('قوانين') || q.includes('fifa')) {
-                reply = "كرة القدم هي لعبة تتكون من فريقين يضم كل منهما 11 لاعباً، ومهمتنا في نادي الإتفاق الرباطي هي التكوين الأكاديمي والرياضي الاحترافي.";
+                reply = "يمكنكم تسجيل الأطفال الجدد عبر الضغط على زر 'سجّل طفلك' في أعلى الصفحة وتعبئة الاستمارة.";
             }
 
             setTimeout(() => {
