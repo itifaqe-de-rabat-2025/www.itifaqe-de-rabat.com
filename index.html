@@ -1243,4 +1243,1719 @@
     </main>
 
 </body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة المستشارين - إدارة النادي</title>
+    <!-- استيراد خط تجوال العربي لتصميم عصري -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --dark-bg: #0f172a;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* شاشة تسجيل الدخول */
+        #login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--dark-bg), var(--primary-color));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 420px;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .login-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .login-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .error-msg {
+            color: var(--danger-color);
+            font-size: 13px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* تخطيط اللوحة الرئيسية */
+        #dashboard-app {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-title h1 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .user-badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logout-btn {
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            transition: opacity 0.2s;
+        }
+
+        .logout-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* محتوى الصفحة والتنقل */
+        .main-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 30px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .card h3 {
+            font-size: 18px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--secondary-color);
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* جدول السجل */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+        }
+
+        table th {
+            background: #f1f5f9;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .badge-status {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-sent { background: #e0f2fe; color: #0369a1; }
+        .status-seen { background: #fef3c7; color: #b45309; }
+        .status-progress { background: #ede9fe; color: #6d28d9; }
+        .status-done { background: #d1fae5; color: #065f46; }
+
+        .success-alert {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 13px;
+            border-top: 1px solid var(--border-color);
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شاشة تسجيل الدخول -->
+    <div id="login-screen">
+        <div class="login-card">
+            <h2>لوحة المستشارين</h2>
+            <p>أدخل الكود التعريفي الخاص بك للولوج للنظام</p>
+            <div class="form-group">
+                <label for="access-code">كود الولوج:</label>
+                <input type="password" id="access-code" placeholder="مثال: X-2007-BENJABER">
+            </div>
+            <button class="btn" onclick="handleLogin()">دخول الآمن</button>
+            <div id="login-error" class="error-msg">الكود غير صحيح، يرجى التأكد من الرمز الخاص بك.</div>
+        </div>
+    </div>
+
+    <!-- لوحة التحكم الرئيسية -->
+    <div id="dashboard-app">
+        <header>
+            <div class="header-title">
+                <i class="fa-solid fa-shield-halved fa-lg"></i>
+                <h1>نظام إدارة المستشارين والقرارات الاستراتيجية</h1>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div class="user-badge" id="current-user-display">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span id="advisor-name-text">المستشار</span>
+                </div>
+                <button class="logout-btn" onclick="handleLogout()">تسجيل خروج</button>
+            </div>
+        </header>
+
+        <div class="main-container">
+            <!-- أزرار التنقل -->
+            <div class="nav-tabs">
+                <button class="tab-btn active" onclick="switchTab('new-report')"><i class="fa-solid fa-pen-to-square"></i> إرسال بلاغ أو استشارة</button>
+                <button class="tab-btn" onclick="switchTab('history')"><i class="fa-solid fa-clock-rotate-left"></i> سجل البلاغات المرسلة</button>
+            </div>
+
+            <!-- محتوى تبويب إرسال بلاغ -->
+            <div id="new-report" class="tab-content active">
+                <div class="card">
+                    <h3><i class="fa-solid fa-file-circle-plus"></i> نموذج رفع البلاغات والاستفسارات الإدارية</h3>
+                    
+                    <div id="success-alert" class="success-alert">
+                        <i class="fa-solid fa-circle-check"></i> تم إرسال البلاغ أو الملاحظة بنجاح إلى رئاسة النادي.
+                    </div>
+
+                    <form id="report-form" onsubmit="submitReport(event)">
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label for="report-type">نوع البلاغ / المدخل:</label>
+                                <select id="report-type" required>
+                                    <option value="" disabled selected>اختر النوع...</option>
+                                    <option value="استراتيجي">استراتيجي / استشاري</option>
+                                    <option value="إداري">إداري</option>
+                                    <option value="استفسار">استفسار</option>
+                                    <option value="طارئ">طارئ / عاجل جداً</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="report-sector">القطاع المعني:</label>
+                                <select id="report-sector" required>
+                                    <option value="" disabled selected>اختر القسم...</option>
+                                    <option value="الفئات السنية">الفئات السنية</option>
+                                    <option value="الشؤون المالية">الشؤون المالية</option>
+                                    <option value="التسويق والإعلام">التسويق والإعلام</option>
+                                    <option value="البنية التحتية">البنية التحتية</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="report-title">عنوان البلاغ / الملاحظة:</label>
+                            <input type="text" id="report-title" placeholder="أدخل عنواناً موجزاً ومعبراً..." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="report-content">نص المحتوى والمقترحات:</label>
+                            <textarea id="report-content" rows="5" placeholder="اكتب التفاصيل والملاحظات بوضوح..." required></textarea>
+                        </div>
+
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label for="report-attachment">المرفقات الداعمة (اختياري):</label>
+                                <input type="file" id="report-attachment" accept=".pdf,.xlsx,.doc,.docx,.png,.jpg">
+                            </div>
+                            <div class="form-group" style="display: flex; align-items: center;">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="joint-proposal">
+                                    <label for="joint-proposal">مقترح مشترك بين المستشارين (أمين & زكرياء)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn" style="margin-top: 15px;"><i class="fa-solid fa-paper-plane"></i> إرسال مباشر إلى رئيس النادي</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- محتوى تبويب السجل -->
+            <div id="history" class="tab-content">
+                <div class="card">
+                    <h3><i class="fa-solid fa-list-check"></i> سجل البلاغات والمرئيات المرسلة</h3>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>المستشار المُرسِل</th>
+                                    <th>النوع</th>
+                                    <th>القطاع المعني</th>
+                                    <th>العنوان</th>
+                                    <th>التاريخ والوقت</th>
+                                    <th>الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-table-body">
+                                <!-- سيتم تعبئتها ديناميكياً عبر الجافاسكريبت -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            جميع الحقوق محفوظة © لوحة إدارة المستشارين - النادي الرياضي
+        </footer>
+    </div>
+
+    <script>
+        // قواعد البيانات الخاصة بالأكواد والمستشارين
+        const advisors = {
+            "X-2007-BENJABER": { name: "أمين بنجابر" },
+            "X-1997-HADAOUI": { name: "زكرياء حداوي" }
+        };
+
+        let currentAdvisor = null;
+        let reportsList = JSON.parse(localStorage.getItem('club_advisor_reports')) || [
+            {
+                id: 1,
+                sender: "أمين بنجابر",
+                type: "استراتيجي",
+                sector: "الفئات السنية",
+                title: "خطة تطوير أكاديمية الشباب والمواهب",
+                date: "2026-03-30 14:20",
+                status: "قيد الدراسة / التنفيذ"
+            },
+            {
+                id: 2,
+                sender: "زكرياء حداوي (مشترك)",
+                type: "إداري",
+                sector: "الشؤون المالية",
+                title: "تقرير الموازنة التقديرية للربع السنوي",
+                date: "2026-03-29 10:15",
+                status: "تم الإطلاع عليها من الرئيس"
+            }
+        ];
+
+        // تسجيل الدخول
+        function handleLogin() {
+            const codeInput = document.getElementById('access-code').value.trim();
+            const errorMsg = document.getElementById('login-error');
+
+            if (advisors[codeInput]) {
+                currentAdvisor = advisors[codeInput];
+                document.getElementById('advisor-name-text').innerText = currentAdvisor.name;
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('dashboard-app').style.display = 'flex';
+                errorMsg.style.display = 'none';
+                loadHistoryTable();
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        }
+
+        // تسجيل الخروج
+        function handleLogout() {
+            currentAdvisor = null;
+            document.getElementById('access-code').value = '';
+            document.getElementById('dashboard-app').style.display = 'none';
+            document.getElementById('login-screen').style.display = 'flex';
+        }
+
+        // التنقل بين التبويبات
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            if(tabId === 'history') {
+                loadHistoryTable();
+            }
+        }
+
+        // إرسال البلاغ
+        function submitReport(e) {
+            e.preventDefault();
+
+            const type = document.getElementById('report-type').value;
+            const sector = document.getElementById('report-sector').value;
+            const title = document.getElementById('report-title').value;
+            const isJoint = document.getElementById('joint-proposal').checked;
+            
+            const now = new Date();
+            const dateStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0') + ' ' + String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+
+            let senderName = currentAdvisor.name;
+            if (isJoint) {
+                senderName += " (مشترك)";
+            }
+
+            const newReport = {
+                id: reportsList.length + 1,
+                sender: senderName,
+                type: type,
+                sector: sector,
+                title: title,
+                date: dateStr,
+                status: "قيد الإرسال / مسجلة"
+            };
+
+            reportsList.unshift(newReport);
+            localStorage.setItem('club_advisor_reports', JSON.stringify(reportsList));
+
+            // إظهار رسالة النجاح
+            const alertBox = document.getElementById('success-alert');
+            alertBox.style.display = 'flex';
+            setTimeout(() => {
+                alertBox.style.display = 'none';
+            }, 4000);
+
+            // إعادة تعيين النموذج
+            document.getElementById('report-form').reset();
+        }
+
+        // تعبئة جدول السجل
+        function loadHistoryTable() {
+            const tbody = document.getElementById('history-table-body');
+            tbody.innerHTML = '';
+
+            reportsList.forEach((rep, index) => {
+                let badgeClass = 'status-sent';
+                if(rep.status.includes('الإطلاع')) badgeClass = 'status-seen';
+                if(rep.status.includes('الدراسة')) badgeClass = 'status-progress';
+                if(rep.status.includes('منجزة')) badgeClass = 'status-done';
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${rep.id}</td>
+                    <td><b>${rep.sender}</b></td>
+                    <td>${rep.type}</td>
+                    <td>${rep.sector}</td>
+                    <td>${rep.title}</td>
+                    <td>${rep.date}</td>
+                    <td><span class="badge-status ${badgeClass}">${rep.status}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الطاقم التقني والمدربين - Coach Panel</title>
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --accent-color: #38bdf8;
+            --gold-color: #f59e0b;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #334155;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            border-right: 4px solid var(--accent-color);
+            padding-right: 10px;
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .coaches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .coach-badge {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--gold-color);
+        }
+
+        .coach-badge h4 {
+            margin: 0 0 5px 0;
+            color: var(--primary-color);
+        }
+
+        .coach-badge code {
+            display: block;
+            background: #e2e8f0;
+            padding: 5px;
+            font-size: 11px;
+            border-radius: 4px;
+            margin-top: 5px;
+            color: #d97706;
+            word-break: break-all;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+
+        .stats-grid div {
+            text-align: center;
+        }
+
+        .stats-grid input {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #0284c7;
+        }
+
+        /* FIFA Card Style Preview */
+        .fifa-card-preview {
+            background: linear-gradient(135deg, #bf953f, #fc6, #bf953f, #aa771c);
+            color: #2b1d0c;
+            width: 250px;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px auto;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border: 3px solid #fff;
+        }
+
+        .noticeboard-box {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>لوحة الطاقم التقني والمدربين (Coach Panel)</h1>
+        <p>نظام الإدارة الفنية وتقييم اللاعبين - نادي احترافي</p>
+    </header>
+
+    <div class="container">
+
+        <!-- قسم أكواد الولوج -->
+        <div class="section-card">
+            <h2>أكواد الولوج وصلاحيات الطاقم التقني</h2>
+            <div class="coaches-grid">
+                <div class="coach-badge">
+                    <h4>آدم القدوري</h4>
+                    <p style="font-size: 12px; margin:0;">المدير الرياضي</p>
+                    <code>COACH-ADAM-QADDOURI-@14</code>
+                </div>
+                <div class="coach-badge">
+                    <h4>عصام الكبوس</h4>
+                    <p style="font-size: 12px; margin:0;">البرمجة والتدريبات</p>
+                    <code>COACH-ISSAM-ALAKBOUS-@22</code>
+                </div>
+                <div class="coach-badge">
+                    <h4>زكرياء حداوي</h4>
+                    <p style="font-size: 12px; margin:0;">اللوجستيك والتدريبات</p>
+                    <code>COACH-ZAKARIA-HADAOUI-@33</code>
+                </div>
+                <div class="coach-badge">
+                    <h4>سليمان بنغزال</h4>
+                    <p style="font-size: 12px; margin:0;">الإعداد البدني</p>
+                    <code>COACH-SOULAYMAN-BENGHAZALE-@44</code>
+                </div>
+                <div class="coach-badge">
+                    <h4>أمين بنجابر</h4>
+                    <p style="font-size: 12px; margin:0;">الحراس والفئة الصغرى</p>
+                    <code>COACH-AMIN-BENJABRE-@55</code>
+                </div>
+            </div>
+        </div>
+
+        <!-- قسم تقييم اللاعبين بطراز FIFA -->
+        <div class="section-card">
+            <h2>تقييم اللاعبين (طراز EA FC / FIFA)</h2>
+            <form id="evaluationForm">
+                <div class="form-group">
+                    <label for="playerSelect">اختر اللاعب:</label>
+                    <select id="playerSelect" required>
+                        <اختر لاعب من القائمة>-- اختر اللاعب --</option>
+                        <option value="player1">يوسف الإدريسي (مهاجم)</option>
+                        <option value="player2">حمزة العمري (وسط ميدان)</option>
+                        <option value="player3">مهدي بنسعيد (مدافع)</option>
+                        <option value="player4">أيوب المرابط (حارس مرمى)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>درجات الطاقات:</label>
+                    <div class="stats-grid">
+                        <div><label style="font-size:12px;">PAC</label><input type="number" id="statPAC" min="1" max="99" value="75"></div>
+                        <div><label style="font-size:12px;">SHO</label><input type="number" id="statSHO" min="1" max="99" value="70"></div>
+                        <div><label style="font-size:12px;">PAS</label><input type="number" id="statPAS" min="1" max="99" value="80"></div>
+                        <div><label style="font-size:12px;">DRI</label><input type="number" id="statDRI" min="1" max="99" value="78"></div>
+                        <div><label style="font-size:12px;">DEF</label><input type="number" id="statDEF" min="1" max="99" value="65"></div>
+                        <div><label style="font-size:12px;">PHY</label><input type="number" id="statPHY" min="1" max="99" value="82"></div>
+                        <div><label style="font-size:12px;">POS</label><input type="number" id="statPOS" min="1" max="99" value="76"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="coachNote">ملاحظة المدرب الشخصية:</label>
+                    <textarea id="coachNote" rows="3" placeholder="أدخل تقييمك الفني وملاحظات التطوير للاعب..."></textarea>
+                </div>
+
+                <button type="submit">حفظ وتحديث البطاقة الرقمية</button>
+            </form>
+
+            <!-- معاينة مصغرة لبطاقة اللاعب -->
+            <div class="fifa-card-preview">
+                <h3 id="cardPlayerName" style="margin:0;">اسم اللاعب</h3>
+                <p style="font-size: 12px; margin:5px 0;">التقييم العام: <span id="cardOverall" style="font-size: 18px; font-weight:bold;">76</span></p>
+                <hr style="border-color: #aa771c;">
+                <p id="cardNotePreview" style="font-size: 11px; font-style: italic; margin:5px 0;">ملاحظة المدرب ستظهر هنا...</p>
+            </div>
+        </div>
+
+        <!-- منتدى المدربين الداخلي -->
+        <div class="section-card">
+            <h2>منتدى المدربين الداخلي (Coach Noticeboard)</h2>
+            <div class="form-group">
+                <label for="writerName">اسم المدرب:</label>
+                <input type="text" id="writerName" placeholder="مثال: عصام الكبوس">
+            </div>
+            <div class="form-group">
+                <label for="noticeText">التنويه أو الملاحظة:</label>
+                <textarea id="noticeText" rows="2" placeholder="اكتب استفسارك أو تنويهك هنا (مرئي للمدربين ورئيس النادي حصرياً)..."></textarea>
+            </div>
+            <button type="button" onclick="addNotice()">نشر في المنتدى</button>
+
+            <div id="noticesContainer" style="margin-top: 20px;">
+                <!-- يتم إضافة الملاحظات هنا برمجياً -->
+                <div class="noticeboard-box">
+                    <strong>آدم القدوري (المدير الرياضي)</strong> <span style="font-size: 11px; color: #64748b;">- 31/07/2026</span>
+                    <p style="margin: 5px 0 0 0; font-size: 14px;">تم اعتماد البرنامج التدريبي للأسبوع القادم، يرجى الالتزام بالأوقات المحددة.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // حساب التقييم العام تلقائياً عند تغيير الإدخالات وتحديث البطاقة
+        document.getElementById('evaluationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const playerName = document.getElementById('playerSelect').selectedOptions[0].text;
+            const pac = parseInt(document.getElementById('statPAC').value) || 0;
+            const sho = parseInt(document.getElementById('statSHO').value) || 0;
+            const pas = parseInt(document.getElementById('statPAS').value) || 0;
+            const dri = parseInt(document.getElementById('statDRI').value) || 0;
+            const def = parseInt(document.getElementById('statDEF').value) || 0;
+            const phy = parseInt(document.getElementById('statPHY').value) || 0;
+            const pos = parseInt(document.getElementById('statPOS').value) || 0;
+            const note = document.getElementById('coachNote').value;
+
+            // حساب المعدل البسيط
+            const overall = Math.round((pac + sho + pas + dri + def + phy + pos) / 7);
+
+            document.getElementById('cardPlayerName').innerText = playerName;
+            document.getElementById('cardOverall').innerText = overall;
+            document.getElementById('cardNotePreview').innerText = `"${note || 'لا توجد ملاحظات حالياً'}"`;
+
+            alert('تم حفظ تقييم اللاعب وتحديث البطاقة الرقمية بنجاح!');
+        });
+
+        // إضافة ملاحظة للمنتدى الداخلي
+        function addNotice() {
+            const writer = document.getElementById('writerName').value;
+            const text = document.getElementById('noticeText').value;
+            if(!writer || !text) {
+                alert('المرجو إدخال الاسم ونصه التنويه');
+                return;
+            }
+
+            const container = document.getElementById('noticesContainer');
+            const dateStr = new Date().toLocaleDateString();
+
+            const newNotice = document.createElement('div');
+            newNotice.className = 'noticeboard-box';
+            newNotice.innerHTML = `<strong>${writer}</strong> <span style="font-size: 11px; color: #64748b;">- ${dateStr}</span><p style="margin: 5px 0 0 0; font-size: 14px;">${text}</p>`;
+
+            container.prepend(newNotice);
+            document.getElementById('noticeText').value = '';
+            alert('تم نشر الملاحظة بنجاح في منتدى الطاقم التقني');
+        }
+    </script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة حساب اللاعب - نادي الاتفاق الرباطي</title>
+    <!-- استيراد خط عربي حديث -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #0b2545;
+            --accent-color: #d4af37; /* ذهبي يليق بطاقات فيفا */
+            --bg-color: #08121f;
+            --card-bg: #132238;
+            --text-color: #ffffff;
+            --text-muted: #94a3b8;
+            --success-color: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* رأس الصفحة */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 15px 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .player-code {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+        }
+
+        /* شبكة المحتويات */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 900px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .panel-card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--accent-color);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+
+        /* 1. تصميم بطاقة الطاقات FIFA Style */
+        .fifa-card {
+            background: linear-gradient(135deg, #2c3e50, #000000);
+            border-radius: 20px;
+            padding: 20px;
+            width: 100%;
+            max-width: 380px;
+            margin: 0 auto;
+            border: 2px solid var(--accent-color);
+            color: #fff;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .fifa-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .fifa-stats-main {
+            text-align: center;
+        }
+
+        .fifa-ovr {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            line-height: 1;
+        }
+
+        .fifa-pos {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .fifa-player-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color);
+            object-fit: cover;
+            background: #fff;
+        }
+
+        .fifa-name {
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: 900;
+            margin: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 5px;
+        }
+
+        .fifa-stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        /* 2. الإيصالات المالية */
+        .receipt-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.2);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .btn-view {
+            background: var(--accent-color);
+            color: #000;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .btn-view:hover {
+            opacity: 0.9;
+        }
+
+        /* 3. الحالة البدنية والحضور */
+        .status-badge {
+            display: inline-block;
+            background: var(--success-color);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar-container {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            height: 10px;
+            margin-top: 5px;
+        }
+
+        .progress-bar {
+            background: var(--accent-color);
+            height: 100%;
+            width: 92%;
+        }
+
+        .info-group {
+            margin-bottom: 15px;
+        }
+
+        .info-group label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* ملاحظات المدرب */
+        .coach-notes {
+            background: rgba(212, 175, 55, 0.05);
+            border-right: 4px solid var(--accent-color);
+            padding: 12px;
+            border-radius: 4px;
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- رأس اللوحة -->
+        <header>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <i class="fa-solid fa-shield-halved fa-2x" style="color: var(--accent-color);"></i>
+                <div>
+                    <h1>نادي الاتفاق الرباطي</h1>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">لوحة حساب اللاعب الرسمية</p>
+                </div>
+            </div>
+            <div class="player-code">الكوذ: #AFR-8824</div>
+        </header>
+
+        <!-- المحتويات الرئيسية -->
+        <div class="grid-layout">
+            
+            <!-- القسم الأيمن: بطاقة الطاقات FIFA Style -->
+            <div class="panel-card">
+                <h2><i class="fa-solid fa-id-card"></i> البطاقة التعريفية وطاقات اللاعب</h2>
+                
+                <div class="fifa-card">
+                    <div class="fifa-header">
+                        <div class="fifa-stats-main">
+                            <div class="fifa-ovr">86</div>
+                            <div class="fifa-pos">CDM</div>
+                        </div>
+                        <img src="https://via.placeholder.com/90" alt="صورة اللاعب" class="fifa-player-img">
+                    </div>
+                    <div class="fifa-name">حمزة الاتفاقي</div>
+                    <div class="fifa-stats-grid">
+                        <div class="stat-row"><span>السرعة (PAC)</span> <span class="stat-value">84</span></div>
+                        <div class="stat-row"><span>التسديد (SHO)</span> <span class="stat-value">72</span></div>
+                        <div class="stat-row"><span>التمرير (PAS)</span> <span class="stat-value">85</span></div>
+                        <div class="stat-row"><span>المراوغة (DRI)</span> <span class="stat-value">80</span></div>
+                        <div class="stat-row"><span>الدفاع (DEF)</span> <span class="stat-value">88</span></div>
+                        <div class="stat-row"><span>الـبدني (PHY)</span> <span class="stat-value">86</span></div>
+                        <div class="stat-row" style="grid-column: span 2; justify-content: center; gap: 10px;">
+                            <span>الروح التنافسية (MEN):</span> <span class="stat-value">90</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 15px;">
+                    <h3 style="font-size: 1rem; color: var(--accent-color); margin-bottom: 5px;"><i class="fa-solid fa-comment-dots"></i> توجيهات المدرب الخاصة:</h3>
+                    <div class="coach-notes">
+                        "أداء ممتاز في افتكاك الكرات المباراة الأخيرة، يرجى التركيز أكثر على سرعة إخراج الكرة من منطقة الضغط."
+                    </div>
+                </div>
+            </div>
+
+            <!-- القسم الأيسر: الإحصائيات، الحالة، والإيصالات المالية -->
+            <div style="display: flex; flex-direction: column; gap: 25px;">
+                
+                <!-- الحالة البدنية والحضور -->
+                <div class="panel-card">
+                    <h2><i class="fa-solid fa-heart-pulse"></i> الحالة البدنية والانضباط</h2>
+                    <span class="status-badge"><i class="fa-solid fa-circle-check"></i> جاهز للمشاركة</span>
+                    
+                    <div class="info-group">
+                        <label>نسبة حضور التمارين هذا الشهر (92%)</label>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+
+                    <div class="info-group" style="margin-bottom: 0;">
+                        <label>سجل المباريات الرسمية: 12 مباراة | الأهداف: 3 | التمريرات الحاسمة: 5</label>
+                    </div>
+                </div>
+
+                <!-- جدول إيصالات الاشتراكات -->
+                <div class="panel-card">
+                    <h2><i class="fa-solid fa-file-invoice-dollar"></i> إيصالات الاشتراكات الشهرية</h2>
+                    
+                    <div class="receipt-item">
+                        <div>
+                            <strong>اشتراك شهر مايو 2026</strong>
+                            <div style="font-size: 0.8rem; color: var(--success-color);">تم الاعتماد من أمينة المال</div>
+                        </div>
+                        <button class="btn-view" onclick="alert('فتح صورة الوصل...')"><i class="fa-solid fa-eye"></i> معاينة</button>
+                    </div>
+
+                    <div class="receipt-item">
+                        <div>
+                            <strong>اشتراك شهر أبريل 2026</strong>
+                            <div style="font-size: 0.8rem; color: var(--success-color);">تم الاعتماد من أمينة المال</div>
+                        </div>
+                        <button class="btn-view" onclick="alert('فتح صورة الوصل...')"><i class="fa-solid fa-eye"></i> معاينة</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم النادي الرياضي</title>
+    <!-- تضمين مكتبة Tailwind CSS للتصميم السريع والمتجاوب -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- تضمين خط Cairo العربي -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
+
+    <!-- واجهة لوحة التحكم المصغرة لاختبار النوافذ -->
+    <div class="bg-white shadow-lg rounded-2xl p-8 max-w-2xl w-full text-center">
+        <h1 class="text-2xl font-bold text-gray-800 mb-2">إدارة النوافذ المنبثقة التفاعلية</h1>
+        <p class="text-gray-600 mb-6">اضغط على أحد الأزرار أدناه لفتح الاستمارة الخاصة بها:</p>
+
+        <div class="flex flex-wrap justify-center gap-4">
+            <!-- زر تسجيل الأطفال -->
+            <button onclick="openModal('childModal')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-xl transition shadow-md cursor-pointer">
+                تسجيل طفل جديد
+            </button>
+            <!-- زر تسجيل المستشهرين -->
+            <button onclick="openModal('sponsorModal')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5 py-2.5 rounded-xl transition shadow-md cursor-pointer">
+                تسجيل مستشهر جديد
+            </button>
+            <!-- زر إضافة / تعديل عضو -->
+            <button onclick="openModal('memberModal')" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-5 py-2.5 rounded-xl transition shadow-md cursor-pointer">
+                إضافة / تعديل عضو (الرئيس)
+            </button>
+        </div>
+    </div>
+
+    <!-- 1. نافذة تسجيل الأطفال -->
+    <div id="childModal" class="fixed inset-0 bg-black/50 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative animate-fade-in">
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 class="text-xl font-bold text-gray-800">استمارة تسجيل الأطفال</h3>
+                <button onclick="closeModal('childModal')" class="text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
+            </div>
+            <form onsubmit="handleFormSubmit(event, 'childModal')" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">اسم الطفل الكامل</label>
+                    <input type="text" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">تاريخ الازدياد</label>
+                        <input type="date" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">الفئة العمرية</label>
+                        <select class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option>U9</option>
+                            <option>U11</option>
+                            <option>U13</option>
+                            <option>U15</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">رقم ولي الأمر</label>
+                    <input type="tel" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder="06xxxxxxxx">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">ملاحظات</label>
+                    <textarea rows="2" class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder="ملاحظات صحية أو أخرى..."></textarea>
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeModal('childModal')" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300">إلغاء</button>
+                    <button type="submit" class="px-5 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700">حفظ البيانات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. نافذة تسجيل المستشهرين -->
+    <div id="sponsorModal" class="fixed inset-0 bg-black/50 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 class="text-xl font-bold text-gray-800">استمارة تسجيل المستشهرين</h3>
+                <button onclick="closeModal('sponsorModal')" class="text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
+            </div>
+            <form onsubmit="handleFormSubmit(event, 'sponsorModal')" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">اسم الشركة / الشريك</label>
+                    <input type="text" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">المسؤول</label>
+                        <input type="text" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">الهاتف</label>
+                        <input type="tel" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">البريد الإلكتروني</label>
+                    <input type="email" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">رابط الموقع أو وسائل التواصل</label>
+                    <input type="url" class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="https://...">
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeModal('sponsorModal')" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300">إلغاء</button>
+                    <button type="submit" class="px-5 py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700">حفظ المستشهر</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 3. نافذة إضافة / تعديل عضو (خاصة بالرئيس) -->
+    <div id="memberModal" class="fixed inset-0 bg-black/50 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 class="text-xl font-bold text-gray-800">إضافة / تعديل عضو (خاص بالرئيس)</h3>
+                <button onclick="closeModal('memberModal')" class="text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
+            </div>
+            <form onsubmit="handleFormSubmit(event, 'memberModal')" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">بيانات العضو (الاسم الكامل)</label>
+                    <input type="text" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-purple-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">الصفة داخل النادي</label>
+                    <select class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-purple-500 outline-none">
+                        <option>لاعب</option>
+                        <option>مدرب</option>
+                        <option>مستشار</option>
+                        <option>أمينة المال</option>
+                        <option>كاتبة</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">الكود السري (توليد تلقائي)</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="generatedCode" readonly class="w-full px-4 py-2 bg-gray-50 border rounded-xl text-gray-500 font-mono" value="CLUB-9482-X">
+                        <button type="button" onclick="generateSecretCode()" class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-xl text-sm font-semibold text-gray-700">إعادة توليد</button>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeModal('memberModal')" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300">إلغاء</button>
+                    <button type="submit" class="px-5 py-2 bg-purple-600 text-white rounded-xl hover:bg-purple-700">حفظ العضو</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- سكربت جافاسكريبت للتحكم في النوافذ -->
+    <script>
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }
+        }
+
+        function generateSecretCode() {
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('generatedCode').value = `CLUB-${randomNum}-X`;
+        }
+
+        function handleFormSubmit(event, modalId) {
+            event.preventDefault();
+            alert('تم حفظ البيانات بنجاح!');
+            closeModal(modalId);
+        }
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم النادي الرياضي المتطورة</title>
+    <!-- تضمين مكتبة Tailwind CSS للتصميم -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- تضمين خط Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+
+    <div class="max-w-6xl mx-auto space-y-6">
+        <!-- شريط التحكم والأزرار -->
+        <div class="bg-white shadow-md rounded-2xl p-6 flex flex-wrap justify-between items-center gap-4">
+            <h1 class="text-xl font-bold text-gray-800">إدارة النادي الرياضي (التحديث الفوري)</h1>
+            <div class="flex flex-wrap gap-3">
+                <button onclick="openModal('childModal')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-semibold transition cursor-pointer">
+                    + تسجيل طفل / لاعب
+                </button>
+                <button onclick="openModal('mediaModal')" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl font-semibold transition cursor-pointer">
+                    + رفع صورة أو فيديو
+                </button>
+            </div>
+        </div>
+
+        <!-- قسم عرض اللاعبين المسجلين (يتجدد لوحده) -->
+        <div class="bg-white shadow-md rounded-2xl p-6">
+            <h2 class="text-lg font-bold text-gray-800 mb-4">قائمة الأطفال / اللاعبين المسجلين (<span id="playersCount">0</span>)</h2>
+            <div id="playersGrid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- سيتم تعبئة البيانات تلقائياً هنا -->
+                <p class="text-gray-400 col-span-full text-center py-4" id="noPlayersText">لا يوجد لاعبو مسجلون حتى الآن.</p>
+            </div>
+        </div>
+
+        <!-- قسم عرض الوسائط (صور وفيديوهات) (يتجدد لوحده) -->
+        <div class="bg-white shadow-md rounded-2xl p-6">
+            <h2 class="text-lg font-bold text-gray-800 mb-4">مكتبة الصور والفيديوهات (<span id="mediaCount">0</span>)</h2>
+            <div id="mediaGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- سيتم تعبئة الصور وفيديوهات تلقائياً هنا -->
+                <p class="text-gray-400 col-span-full text-center py-4" id="noMediaText">لم يتم رفع أي صور أو فيديوهات بعد.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة تسجيل طفل جديد -->
+    <div id="childModal" class="fixed inset-0 bg-black/50 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 class="text-xl font-bold text-gray-800">تسجيل طفل / لاعب جديد</h3>
+                <button onclick="closeModal('childModal')" class="text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
+            </div>
+            <form onsubmit="savePlayer(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">اسم الطفل الكامل</label>
+                    <input type="text" id="playerName" required class="w-full px-4 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">تاريخ الازدياد</label>
+                        <input type="date" id="playerDob" required class="w-full px-4 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">الفئة العمرية</label>
+                        <select id="playerCategory" class="w-full px-4 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="U9">U9</option>
+                            <option value="U11">U11</option>
+                            <option value="U13">U13</option>
+                            <option value="U15">U15</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">رقم ولي الأمر</label>
+                    <input type="tel" id="playerPhone" required class="w-full px-4 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500" placeholder="06xxxxxxxx">
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeModal('childModal')" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300">إلغاء</button>
+                    <button type="submit" class="px-5 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700">حفظ وتحديث اللوحة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة رفع الصور والفيديوهات -->
+    <div id="mediaModal" class="fixed inset-0 bg-black/50 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 class="text-xl font-bold text-gray-800">رفع صورة أو فيديو جديد</h3>
+                <button onclick="closeModal('mediaModal')" class="text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
+            </div>
+            <form onsubmit="saveMedia(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">عنوان أو وصف الملف</label>
+                    <input type="text" id="mediaTitle" required class="w-full px-4 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-emerald-500" placeholder="مثال: مباراة اليوم ضد...">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">اختر الملف (صورة أو فيديو بأي صيغة)</label>
+                    <input type="file" id="mediaFile" accept="image/*,video/*" required class="w-full px-4 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 bg-gray-50">
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeModal('mediaModal')" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300">إلغاء</button>
+                    <button type="submit" class="px-5 py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700">رفع وتحديث اللوحة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- السكربت البرمجي للتحديث التلقائي وتخزين البيانات -->
+    <script>
+        // تحميل البيانات عند فتح الصفحة أول مرة
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPlayers();
+            renderMedia();
+        });
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            document.getElementById(modalId).classList.add('flex');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('flex');
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // --- إدارة اللاعبين والتحديث الفوري ---
+        function savePlayer(event) {
+            event.preventDefault();
+            const name = document.getElementById('playerName').value;
+            const dob = document.getElementById('playerDob').value;
+            const category = document.getElementById('playerCategory').value;
+            const phone = document.getElementById('playerPhone').value;
+
+            const newPlayer = { id: Date.now(), name, dob, category, phone };
+
+            // جلب البيانات القديمة أو مصفوفة فارغة
+            let players = JSON.parse(localStorage.getItem('club_players')) || [];
+            players.push(newPlayer);
+            
+            // تخزين في ذاكرة المتصفح (Local Storage)
+            localStorage.setItem('club_players', JSON.stringify(players));
+
+            // إعادة ضبط النموذج وإغلاق النافذة
+            event.target.reset();
+            closeModal('childModal');
+
+            // تحديث الواجهة تلقائياً فورا بدون إعادة تحميل الصفحة
+            renderPlayers();
+        }
+
+        function renderPlayers() {
+            let players = JSON.parse(localStorage.getItem('club_players')) || [];
+            const grid = document.getElementById('playersGrid');
+            const countSpan = document.getElementById('playersCount');
+            const noText = document.getElementById('noPlayersText');
+
+            countSpan.textContent = players.length;
+
+            if (players.length === 0) {
+                noText.style.display = 'block';
+                grid.innerHTML = '<p class="text-gray-400 col-span-full text-center py-4" id="noPlayersText">لا يوجد لاعبو مسجلون حتى الآن.</p>';
+                return;
+            }
+
+            grid.innerHTML = '';
+            players.forEach(player => {
+                grid.innerHTML += `
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 shadow-xs relative">
+                        <h3 class="font-bold text-gray-800 text-base">${player.name}</h3>
+                        <p class="text-sm text-gray-600 mt-1">الفئة: <span class="font-semibold text-blue-600">${player.category}</span></p>
+                        <p class="text-sm text-gray-600">تاريخ الازدياد: ${player.dob}</p>
+                        <p class="text-sm text-gray-600">الهاتف: ${player.phone}</p>
+                        <button onclick="deletePlayer(${player.id})" class="absolute top-3 left-3 text-red-500 hover:text-red-700 text-xs font-bold">حذف</button>
+                    </div>
+                `;
+            });
+        }
+
+        function deletePlayer(id) {
+            let players = JSON.parse(localStorage.getItem('club_players')) || [];
+            players = players.filter(p => p.id !== id);
+            localStorage.setItem('club_players', JSON.stringify(players));
+            renderPlayers(); // تحديث فوري
+        }
+
+        // --- إدارة الوسائط (صور وفيديوهات) والتحديث الفوري ---
+        function saveMedia(event) {
+            event.preventDefault();
+            const title = document.getElementById('mediaTitle').value;
+            const fileInput = document.getElementById('mediaFile');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64Data = e.target.result;
+                    const isVideo = file.type.startsWith('video');
+
+                    const newMedia = {
+                        id: Date.now(),
+                        title,
+                        type: isVideo ? 'video' : 'image',
+                        url: base64Data
+                    };
+
+                    let mediaList = JSON.parse(localStorage.getItem('club_media')) || [];
+                    mediaList.push(newMedia);
+                    localStorage.setItem('club_media', JSON.stringify(mediaList));
+
+                    event.target.reset();
+                    closeModal('mediaModal');
+                    renderMedia(); // تحديث فوري للوحة الوسائط
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function renderMedia() {
+            let mediaList = JSON.parse(localStorage.getItem('club_media')) || [];
+            const grid = document.getElementById('mediaGrid');
+            const countSpan = document.getElementById('mediaCount');
+            const noText = document.getElementById('noMediaText');
+
+            countSpan.textContent = mediaList.length;
+
+            if (mediaList.length === 0) {
+                grid.innerHTML = '<p class="text-gray-400 col-span-full text-center py-4" id="noMediaText">لم يتم رفع أي صور أو فيديوهات بعد.</p>';
+                return;
+            }
+
+            grid.innerHTML = '';
+            mediaList.forEach(item => {
+                let mediaElement = '';
+                if (item.type === 'video') {
+                    mediaElement = `<video src="${item.url}" controls class="w-full h-36 object-cover rounded-lg"></video>`;
+                } else {
+                    mediaElement = `<img src="${item.url}" alt="${item.title}" class="w-full h-36 object-cover rounded-lg">`;
+                }
+
+                grid.innerHTML += `
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-3 shadow-xs relative">
+                        ${mediaElement}
+                        <h4 class="font-bold text-gray-800 text-sm mt-2 truncate">${item.title}</h4>
+                        <button onclick="deleteMedia(${item.id})" class="mt-2 text-red-500 hover:text-red-700 text-xs font-bold block">حذف الملف</button>
+                    </div>
+                `;
+            });
+        }
+
+        function deleteMedia(id) {
+            let mediaList = JSON.parse(localStorage.getItem('club_media')) || [];
+            mediaList = mediaList.filter(m => m.id !== id);
+            localStorage.setItem('club_media', JSON.stringify(mediaList));
+            renderMedia(); // تحديث فوري
+        }
+    </script>
+</body>
 </html>
