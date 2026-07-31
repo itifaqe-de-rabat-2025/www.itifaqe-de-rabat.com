@@ -3,355 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة تحكم النادي الرياضي المتطورة</title>
-    <!-- تضمين مكتبة Tailwind CSS للتصميم -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- تضمين أيقونات FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- تضمين خط Cairo -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Cairo', sans-serif; }
-    </style>
+    <title>نادي الاتفاق الرباطي | Itifaqe De Rabat</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clubGreen: '#0d5c36',
+                        clubYellow: '#fbbf24',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-gray-100 min-h-screen p-4 md:p-6 flex flex-col items-center">
+<body class="bg-gray-50 text-gray-800 font-sans">
 
-    <div class="max-w-6xl w-full space-y-6">
-        
-        <!-- شريط التحكم والأزرار الرئيسية -->
-        <div class="bg-white shadow-md rounded-2xl p-6 flex flex-wrap justify-between items-center gap-4">
-            <h1 class="text-xl font-bold text-gray-800">لوحة تحكم النادي الرياضي</h1>
-            <div class="flex flex-wrap gap-3">
-                <button onclick="openModal('childModal')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-semibold transition cursor-pointer shadow-md">
-                    <i class="fa-solid fa-user-plus ml-1"></i> تسجيل طفل / لاعب
-                </button>
-                <button onclick="openModal('sponsorModal')" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl font-semibold transition cursor-pointer shadow-md">
-                    <i class="fa-solid fa-handshake ml-1"></i> تسجيل مستشهر
-                </button>
-                <button onclick="openModal('memberModal')" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-xl font-semibold transition cursor-pointer shadow-md">
-                    <i class="fa-solid fa-user-shield ml-1"></i> إضافة عضو (الرئيس)
-                </button>
-                <button onclick="openModal('mediaModal')" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-xl font-semibold transition cursor-pointer shadow-md">
-                    <i class="fa-solid fa-photo-film ml-1"></i> رفع وسائط
-                </button>
+    <!-- شريط التنقل العلوي -->
+    <header class="bg-clubGreen text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 space-x-reverse">
+                <div class="bg-clubYellow text-clubGreen font-bold px-3 py-1 rounded-full text-sm">FAR</div>
+                <h1 class="text-xl font-bold tracking-wide">نادي الاتفاق الرباطي</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6 space-x-reverse text-sm">
+                <a href="#home" class="hover:text-clubYellow transition">الرئيسية</a>
+                <a href="#about" class="hover:text-clubYellow transition">عن النادي</a>
+                <a href="#tokens" class="hover:text-clubYellow transition">أكواد الولوج واللوحات</a>
+                <a href="#contact" class="hover:text-clubYellow transition">اتصل بنا</a>
+            </nav>
+            <div>
+                <button onclick="openModal('registerModal')" class="bg-clubYellow text-clubGreen font-semibold px-4 py-2 rounded-lg shadow hover:bg-yellow-400 transition text-sm">تسجيل لاعب جديد</button>
             </div>
         </div>
+    </header>
 
-        <!-- قسم عرض اللاعبين المسجلين -->
-        <div class="bg-white shadow-md rounded-2xl p-6">
-            <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">قائمة الأطفال / اللاعبين المسجلين (<span id="playersCount">0</span>)</h2>
-            <div id="playersGrid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <p class="text-gray-400 col-span-full text-center py-4" id="noPlayersText">لا يوجد لاعبو مسجلون حتى الآن.</p>
+    <!-- قسم الرئيسية -->
+    <section id="home" class="bg-gradient-to-r from-clubGreen to-emerald-900 text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4">مرحباً بكم في بوابة نادي الاتفاق الرباطي</h2>
+            <p class="text-lg text-gray-200 max-w-2xl mx-auto mb-8">الموقع الرسمي لإدارة الأكاديمية، لوحات التحكم الرقمية، ومتابعة اللاعبين والطاقم التقني.</p>
+            <div class="flex justify-center gap-4">
+                <a href="#tokens" class="bg-clubYellow text-clubGreen font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-400 transition">لوحات التحكم</a>
+                <a href="#about" class="bg-transparent border-2 border-white text-white font-bold px-6 py-3 rounded-lg hover:bg-white hover:text-clubGreen transition">استكشف النادي</a>
             </div>
         </div>
+    </section>
 
-        <!-- قسم عرض الوسائط (صور وفيديوهات) -->
-        <div class="bg-white shadow-md rounded-2xl p-6">
-            <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">مكتبة الصور والفيديوهات (<span id="mediaCount">0</span>)</h2>
-            <div id="mediaGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                <p class="text-gray-400 col-span-full text-center py-4" id="noMediaText">لم يتم رفع أي صور أو فيديوهات بعد.</p>
+    <!-- نبذة عن النادي والرعاة -->
+    <section id="about" class="py-16 container mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+                <h3 class="text-2xl font-bold text-clubGreen mb-4">الريادة والاحتراف في كرة القدم</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">يقود النادي المدير التقني <strong>آدم القدوري</strong>، ويعتمد على منظومة إدارية وتقنية متكاملة تشمل تدبير الخزينة، النشر الإعلامي، واستراتيجيات التكوين للفئات السنية (U9, U11, U13, U15).</p>
+                <div class="flex gap-4 text-sm font-semibold text-gray-700">
+                    <span class="bg-green-100 text-clubGreen px-3 py-1 rounded">الملعب: ملاعب مقاطعة اليوسفية</span>
+                    <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded">الرباط، المغرب</span>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow border border-gray-100">
+                <h4 class="font-bold text-lg mb-3 text-gray-800">الشركاء والرعاة الرسميون</h4>
+                <ul class="space-y-2 text-gray-600">
+                    <li class="flex items-center gap-2">✅ GALAXY Tiles & Ceramic</li>
+                    <li class="flex items-center gap-2">✅ مجلس مقاطعة اليوسفية - الرباط</li>
+                </ul>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- 1. نافذة تسجيل طفل جديد -->
-    <div id="childModal" class="fixed inset-0 bg-black/50 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative animate-fade-in">
-            <div class="flex justify-between items-center mb-4 border-b pb-3">
-                <h3 class="text-xl font-bold text-gray-800">استمارة تسجيل الأطفال</h3>
-                <button onclick="closeModal('childModal')" class="text-gray-400 hover:text-gray-600 text-xl font-bold cursor-pointer">&times;</button>
+    <!-- جدول أكواد الولوج ولوحات التحكم -->
+    <section id="tokens" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-clubGreen">منظومة أكواد الولوج (Access Tokens)</h3>
+                <p class="text-gray-600 mt-2">قائمة المسؤولين والصلاحيات الرقمية الخاصة بالنظام الداخلي</p>
             </div>
-            <form onsubmit="savePlayer(event)" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">اسم الطفل الكامل</label>
-                    <input type="text" id="playerName" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">تاريخ الازدياد</label>
-                        <input type="date" id="playerDob" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">الفئة العمرية</label>
-                        <select id="playerCategory" class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
-                            <option value="U9">U9</option>
-                            <option value="U11">U11</option>
-                            <option value="U13">U13</option>
-                            <option value="U15">U15</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">رقم ولي الأمر</label>
-                    <input type="tel" id="playerPhone" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder="06xxxxxxxx">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">ملاحظات</label>
-                    <textarea id="playerNotes" rows="2" class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder="ملاحظات صحية أو أخرى..."></textarea>
-                </div>
-                <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="closeModal('childModal')" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300 cursor-pointer">إلغاء</button>
-                    <button type="submit" class="px-5 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 cursor-pointer">حفظ البيانات</button>
-                </div>
-            </form>
+            <div class="overflow-x-auto bg-white rounded-xl shadow">
+                <table class="w-full text-right border-collapse">
+                    <thead>
+                        <tr class="bg-clubGreen text-white text-sm">
+                            <th class="p-4">لوحة التحكم / الدور</th>
+                            <th class="p-4">المسؤول</th>
+                            <th class="p-4">كود الولوج (Token)</th>
+                            <th class="p-4">الصلاحيات الأساسية</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 text-sm">
+                        <tr>
+                            <td class="p-4 font-bold text-clubGreen">المدير التقني والريادة</td>
+                            <td class="p-4">آدم القدوري</td>
+                            <td class="p-4 font-mono bg-gray-50 text-red-600 font-semibold">X-2006-QDR</td>
+                            <td class="p-4 text-gray-600">إدارة الحسابات، الأكواد، واعتماد التقارير.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-bold text-clubGreen">أمينة المال</td>
+                            <td class="p-4">ملاك القدوري</td>
+                            <td class="p-4 font-mono bg-gray-50 text-red-600 font-semibold">X-2003-QDR</td>
+                            <td class="p-4 text-gray-600">إصدار إيصالات الاشتراكات ومراقبة الخزينة.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-bold text-clubGreen">مسؤولة النشر</td>
+                            <td class="p-4">هدى بوكدال</td>
+                            <td class="p-4 font-mono bg-gray-50 text-red-600 font-semibold">X-1992-BOUKDAL</td>
+                            <td class="p-4 text-gray-600">نشر التدوينات والأخبار وتحديث الواجهة.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-bold text-clubGreen">المستشارون</td>
+                            <td class="p-4">أمين بنجابر / زكرياء حداوي</td>
+                            <td class="p-4 font-mono bg-gray-50 text-red-600 font-semibold">X-2007 / X-1997</td>
+                            <td class="p-4 text-gray-600">رفع البلاغات الاستراتيجية ومتابعة القرارات.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- 2. نافذة تسجيل المستشهرين -->
-    <div id="sponsorModal" class="fixed inset-0 bg-black/50 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
-            <div class="flex justify-between items-center mb-4 border-b pb-3">
-                <h3 class="text-xl font-bold text-gray-800">استمارة تسجيل المستشهرين</h3>
-                <button onclick="closeModal('sponsorModal')" class="text-gray-400 hover:text-gray-600 text-xl font-bold cursor-pointer">&times;</button>
-            </div>
-            <form onsubmit="handleFormSubmit(event, 'sponsorModal')" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">اسم الشركة / الشريك</label>
-                    <input type="text" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">المسؤول</label>
-                        <input type="text" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">الهاتف</label>
-                        <input type="tel" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">البريد الإلكتروني</label>
-                    <input type="email" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">رابط الموقع أو وسائل التواصل</label>
-                    <input type="url" class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="https://...">
-                </div>
-                <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="closeModal('sponsorModal')" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300 cursor-pointer">إلغاء</button>
-                    <button type="submit" class="px-5 py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 cursor-pointer">حفظ المستشهر</button>
-                </div>
-            </form>
+    <!-- تذييل الصفحة -->
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm">
+        <div class="container mx-auto px-4">
+            <p>© 2026 نادي الاتفاق الرباطي (Itifaqe De Rabat). جميع الحقوق محفوظة.</p>
         </div>
-    </div>
+    </footer>
 
-    <!-- 3. نافذة إضافة / تعديل عضو (خاصة بالرئيس) -->
-    <div id="memberModal" class="fixed inset-0 bg-black/50 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
-            <div class="flex justify-between items-center mb-4 border-b pb-3">
-                <h3 class="text-xl font-bold text-gray-800">إضافة / تعديل عضو (خاص بالرئيس)</h3>
-                <button onclick="closeModal('memberModal')" class="text-gray-400 hover:text-gray-600 text-xl font-bold cursor-pointer">&times;</button>
-            </div>
-            <form onsubmit="handleFormSubmit(event, 'memberModal')" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">بيانات العضو (الاسم الكامل)</label>
-                    <input type="text" required class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-purple-500 outline-none">
+    <!-- نافذة منبثقة للتسجيل (Modal) -->
+    <div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex justify-center items-center z-50">
+        <div class="bg-white p-6 rounded-xl w-full max-w-md mx-4 shadow-xl relative">
+            <button onclick="closeModal('registerModal')" class="absolute top-4 left-4 text-gray-500 hover:text-red-500 font-bold text-lg">✕</button>
+            <h3 class="text-xl font-bold text-clubGreen mb-4">تسجيل لاعب جديد في الأكاديمية</h3>
+            <form onsubmit="event.preventDefault(); alert('تم إرسال طلب التسجيل بنجاح!'); closeModal('registerModal');">
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold mb-2">اسم اللاعب الكامل</label>
+                    <input type="text" required class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-clubGreen">
                 </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">الصفة داخل النادي</label>
-                    <select class="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-purple-500 outline-none">
-                        <option>لاعب</option>
-                        <option>مدرب</option>
-                        <option>مستشار</option>
-                        <option>أمينة المال</option>
-                        <option>كاتبة</option>
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold mb-2">الفئة العمرية</label>
+                    <select class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-clubGreen">
+                        <option>U9 (فئة الصغار)</option>
+                        <option>U11 (فئة الفتيان)</option>
+                        <option>U13</option>
+                        <option>U15</option>
                     </select>
                 </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">الكود السري (توليد تلقائي)</label>
-                    <div class="flex gap-2">
-                        <input type="text" id="generatedCode" readonly class="w-full px-4 py-2 bg-gray-50 border rounded-xl text-gray-500 font-mono" value="CLUB-9482-X">
-                        <button type="button" onclick="generateSecretCode()" class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-xl text-sm font-semibold text-gray-700 cursor-pointer">إعادة توليد</button>
-                    </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold mb-2">رقم هاتف ولي الأمر</label>
+                    <input type="tel" required class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-clubGreen">
                 </div>
-                <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="closeModal('memberModal')" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300 cursor-pointer">إلغاء</button>
-                    <button type="submit" class="px-5 py-2 bg-purple-600 text-white rounded-xl hover:bg-purple-700 cursor-pointer">حفظ العضو</button>
-                </div>
+                <button type="submit" class="w-full bg-clubGreen text-white font-bold py-2 rounded-lg hover:bg-emerald-800 transition">تأكيد التسجيل</button>
             </form>
         </div>
     </div>
 
-    <!-- 4. نافذة رفع الصور والفيديوهات -->
-    <div id="mediaModal" class="fixed inset-0 bg-black/50 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
-            <div class="flex justify-between items-center mb-4 border-b pb-3">
-                <h3 class="text-xl font-bold text-gray-800">رفع صورة أو فيديو جديد</h3>
-                <button onclick="closeModal('mediaModal')" class="text-gray-400 hover:text-gray-600 text-xl font-bold cursor-pointer">&times;</button>
-            </div>
-            <form onsubmit="saveMedia(event)" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">عنوان أو وصف الملف</label>
-                    <input type="text" id="mediaTitle" required class="w-full px-4 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-amber-500" placeholder="مثال: مباراة اليوم ضد...">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">اختر الملف (صورة أو فيديو)</label>
-                    <input type="file" id="mediaFile" accept="image/*,video/*" required class="w-full px-4 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-amber-500 bg-gray-50">
-                </div>
-                <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="closeModal('mediaModal')" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300 cursor-pointer">إلغاء</button>
-                    <button type="submit" class="px-5 py-2 bg-amber-600 text-white rounded-xl hover:bg-amber-700 cursor-pointer">رفع وتحديث اللوحة</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- السكربت البرمجي الموحد -->
+    <!-- سكريبت بسيط للتحكم بالنافذة المنبثقة -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            renderPlayers();
-            renderMedia();
-            generateSecretCode();
-        });
-
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-            }
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
         }
-
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.remove('flex');
-                modal.classList.add('hidden');
-            }
-        }
-
-        function generateSecretCode() {
-            const randomNum = Math.floor(1000 + Math.random() * 9000);
-            const codeInput = document.getElementById('generatedCode');
-            if(codeInput) codeInput.value = `CLUB-${randomNum}-X`;
-        }
-
-        function handleFormSubmit(event, modalId) {
-            event.preventDefault();
-            alert('تم حفظ البيانات بنجاح!');
-            closeModal(modalId);
-            event.target.reset();
-        }
-
-        // --- إدارة اللاعبين ---
-        function savePlayer(event) {
-            event.preventDefault();
-            const name = document.getElementById('playerName').value;
-            const dob = document.getElementById('playerDob').value;
-            const category = document.getElementById('playerCategory').value;
-            const phone = document.getElementById('playerPhone').value;
-            const notes = document.getElementById('playerNotes').value;
-
-            const newPlayer = { id: Date.now(), name, dob, category, phone, notes };
-
-            let players = JSON.parse(localStorage.getItem('club_players')) || [];
-            players.push(newPlayer);
-            localStorage.setItem('club_players', JSON.stringify(players));
-
-            event.target.reset();
-            closeModal('childModal');
-            renderPlayers();
-        }
-
-        function renderPlayers() {
-            let players = JSON.parse(localStorage.getItem('club_players')) || [];
-            const grid = document.getElementById('playersGrid');
-            const countSpan = document.getElementById('playersCount');
-
-            countSpan.textContent = players.length;
-
-            if (players.length === 0) {
-                grid.innerHTML = '<p class="text-gray-400 col-span-full text-center py-4" id="noPlayersText">لا يوجد لاعبو مسجلون حتى الآن.</p>';
-                return;
-            }
-
-            grid.innerHTML = '';
-            players.forEach(player => {
-                grid.innerHTML += `
-                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 shadow-xs relative">
-                        <h3 class="font-bold text-gray-800 text-base">${player.name}</h3>
-                        <p class="text-sm text-gray-600 mt-1">الفئة: <span class="font-semibold text-blue-600">${player.category}</span></p>
-                        <p class="text-sm text-gray-600">تاريخ الازدياد: ${player.dob}</p>
-                        <p class="text-sm text-gray-600">الهاتف: ${player.phone}</p>
-                        ${player.notes ? `<p class="text-xs text-gray-500 mt-1 bg-white p-1.5 rounded border">ملاحظات: ${player.notes}</p>` : ''}
-                        <button onclick="deletePlayer(${player.id})" class="absolute top-3 left-3 text-red-500 hover:text-red-700 text-xs font-bold cursor-pointer">حذف</button>
-                    </div>
-                `;
-            });
-        }
-
-        function deletePlayer(id) {
-            let players = JSON.parse(localStorage.getItem('club_players')) || [];
-            players = players.filter(p => p.id !== id);
-            localStorage.setItem('club_players', JSON.stringify(players));
-            renderPlayers();
-        }
-
-        // --- إدارة الوسائط ---
-        function saveMedia(event) {
-            event.preventDefault();
-            const title = document.getElementById('mediaTitle').value;
-            const fileInput = document.getElementById('mediaFile');
-            const file = fileInput.files[0];
-
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const base64Data = e.target.result;
-                    const isVideo = file.type.startsWith('video');
-
-                    const newMedia = {
-                        id: Date.now(),
-                        title,
-                        type: isVideo ? 'video' : 'image',
-                        url: base64Data
-                    };
-
-                    let mediaList = JSON.parse(localStorage.getItem('club_media')) || [];
-                    mediaList.push(newMedia);
-                    localStorage.setItem('club_media', JSON.stringify(mediaList));
-
-                    event.target.reset();
-                    closeModal('mediaModal');
-                    renderMedia();
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function renderMedia() {
-            let mediaList = JSON.parse(localStorage.getItem('club_media')) || [];
-            const grid = document.getElementById('mediaGrid');
-            const countSpan = document.getElementById('mediaCount');
-
-            countSpan.textContent = mediaList.length;
-
-            if (mediaList.length === 0) {
-                grid.innerHTML = '<p class="text-gray-400 col-span-full text-center py-4" id="noMediaText">لم يتم رفع أي صور أو فيديوهات بعد.</p>';
-                return;
-            }
-
-            grid.innerHTML = '';
-            mediaList.forEach(item => {
-                let mediaElement = item.type === 'video' 
-                    ? `<video src="${item.url}" controls class="w-full h-36 object-cover rounded-lg"></video>`
-                    : `<img src="${item.url}" alt="${item.title}" class="w-full h-36 object-cover rounded-lg">`;
-
-                grid.innerHTML += `
-                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-3 shadow-xs relative">
-                        ${mediaElement}
-                        <h4 class="font-bold text-gray-800 text-sm mt-2 truncate">${item.title}</h4>
-                        <button onclick="deleteMedia(${item.id})" class="mt-2 text-red-500 hover:text-red-700 text-xs font-bold block cursor-pointer">حذف الملف</button>
-                    </div>
-                `;
-            });
-        }
-
-        function deleteMedia(id) {
-            let mediaList = JSON.parse(localStorage.getItem('club_media')) || [];
-            mediaList = mediaList.filter(m => m.id !== id);
-            localStorage.setItem('club_media', JSON.stringify(mediaList));
-            renderMedia();
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
         }
     </script>
 </body>
