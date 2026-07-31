@@ -8,11 +8,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Cairo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                    },
                     colors: {
                         emerald: { 50: '#ecfdf5', 600: '#059669', 700: '#047857', 800: '#065f46', 900: '#064e3b' }
                     }
@@ -20,6 +25,9 @@
             }
         }
     </script>
+    <style>
+        body { font-family: 'Cairo', sans-serif; }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200">
 
@@ -30,8 +38,8 @@
                 <!-- الشعار والاسم -->
                 <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="showView('public')">
                     <div class="w-12 h-12 bg-emerald-700 rounded-full flex items-center justify-center text-white font-bold text-xl border-2 border-yellow-400 shadow overflow-hidden">
-                        <img id="display-logo-img" src="" alt="Logo" class="w-full h-full object-cover hidden">
-                        <span id="display-logo-placeholder" class="text-xs font-black">IR Logo</span>
+                        <img id="display-logo-img" src="logo.jpeg" alt="نادي الإتفاق الرباطي" class="w-full h-full object-cover">
+                        <span id="display-logo-placeholder" class="text-xs font-black hidden">IR Logo</span>
                     </div>
                     <div>
                         <h1 class="font-bold text-lg text-emerald-800 dark:text-emerald-400" id="display-site-title">نادي الإتفاق الرباطي</h1>
@@ -65,7 +73,7 @@
     <div id="public-view">
         <!-- البانر الرئيسي -->
         <section id="hero" class="relative bg-emerald-900 text-white py-24 px-4 text-center overflow-hidden">
-            <div id="hero-bg-div" class="absolute inset-0 opacity-2 bg-cover bg-center"></div>
+            <div id="hero-bg-div" class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('stadium.jpeg');"></div>
             <div class="max-w-5xl mx-auto relative z-10">
                 <span class="bg-yellow-400 text-emerald-950 text-xs font-black uppercase px-4 py-1.5 rounded-full inline-block mb-4 shadow">
                     نادي الإتفاق الرباطي
@@ -105,7 +113,7 @@
                     <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow border-t-4 border-emerald-600">
                         <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-1 rounded">فئة الصغار</span>
                         <h4 class="font-bold text-lg my-2">فئة 2013 - 2012 (U11 - U12)</h4>
-                        <p class="text-xs text-gray-500">التكتيك الأساسي، الانضباط، والتمركز داخل الملعب.</p>
+                        <p class="text-xs text-gray-500">التكتيك الأساسي، الانضباط، والتتمرك داخل الملعب.</p>
                     </div>
                     <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow border-t-4 border-emerald-600">
                         <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-1 rounded">الفتيان والشباب</span>
@@ -129,8 +137,8 @@
                 <!-- مستشهر 1 -->
                 <div class="p-6 border rounded-2xl bg-white dark:bg-gray-800 shadow-sm flex flex-col items-center">
                     <div class="w-24 h-24 mb-4 rounded-xl overflow-hidden bg-gray-100 flex items-center justify-center border border-emerald-500">
-                        <img id="sponsor1-img" src="" alt="GALAXY" class="w-full h-full object-cover hidden">
-                        <span id="sponsor1-ph" class="text-xs font-bold text-emerald-800">GALAXY Logo</span>
+                        <img id="sponsor1-img" src="galaxy.jpeg" alt="GALAXY" class="w-full h-full object-cover">
+                        <span id="sponsor1-ph" class="text-xs font-bold text-emerald-800 hidden">GALAXY Logo</span>
                     </div>
                     <h4 class="font-bold text-lg mb-1">GALAXY Tiles & Ceramic</h4>
                     <p class="text-xs text-gray-500 mb-4">الرائد في عالم السيراميك والحلول المعمارية العصرية، والشريك الرسمي لنادي الاتفاق الرباطي.</p>
@@ -140,8 +148,8 @@
                 <!-- مستشهر 2 -->
                 <div class="p-6 border rounded-2xl bg-white dark:bg-gray-800 shadow-sm flex flex-col items-center">
                     <div class="w-24 h-24 mb-4 rounded-xl overflow-hidden bg-gray-100 flex items-center justify-center border border-emerald-500">
-                        <img id="sponsor2-img" src="" alt="المقاطعة" class="w-full h-full object-cover hidden">
-                        <span id="sponsor2-ph" class="text-xs font-bold text-emerald-800">المقاطعة Logo</span>
+                        <img id="sponsor2-img" src="youssoufia.jpeg" alt="المقاطعة" class="w-full h-full object-cover">
+                        <span id="sponsor2-ph" class="text-xs font-bold text-emerald-800 hidden">المقاطعة Logo</span>
                     </div>
                     <h4 class="font-bold text-lg mb-1">مجلس مقاطعة اليوسفية - الرباط</h4>
                     <p class="text-xs text-gray-500 mb-4">الشريك المؤسساتي الداعم للرياضة المحلية والمبادرات الشبابية بعمالة الرباط.</p>
@@ -207,17 +215,14 @@
         <div id="panel-super-admin" class="hidden space-y-8">
             <div class="bg-emerald-900 text-white p-6 rounded-2xl shadow">
                 <h4 class="font-bold text-lg mb-2"><i class="fa-solid fa-crown text-yellow-400"></i> لوحة الرئيس - ادم القدوري</h4>
-                <p class="text-xs opacity-80 mb-6">إدارة الحسابات، الصور واللوغو، طلبات المستشهرين، والتعديل الفوري.</p>
+                <p class="text-xs opacity-80 mb-6">إدارة الحسابات، طلبات المستشهرين، وتعديل بيانات الموقع.</p>
                 
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-center">
                     <button onclick="openModal('add-player-modal')" class="bg-emerald-700 hover:bg-emerald-600 p-4 rounded-xl font-bold text-xs border border-emerald-500">
                         <i class="fa-solid fa-user-plus text-xl block mb-1 text-yellow-300"></i> إضافة لاعب وقن سري
                     </button>
                     <button onclick="switchAdminTab('users-list')" class="bg-emerald-700 hover:bg-emerald-600 p-4 rounded-xl font-bold text-xs border border-emerald-500">
                         <i class="fa-solid fa-users-gear text-xl block mb-1 text-yellow-300"></i> إدارة وتعديل الحسابات
-                    </button>
-                    <button onclick="switchAdminTab('site-editor')" class="bg-emerald-700 hover:bg-emerald-600 p-4 rounded-xl font-bold text-xs border border-emerald-500">
-                        <i class="fa-solid fa-image text-xl block mb-1 text-yellow-300"></i> رفع الشعار والصور للموقع
                     </button>
                     <button onclick="switchAdminTab('messages-list')" class="bg-yellow-500 text-emerald-950 p-4 rounded-xl font-bold text-xs">
                         <i class="fa-solid fa-handshake text-xl block mb-1"></i> طلبات الاستشهار والرسائل
@@ -243,66 +248,12 @@
                 </div>
             </div>
 
-            <!-- قسم رفع الشعار والصور ومحرر الموقع -->
-            <div id="admin-sec-site-editor" class="hidden bg-white dark:bg-gray-800 p-6 rounded-2xl shadow space-y-6">
-                <h4 class="font-bold text-emerald-800 text-sm"><i class="fa-solid fa-upload"></i> رفع وتغيير لوغو النادي وصور الشركاء (صيغة JPEG)</h4>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
-                    <!-- رفع الشعار -->
-                    <div class="border p-4 rounded-xl text-center bg-gray-50 dark:bg-gray-900">
-                        <span class="font-bold block mb-2">شعار النادي (Logo):</span>
-                        <input type="file" id="upload-logo" accept="image/jpeg,image/png" onchange="previewImage(this, 'logo')" class="hidden">
-                        <label for="upload-logo" class="cursor-pointer inline-block bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg">اختر صورة الشعار</label>
-                    </div>
-
-                    <!-- رفع مستشهر 1 -->
-                    <div class="border p-4 rounded-xl text-center bg-gray-50 dark:bg-gray-900">
-                        <span class="font-bold block mb-2">شعار المستشهر (GALAXY):</span>
-                        <input type="file" id="upload-sp1" accept="image/jpeg,image/png" onchange="previewImage(this, 'sponsor1')" class="hidden">
-                        <label for="upload-sp1" class="cursor-pointer inline-block bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg">اختر صورة الشعار</label>
-                    </div>
-
-                    <!-- رفع مستشهر 2 -->
-                    <div class="border p-4 rounded-xl text-center bg-gray-50 dark:bg-gray-900">
-                        <span class="font-bold block mb-2">شعار (مجلس المقاطعة):</span>
-                        <input type="file" id="upload-sp2" accept="image/jpeg,image/png" onchange="previewImage(this, 'sponsor2')" class="hidden">
-                        <label for="upload-sp2" class="cursor-pointer inline-block bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg">اختر صورة الشعار</label>
-                    </div>
-                </div>
-
-                <hr>
-
-                <h4 class="font-bold text-emerald-800 text-sm">تعديل معلومات وتفاصيل التواصل:</h4>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                    <div>
-                        <label class="font-bold block mb-1">عنوان البانر الرئيسي:</label>
-                        <input type="text" id="edit-hero-title" class="w-full p-2 border rounded dark:bg-gray-900" value="مصنع أبطال الغد.. هنا تُصنع الأساطير وتبدأ رحلة النجاح الكروي">
-                    </div>
-                    <div>
-                        <label class="font-bold block mb-1">رقم هاتف التواصل:</label>
-                        <input type="text" id="edit-phone" class="w-full p-2 border rounded dark:bg-gray-900" value="+212 702497748">
-                    </div>
-                    <div class="md:col-span-2">
-                        <label class="font-bold block mb-1">البريد الإلكتروني للنادي:</label>
-                        <input type="text" id="edit-email" class="w-full p-2 border rounded dark:bg-gray-900" value="itifaqe.de.rabat.contact@gmail.com">
-                    </div>
-                </div>
-                <button onclick="saveSiteChanges()" class="bg-emerald-700 text-white font-bold px-6 py-2 rounded-lg text-xs hover:bg-emerald-800">حفظ وحفظ جميع التغيرات بالموقع</button>
-            </div>
-
             <!-- قسم الرسائل وطلبات الاستشهار -->
             <div id="admin-sec-messages-list" class="hidden bg-white dark:bg-gray-800 p-6 rounded-2xl shadow space-y-6">
                 <div>
                     <h4 class="font-bold text-emerald-800 mb-4 text-sm"><i class="fa-solid fa-handshake"></i> طلبات الاستشهار والشراكة الواردة</h4>
                     <div id="sponsors-req-container" class="space-y-3 text-xs">
                         <p class="text-gray-500">لا توجد طلبات استشهار جديدة حتى الآن.</p>
-                    </div>
-                </div>
-                <hr>
-                <div>
-                    <h4 class="font-bold text-emerald-800 mb-4 text-sm"><i class="fa-solid fa-envelope"></i> الرسائل العامة الموجهة للرئيس</h4>
-                    <div id="messages-container" class="space-y-3 text-xs">
-                        <p class="text-gray-500">لا توجد رسائل جديدة.</p>
                     </div>
                 </div>
             </div>
@@ -318,7 +269,6 @@
                         <div><span>السرعة: 88%</span><div class="bg-gray-200 h-2 rounded"><div class="bg-emerald-600 h-2 rounded" style="width: 88%"></div></div></div>
                         <div><span>اللياقة البدنية: 92%</span><div class="bg-gray-200 h-2 rounded"><div class="bg-emerald-600 h-2 rounded" style="width: 92%"></div></div></div>
                     </div>
-                    <button onclick="alert('تم استخراج تقرير PDF المعتمد باسمك')" class="mt-4 bg-emerald-700 text-white text-xs px-3 py-2 rounded font-bold">تصدير تقرير PDF معتمد</button>
                 </div>
             </div>
         </div>
@@ -383,11 +333,6 @@
                         </select>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <div><label class="font-bold">مركز اللعب:</label><input type="text" id="new-p-pos" placeholder="مثال: مهاجم" required class="w-full p-2 border rounded mt-1 dark:bg-gray-900"></div>
-                    <div><label class="font-bold">القدم المفضلة:</label><select id="new-p-foot" class="w-full p-2 border rounded mt-1 dark:bg-gray-900"><option>اليمنى</option><option>اليسرى</option></select></div>
-                </div>
-                <div><label class="font-bold">رقم هاتف ولي الأمر:</label><input type="tel" id="new-p-phone" required class="w-full p-2 border rounded mt-1 dark:bg-gray-900"></div>
                 <div>
                     <label class="font-bold text-emerald-700">القن السري المولد تلقائياً للاعب:</label>
                     <input type="text" id="new-p-code" readonly class="w-full p-2 bg-gray-100 dark:bg-gray-700 border font-mono font-bold text-center mt-1">
@@ -416,13 +361,8 @@
             "X-2006-QDR": { role: "super_admin", title: "ادم القدوري - الرئيس", type: "رئيس النادي" },
             "X-2007-BENJABER": { role: "admin", title: "أمين بنجابر - المستشار الأول", type: "إدارة" },
             "X-2003-QDR": { role: "finance", title: "ملاك قدوري - أمينة المال", type: "إدارة مالية" },
-            "X-1993-BOUKDAL": { role: "secretary", title: "هدى بوكدال - الكاتبة العامة", type: "إدارة" },
-            "X-1997-HADAOUI": { role: "admin", title: "زكرياء حداوي - المستشار الثاني", type: "إدارة" },
             "COACH-ADAM-QADDOURI-@14": { role: "coach", title: "المدير التقني - ادم القدوري", type: "مدرب" },
-            "COACH-ISSAM-ALAKBOUS-@33": { role: "coach", title: "مسؤول البرمجة - عصام الكبوس", type: "مدرب" },
-            "COACH-ZAKARIA-HADAOUI-@22": { role: "coach", title: "مسؤول اللوجستيك - زكرياء حداوي", type: "مدرب" },
-            "COACH-SOULAYMAN-BENGHAZALE-@44": { role: "coach", title: "مدرب اللياقة - سليمان بنغزال", type: "مدرب" },
-            "COACH-AMIN-BENJABRI-@55": { role: "coach", title: "مدرب الحراس - أمين بنجابر", type: "مدرب" }
+            "COACH-ISSAM-ALAKBOUS-@33": { role: "coach", title: "مسؤول البرمجة - عصام الكبوس", type: "مدرب" }
         };
 
         function getUsersDB() {
@@ -472,7 +412,6 @@
                     document.getElementById('panel-super-admin').classList.remove('hidden');
                     renderUsersTable();
                     renderSponsorsRequests();
-                    renderMessages();
                 } else if(user.role === 'coach') {
                     document.getElementById('panel-coach').classList.remove('hidden');
                 } else if(user.role === 'player') {
@@ -486,46 +425,6 @@
             }
         }
 
-        // تحويل وتأكيد معاينة الصور المرفوعة (Logo والرعاة)
-        function previewImage(input, targetKey) {
-            const file = input.files[0];
-            if(file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const imgData = e.target.result;
-                    localStorage.setItem('IR_IMG_' + targetKey, imgData);
-                    applyImages();
-                    alert("تم تحميل وتحديث الصورة بنجاح!");
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // تطبيق واستعراض الصور في الموقع
-        function applyImages() {
-            const logo = localStorage.getItem('IR_IMG_logo');
-            if(logo) {
-                document.getElementById('display-logo-img').src = logo;
-                document.getElementById('display-logo-img').classList.remove('hidden');
-                document.getElementById('display-logo-placeholder').classList.add('hidden');
-            }
-
-            const sp1 = localStorage.getItem('IR_IMG_sponsor1');
-            if(sp1) {
-                document.getElementById('sponsor1-img').src = sp1;
-                document.getElementById('sponsor1-img').classList.remove('hidden');
-                document.getElementById('sponsor1-ph').classList.add('hidden');
-            }
-
-            const sp2 = localStorage.getItem('IR_IMG_sponsor2');
-            if(sp2) {
-                document.getElementById('sponsor2-img').src = sp2;
-                document.getElementById('sponsor2-img').classList.remove('hidden');
-                document.getElementById('sponsor2-ph').classList.add('hidden');
-            }
-        }
-
-        // إرسال طلب استشهار جديد
         function submitSponsorRequest(e) {
             e.preventDefault();
             const saved = localStorage.getItem('IR_SPONSORS_REQ') || '[]';
@@ -542,7 +441,7 @@
             });
 
             localStorage.setItem('IR_SPONSORS_REQ', JSON.stringify(reqs));
-            alert("شكراً لك! تم إرسال طلب الاستشهار والشراكة بنجاح لإدارة النادي برئاسة ادم القدوري.");
+            alert("شكراً لك! تم إرسال طلب الاستشهار بنجاح لرئيس النادي ادم القدوري.");
             closeModal('sponsor-modal');
             e.target.reset();
         }
@@ -567,7 +466,6 @@
                         </div>
                         <p class="mt-1"><strong>الهاتف:</strong> ${r.phone} | <strong>البريد:</strong> ${r.email}</p>
                         <p><strong>نوع الشراكة:</strong> ${r.type}</p>
-                        ${r.details ? `<p class="italic text-gray-600 mt-1">"${r.details}"</p>` : ''}
                     </div>
                 `;
             });
@@ -616,22 +514,8 @@
 
         function switchAdminTab(tab) {
             document.getElementById('admin-sec-users-list').classList.add('hidden');
-            document.getElementById('admin-sec-site-editor').classList.add('hidden');
             document.getElementById('admin-sec-messages-list').classList.add('hidden');
             document.getElementById('admin-sec-' + tab).classList.remove('hidden');
-        }
-
-        function saveSiteChanges() {
-            const heroTitle = document.getElementById('edit-hero-title').value;
-            const phone = document.getElementById('edit-phone').value;
-            const email = document.getElementById('edit-email').value;
-
-            document.getElementById('display-hero-title').innerText = heroTitle;
-            document.getElementById('display-phone').innerText = phone;
-            document.getElementById('display-email').innerText = email;
-
-            localStorage.setItem('IR_SITE_DATA', JSON.stringify({ heroTitle, phone, email }));
-            alert("تم حفظ جميع التغييرات بنجاح!");
         }
 
         function handleContactSubmit(e) {
@@ -640,20 +524,8 @@
             e.target.reset();
         }
 
-        function renderMessages() {}
         function submitPublicRegistration(e) { e.preventDefault(); closeModal('reg-modal'); }
         function logout() { showView('public'); }
-
-        window.onload = function() {
-            applyImages();
-            const saved = localStorage.getItem('IR_SITE_DATA');
-            if(saved) {
-                const data = JSON.parse(saved);
-                if(data.heroTitle) document.getElementById('display-hero-title').innerText = data.heroTitle;
-                if(data.phone) document.getElementById('display-phone').innerText = data.phone;
-                if(data.email) document.getElementById('display-email').innerText = data.email;
-            }
-        };
     </script>
 </body>
 </html>
