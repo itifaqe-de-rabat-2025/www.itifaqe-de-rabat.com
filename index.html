@@ -935,4 +935,312 @@
     </main>
 
 </body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الكاتبة ومسؤولة النشر - هدى بوكدال</title>
+    <!-- استيراد خط تجوال العصري من جوجل -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1e293b; /* كحلي دافئ */
+            --accent-color: #d97706;  /* ذهبي هادئ */
+            --bg-color: #f8fafc;      /* خلفية فاتحة جداً مريحة للعين */
+            --card-bg: #ffffff;
+            --text-main: #334155;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* الشريط الجانبي */
+        aside {
+            width: 280px;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .profile-section {
+            text-align: center;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .profile-section h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .access-code {
+            font-size: 12px;
+            background: rgba(255,255,255,0.1);
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            color: #cbd5e1;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin-top: 40px;
+        }
+
+        .nav-links li {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-links li.active, .nav-links li:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: var(--accent-color);
+        }
+
+        /* محتوى اللوحة الرئيسي */
+        main {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* تصميم البطاقات */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border-color);
+        }
+
+        .card h3 {
+            font-size: 18px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 10px;
+        }
+
+        /* النماذج والحقول */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            height: 120px;
+        }
+
+        /* منطقة رفع الملفات */
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            background-color: var(--bg-color);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .upload-area:hover {
+            border-color: var(--accent-color);
+        }
+
+        .upload-area p {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        /* الأزرار */
+        .btn {
+            background-color: var(--primary-color);
+            color: #white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #0f172a;
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background-color: #b45309;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الشريط الجانبي -->
+    <aside>
+        <div>
+            <div class="profile-section">
+                <div class="avatar">هـ</div>
+                <h2>هدى بوكدال</h2>
+                <span class="access-code">X-1992-BOUKDAL</span>
+            </div>
+            <ul class="nav-links">
+                <li class="active">الرئيسية والنشر</li>
+                <li>رفع التقارير</li>
+                <li>الأرشيف</li>
+            </ul>
+        </div>
+        <div style="font-size: 12px; text-align: center; color: #94a3b8;">
+            النظام الإعلامي المعتمد
+        </div>
+    </aside>
+
+    <!-- المحتوى الرئيسي -->
+    <main>
+        <header>
+            <h1>مرحباً بكِ، أستاذة هدى</h1>
+            <p>لوحة التحكم الخاصة بنشر التดويـنات وإرسال التقارير الرسمية.</p>
+        </header>
+
+        <div class="dashboard-grid">
+            
+            <!-- قسم نشر التدوينات -->
+            <div class="card">
+                <h3>نشر تدوينة جديدة في الواجهة</h3>
+                <form>
+                    <div class="form-group">
+                        <label>عنوان التدوينة</label>
+                        <input type="text" placeholder="اكتبي عنواناً جذاباً...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>نص التدوينة</label>
+                        <textarea placeholder="اكتبي تفاصيل التدوينة هنا..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>صورة التدوينة</label>
+                        <div class="upload-area" onclick="alert('خاصية اختيار الصورة من الجهاز')">
+                            <p>📂 اضغطي هنا أو اسحبي الصورة لرفعها فوراً</p>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-accent">نشر فوراً في الواجهة</button>
+                </form>
+            </div>
+
+            <!-- قسم رفع التقارير الإعلامية -->
+            <div class="card">
+                <h3>إرسال التقرير الإعلامي لرئيس النادي</h3>
+                <form>
+                    <div class="form-group">
+                        <label>عنوان التقرير</label>
+                        <input type="text" placeholder="مثال: تقرير التغطية الإعلامية لمباراة اليوم...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>محتوى أو ملاحظات التقرير</label>
+                        <textarea placeholder="اكتبي تفاصيل التقرير الموجه لرئيس النادي..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn">إرسال التقرير للإدارة</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="footer-note">
+            جميع الحقوق محفوظة &copy; 2026 - لوحة النشر الإعلامي
+        </div>
+    </main>
+
+</body>
 </html>
